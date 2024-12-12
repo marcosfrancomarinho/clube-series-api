@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "start": "nodemon dist/config/server.js",
-    "db": "nodemon dist/model/User.js"
+    "build": "tsc",
+    "start": "node dist/config/server.js"
   },
   "keywords": [],
   "author": "",

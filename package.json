@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "app.ts",
   "scripts": {
-    "start": "ts-node src/config/server.ts",
-    "db": "ts-node src/model/User.ts"
+    "start": "nodemon dist/config/server.js",
+    "db": "nodemon dist/model/User.js"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
     "@types/minimatch": "5.1.2",
     "@types/node": "22.10.1",
     "@types/sequelize": "4.28.20",
+    "nodemon": "^3.1.7",
     "ts-node": "10.9.2",
     "typescript": "5.7.2"
   }

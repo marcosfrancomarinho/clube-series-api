@@ -20,6 +20,6 @@ async function verifyConnectionDataBase(): Promise<void> {
 	}
 }
 
-//verifyConnectionDataBase(); //teste de conexão;
+// verifyConnectionDataBase(); //teste de conexão;
 
 export default sequelize;

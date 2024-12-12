@@ -18,7 +18,7 @@ function verifyDatasBodyUserLogin(
 		next();
 	} catch (error) {
 		const messageError: string = (error as Error).message;
-		res.status(400).json({error:messageError});
+		res.status(400).json({ error: messageError });
 	}
 }
 export default verifyDatasBodyUserLogin;

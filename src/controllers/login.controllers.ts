@@ -10,9 +10,9 @@ class ControllersLogin implements TypesControllersLogin {
 				email: string;
 				password: string;
 			};
-			const { email: $email, ok, status, id } = await loginUserDb(email, password);
-			const keyScret: string = process.env.SECRET as string;
-			const hash: string = jwt.sign({ email: $email, id }, keyScret);
+			const { ok, status, id } = await loginUserDb(email, password);
+			const keyScret = process.env.SECRET as string;
+			const hash: string = jwt.sign({ email, id }, keyScret, { expiresIn: 60,  });
 			res.status(200).setHeader('authorization', hash).json({ ok, status });
 		} catch (error) {
 			const messageError: string = (error as Error).message;

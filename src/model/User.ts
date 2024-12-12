@@ -37,7 +37,7 @@ User.init(
 		},
 		email: {
 			type: DataTypes.STRING,
-			unique: true,
+			unique: { name: 'email', msg: 'email ja cadastrado' },
 			allowNull: false,
 			validate: {
 				isEmail: true,

@@ -17,6 +17,7 @@ function authenticationTokenUser(
 			id: number;
 			email: string;
 		};
+		res.locals.token = response;
 		next();
 	} catch (error) {
 		const messageError: string = (error as Error).message;

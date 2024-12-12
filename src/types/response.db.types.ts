@@ -5,5 +5,6 @@ export interface TypesResponseDbRegister {
 export interface TypesResponseDbLogin {
 	ok: boolean;
 	status: string;
-	token: string;
+	id?: number;
+	email: string;
 }

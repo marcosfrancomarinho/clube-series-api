@@ -3,6 +3,7 @@ import routerLogin from './login.router';
 import routerSignUp from './siginup.router';
 import verifyDatasBodyUserLogin from '../middlewares/verify.login';
 import verifyDatasBodyUserRegister from '../middlewares/verify.register';
+import authenticationTokenUser from '../middlewares/authenticate';
 
 const router = Router();
 

@@ -7,11 +7,6 @@ const loginUserDb = async (
 	password: string,
 ): Promise<TypesResponseDbLogin> => {
 	const messageError: string = 'Email ou senha inválida';
-	const messageSuccess: TypesResponseDbLogin = {
-		ok: true,
-		status: 'usuario logado com sucesso',
-		token: '',
-	};
 	try {
 		const response = await User.findOne({
 			attributes: ['id', 'email', 'password'],
@@ -25,6 +20,12 @@ const loginUserDb = async (
 			response.password,
 		);
 		if (!checkPassword) throw new Error(messageError);
+		const messageSuccess: TypesResponseDbLogin = {
+			ok: true,
+			status: 'usuario logado com sucesso',
+			email: email,
+			id: response.id,
+		};
 		return messageSuccess;
 	} catch (error) {
 		throw error;

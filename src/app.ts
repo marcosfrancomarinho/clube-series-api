@@ -6,6 +6,7 @@ const configCors: CorsOptions = {
 	methods: ['POST'],
 	origin: '*',
 	allowedHeaders: ['Authorization', 'Content-Type'],
+	exposedHeaders: ['Authorization'],
 };
 const app = express();
 app.use(cors(configCors));

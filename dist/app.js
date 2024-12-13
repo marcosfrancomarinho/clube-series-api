@@ -10,6 +10,7 @@ const configCors = {
     methods: ['POST'],
     origin: '*',
     allowedHeaders: ['Authorization', 'Content-Type'],
+    exposedHeaders: ['Authorization'],
 };
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)(configCors));

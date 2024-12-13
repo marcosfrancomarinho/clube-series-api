@@ -4,7 +4,8 @@
   "main": "app.ts",
   "scripts": {
     "build": "tsc -w",
-    "start": "nodemon dist/config/server.js"
+    "start": "node dist/config/server.js",
+    "dev": "nodemon dist/config/server.js"
   },
   "keywords": [],
   "author": "",

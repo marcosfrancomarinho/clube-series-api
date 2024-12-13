@@ -1,5 +1,5 @@
 import express from 'express';
-import router from './routers/index';
+import router from './routers/main';
 import cors, { CorsOptions } from 'cors';
 
 const configCors: CorsOptions = {

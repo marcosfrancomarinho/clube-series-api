@@ -13,6 +13,7 @@ const loginUserDb = async (
 			where: {
 				email: email,
 			},
+			raw: true,
 		});
 		if (!response) throw new Error(messageError);
 		const checkPassword: boolean = await passwordValidation(

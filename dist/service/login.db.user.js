@@ -13,6 +13,7 @@ const loginUserDb = async (email, password) => {
             where: {
                 email: email,
             },
+            raw: true,
         });
         if (!response)
             throw new Error(messageError);

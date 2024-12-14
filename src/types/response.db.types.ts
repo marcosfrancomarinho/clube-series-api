@@ -6,5 +6,5 @@ export interface TypesResponseDbLogin {
 	ok: boolean;
 	status: string;
 	id?: number;
-	email: string;
+	name: string;
 }

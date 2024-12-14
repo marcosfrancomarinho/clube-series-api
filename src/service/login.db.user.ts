@@ -9,7 +9,7 @@ const loginUserDb = async (
 	const messageError: string = 'Email ou senha inválida';
 	try {
 		const response = await User.findOne({
-			attributes: ['id', 'email', 'password'],
+			attributes: ['id', 'name', 'password'],
 			where: {
 				email: email,
 			},
@@ -24,7 +24,7 @@ const loginUserDb = async (
 		const messageSuccess: TypesResponseDbLogin = {
 			ok: true,
 			status: 'usuario logado com sucesso',
-			email: email,
+			name: response.name,
 			id: response.id,
 		};
 		return messageSuccess;

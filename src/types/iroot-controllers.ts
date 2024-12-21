@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-interface TypesControllerRoot {
+interface IRootControllers {
 	accessAllowed(req: Request, res: Response):void;
 }
-export default TypesControllerRoot;
+export default IRootControllers;

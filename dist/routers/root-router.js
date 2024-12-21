@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
-const authenticate_user_1 = __importDefault(require("../middlewares/authenticate.user"));
-const root_controllers_1 = __importDefault(require("../controllers/root.controllers"));
+const root_controllers_1 = __importDefault(require("../controllers/root-controllers"));
+const rootControllers = new root_controllers_1.default();
 const routerRoot = (0, express_1.Router)();
 const controllersRoot = new root_controllers_1.default();
-routerRoot.post('/', authenticate_user_1.default, controllersRoot.accessAllowed);
+routerRoot.post('/', rootControllers.accessAllowed, controllersRoot.accessAllowed);
 exports.default = routerRoot;

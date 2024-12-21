@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-interface TypesControllerSiginUp {
+interface ISignupControllers {
 	siginUpUser(req: Request, res: Response): Promise<void>;
 }
-export default TypesControllerSiginUp;
+export default ISignupControllers;

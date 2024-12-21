@@ -1,15 +1,8 @@
 import { Router } from 'express';
-import RootControllres from '../controllers/root-controllers';
-
-const rootControllers: RootControllres = new RootControllres();
+import { controllersRoot } from '../config/instances';
 
 const routerRoot = Router();
-const controllersRoot = new RootControllres();
 
-routerRoot.post(
-	'/',
-	rootControllers.accessAllowed,
-	controllersRoot.accessAllowed,
-);
+routerRoot.post('/', controllersRoot.accessAllowed);
 
 export default routerRoot;

@@ -5,7 +5,7 @@ class AuthenticateUser {
     constructor(generateHash) {
         this.generateHash = generateHash;
     }
-    authenticationTokenUser(req, res, next) {
+    authenticationTokenUser = (req, res, next) => {
         try {
             const token = req.headers['authorization'];
             if (!token)
@@ -18,6 +18,6 @@ class AuthenticateUser {
             const messageError = error.message;
             res.status(400).json({ error: messageError });
         }
-    }
+    };
 }
 exports.default = AuthenticateUser;

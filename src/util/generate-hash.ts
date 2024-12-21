@@ -3,6 +3,7 @@ import IGenerateHash from '../interfaces/igeneate-hash';
 import dotenv from 'dotenv';
 
 dotenv.config();
+
 class GenerateHash implements IGenerateHash {
 	constructor(private jwt: { sign: typeof sign; verify: typeof verify }) {}
 

@@ -1,14 +1,13 @@
 import { Response, Request, NextFunction } from 'express';
 import GenerateHash from '../util/generate-hash';
 
-
 class AuthenticateUser {
 	constructor(private generateHash: GenerateHash) {}
-	authenticationTokenUser(
+	public authenticationTokenUser = (
 		req: Request,
 		res: Response,
 		next: NextFunction,
-	): void {
+	): void => {
 		try {
 			const token: string | undefined = req.headers['authorization'];
 			if (!token) throw new Error('token invalido');
@@ -22,7 +21,7 @@ class AuthenticateUser {
 			const messageError: string = (error as Error).message;
 			res.status(400).json({ error: messageError });
 		}
-	}
+	};
 }
 
 export default AuthenticateUser;

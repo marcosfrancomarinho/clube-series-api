@@ -1,30 +1,26 @@
 import { Response, Request } from 'express';
-import LoginDbUser from '../service/login-db-user';
-import GenerateHash from '../util/generate-hash';
-import IControllersLogin from '../interfaces/ilogin-controllers';
+import ILoginControllers from '../interfaces/login-controllers';
+import { ILoginDbUser } from '../interfaces/login-db-user';
+import IGenerateHash from '../interfaces/geneate-hash';
+import RequestModel from '../model/Request';
 
-class ControllersLogin implements IControllersLogin {
-	constructor(
-		private loginUserDb: LoginDbUser,
-		private generateHash: GenerateHash,
-	) {}
+class LoginControllers extends RequestModel implements ILoginControllers {
+	private loginUserDb: ILoginDbUser;
+	private generateHash: IGenerateHash;
+	constructor(loginUserDb: ILoginDbUser, generateHash: IGenerateHash) {
+		super();
+		this.loginUserDb = loginUserDb;
+		this.generateHash = generateHash;
+	}
 	public loginUser = async (req: Request, res: Response): Promise<void> => {
 		try {
-			const { email, password } = req.body as {
-				email: string;
-				password: string;
-			};
-			const { ok, status, id, name } = await this.loginUserDb.login(
-				email,
-				password,
-			);
-			if (!id) throw new Error('ID não informado para geração do Token');
-			const hash: string = this.generateHash.hash(email, id);
-			res.status(200).setHeader('authorization', hash).json({ ok, status, name });
+			const datas = super.getDatasBodyLogin(req);
+			const { id, email, ...response } = await this.loginUserDb.login(datas);
+			const hash: string = this.generateHash.hash(email, id as number);
+			res.status(200).setHeader('authorization', hash).json(response);
 		} catch (error) {
-			const messageError: string = (error as Error).message;
-			res.status(400).json({ error: messageError });
+			res.status(400).json(super.messageError(error));
 		}
 	};
 }
-export default ControllersLogin;
+export default LoginControllers;

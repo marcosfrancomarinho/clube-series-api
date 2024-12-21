@@ -1,24 +1,25 @@
 import { NextFunction, Response, Request } from 'express';
-import VerifyDatasUser from '../util/verify-datas';
+import RequestModel from '../model/Request';
+import IVerifyRegister from '../interfaces/verify-register';
+import IVerifyDatasUser from '../interfaces/verify-datas-user';
 
-class VerifyRegister {
-	constructor(private VerifyDatasUser: VerifyDatasUser) {}
+class VerifyRegister extends RequestModel implements IVerifyRegister {
+	private verifyDatasUser: IVerifyDatasUser;
+	constructor(verifyDatasUser: IVerifyDatasUser) {
+		super();
+		this.verifyDatasUser = verifyDatasUser;
+	}
 	verifyDatasBodyUserRegister = (
 		req: Request,
 		res: Response,
 		next: NextFunction,
 	): void => {
 		try {
-			const { name, email, password } = req.body as {
-				name: string;
-				email: string;
-				password: string;
-			};
-			this.VerifyDatasUser.registerUser(name, email, password);
+			const { name, email, password } = super.getDatasBodyRegister(req);
+			this.verifyDatasUser.registerUser(name, email, password);
 			next();
 		} catch (error) {
-			const messageError: string = (error as Error).message;
-			res.status(400).json({ error: messageError });
+			res.status(400).json(super.messageError(error));
 		}
 	};
 }

@@ -11,7 +11,7 @@ const sequelize = new Sequelize({
 	dialect: 'postgres',
 });
 
-async function verifyConnectionDataBase(): Promise<void> {
+export async function verifyConnectionDataBase(): Promise<void> {
 	try {
 		await sequelize.authenticate();
 		console.log('connection database');
@@ -19,7 +19,5 @@ async function verifyConnectionDataBase(): Promise<void> {
 		console.log(error);
 	}
 }
-
-// verifyConnectionDataBase(); //teste de conexão;
 
 export default sequelize;

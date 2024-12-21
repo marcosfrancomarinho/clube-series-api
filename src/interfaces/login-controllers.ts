@@ -1,6 +1,6 @@
 import { Response, Request } from 'express';
 
-interface IControllersLogin {
+interface ILoginControllers {
 	loginUser(req: Request, res: Response): Promise<void>;
 }
-export default IControllersLogin;
+export default ILoginControllers;

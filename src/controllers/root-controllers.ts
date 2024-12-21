@@ -1,5 +1,5 @@
 import { Response, Request } from 'express';
-import IRootControllers from '../interfaces/iroot-controllers';
+import IRootControllers from '../interfaces/root-controllers';
 
 class RootControllres implements IRootControllers {
 	public accessAllowed = (req: Request, res: Response): void => {
@@ -10,3 +10,5 @@ class RootControllres implements IRootControllers {
 	};
 }
 export default RootControllres;
+
+//CONTROLLER  DE TESTE

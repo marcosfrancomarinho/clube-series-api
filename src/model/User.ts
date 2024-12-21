@@ -1,17 +1,11 @@
 import { Model, Optional, DataTypes } from 'sequelize';
 import sequelize from '../config/database';
-import UserAttributes from '../interfaces/user.model.types';
+import IUser from '../interfaces/User';
 
-type UserCreationAttributes = Optional<
-	UserAttributes,
-	'id' | 'createdAt' | 'updatedAt'
->;
+type UserCreationAttributes = Optional<IUser, 'id' | 'createdAt' | 'updatedAt'>;
 
-class User
-	extends Model<UserAttributes, UserCreationAttributes>
-	implements UserAttributes
-{
-	id?: number | undefined;
+class User extends Model<IUser, UserCreationAttributes> implements IUser {
+	id?: number;
 	name!: string;
 	email!: string;
 	password!: string;

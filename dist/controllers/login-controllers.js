@@ -1,25 +1,27 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class ControllersLogin {
+const Request_1 = __importDefault(require("../model/Request"));
+class LoginControllers extends Request_1.default {
     loginUserDb;
     generateHash;
     constructor(loginUserDb, generateHash) {
+        super();
         this.loginUserDb = loginUserDb;
         this.generateHash = generateHash;
     }
     loginUser = async (req, res) => {
         try {
-            const { email, password } = req.body;
-            const { ok, status, id, name } = await this.loginUserDb.login(email, password);
-            if (!id)
-                throw new Error('ID não informado para geração do Token');
+            const datas = super.getDatasBodyLogin(req);
+            const { id, email, ...response } = await this.loginUserDb.login(datas);
             const hash = this.generateHash.hash(email, id);
-            res.status(200).setHeader('authorization', hash).json({ ok, status, name });
+            res.status(200).setHeader('authorization', hash).json(response);
         }
         catch (error) {
-            const messageError = error.message;
-            res.status(400).json({ error: messageError });
+            res.status(400).json(super.messageError(error));
         }
     };
 }
-exports.default = ControllersLogin;
+exports.default = LoginControllers;

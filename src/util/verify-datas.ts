@@ -1,13 +1,18 @@
-import Joi from 'joi';
-import TypeVerifyDatasUser from '../interfaces/verify.datas.types';
+import { Root, StringSchema } from 'joi';
+import IVerifyDatasUser from '../interfaces/verify-datas-user';
 
-class VerifyDatasUser implements TypeVerifyDatasUser {
-	private hasError(params: string, schema: Joi.StringSchema<string>): void {
+class VerifyDatasUser implements IVerifyDatasUser {
+	private joi: Root;
+	constructor(joi: Root) {
+		this.joi = joi;
+	}
+	private hasError(params: string, schema: StringSchema<string>): void {
 		const { error } = schema.validate(params);
 		if (error) throw new Error(error.message);
 	}
 	public nameUser(name: string): void {
-		const schema = Joi.string()
+		const schema = this.joi
+			.string()
 			.required()
 			.trim()
 			.min(3)
@@ -17,7 +22,8 @@ class VerifyDatasUser implements TypeVerifyDatasUser {
 		this.hasError(name, schema);
 	}
 	public emailUser(email: string): void {
-		const schema = Joi.string()
+		const schema = this.joi
+			.string()
 			.required()
 			.trim()
 			.min(10)
@@ -28,7 +34,8 @@ class VerifyDatasUser implements TypeVerifyDatasUser {
 		this.hasError(email, schema);
 	}
 	public passwordUser(password: string): void {
-		const schema = Joi.string()
+		const schema = this.joi
+			.string()
 			.required()
 			.trim()
 			.min(8)

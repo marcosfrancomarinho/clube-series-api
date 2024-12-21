@@ -1,4 +1,4 @@
-interface UserAttributes {
+interface IUser {
 	id?: number;
 	name: string;
 	email: string;
@@ -7,4 +7,4 @@ interface UserAttributes {
 	updatedAt?: Date; 
 }
 
-export default UserAttributes;
+export default IUser;

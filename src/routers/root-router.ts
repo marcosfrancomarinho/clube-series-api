@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { controllersRoot } from '../config/instances';
+import { rootControllers } from '../config/instances';
 
 const routerRoot = Router();
 
-routerRoot.post('/', controllersRoot.accessAllowed);
+routerRoot.post('/', rootControllers.accessAllowed);
 
 export default routerRoot;

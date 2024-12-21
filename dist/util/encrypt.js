@@ -5,13 +5,13 @@ class Encrypt {
     constructor(crypt) {
         this.crypt = crypt;
     }
-    async encryptPassword(password) {
+    encryptPassword = async (password) => {
         const salt = await this.crypt.genSalt(15);
         return await this.crypt.hash(password, salt);
-    }
-    async passwordValidation(password, encrypted_password) {
+    };
+    passwordValidation = async (password, encrypted_password) => {
         const response = await this.crypt.compare(password, encrypted_password);
         return response;
-    }
+    };
 }
 exports.default = Encrypt;

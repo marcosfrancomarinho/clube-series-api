@@ -1,19 +1,23 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-class VerifyRegister {
-    VerifyDatasUser;
-    constructor(VerifyDatasUser) {
-        this.VerifyDatasUser = VerifyDatasUser;
+const Request_1 = __importDefault(require("../model/Request"));
+class VerifyRegister extends Request_1.default {
+    verifyDatasUser;
+    constructor(verifyDatasUser) {
+        super();
+        this.verifyDatasUser = verifyDatasUser;
     }
     verifyDatasBodyUserRegister = (req, res, next) => {
         try {
-            const { name, email, password } = req.body;
-            this.VerifyDatasUser.registerUser(name, email, password);
+            const { name, email, password } = super.getDatasBodyRegister(req);
+            this.verifyDatasUser.registerUser(name, email, password);
             next();
         }
         catch (error) {
-            const messageError = error.message;
-            res.status(400).json({ error: messageError });
+            res.status(400).json(super.messageError(error));
         }
     };
 }

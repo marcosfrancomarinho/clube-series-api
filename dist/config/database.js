@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.verifyConnectionDataBase = verifyConnectionDataBase;
 const sequelize_1 = require("sequelize");
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -22,5 +23,4 @@ async function verifyConnectionDataBase() {
         console.log(error);
     }
 }
-// verifyConnectionDataBase(); //teste de conexão;
 exports.default = sequelize;

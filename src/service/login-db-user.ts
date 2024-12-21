@@ -1,39 +1,47 @@
 import User from '../model/User';
-import { TypesResponseDbLogin } from '../interfaces/response.db.types';
-import Encrypt from '../util/encrypt';
+import { IResponseDbLogin } from '../interfaces/response-db';
+import IEncrypt from '../interfaces/encrypt';
+import { IDatasLogin, ILoginDbUser } from '../interfaces/login-db-user';
 
-class LoginDbUser {
-	constructor(private encrypt: Encrypt, private user: typeof User) {}
-	public login = async (
-		email: string,
-		password: string,
-	): Promise<TypesResponseDbLogin> => {
-		const messageError: string = 'Email ou senha inválida';
+class LoginDbUser implements ILoginDbUser {
+	private encrypt: IEncrypt;
+	private user: typeof User;
+	private messageError: string = 'Email ou senha inválida';
+	private attribute: string[] = ['id', 'email', 'password'];
+	constructor(encrypt: IEncrypt, user: typeof User) {
+		this.encrypt = encrypt;
+		this.user = user;
+	}
+	private messageSuccess = ({ email, id }: User) => {
+		return {
+			ok: true,
+			status: 'usuario logado com sucesso',
+			email,
+			id,
+		};
+	};
+	public login = async ({
+		email,
+		password,
+	}: IDatasLogin): Promise<IResponseDbLogin> => {
 		try {
 			const response = await this.user.findOne({
-				attributes: ['id', 'name', 'password'],
+				attributes: this.attribute,
 				where: {
 					email: email,
 				},
 				raw: true,
 			});
-			if (!response) throw new Error(messageError);
+			if (!response) throw new Error(this.messageError);
 			const checkPassword: boolean = await this.encrypt.passwordValidation(
 				password,
 				response.password,
 			);
-			if (!checkPassword) throw new Error(messageError);
-			const messageSuccess: TypesResponseDbLogin = {
-				ok: true,
-				status: 'usuario logado com sucesso',
-				name: response.name,
-				id: response.id,
-			};
-			return messageSuccess;
+			if (!checkPassword) throw new Error(this.messageError);
+			return this.messageSuccess(response);
 		} catch (error) {
 			throw error;
 		}
 	};
 }
-
 export default LoginDbUser;

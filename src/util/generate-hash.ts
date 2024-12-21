@@ -1,5 +1,5 @@
 import { sign, verify, JwtPayload } from 'jsonwebtoken';
-import IGenerateHash from '../interfaces/igeneate-hash';
+import IGenerateHash from '../interfaces/geneate-hash';
 import dotenv from 'dotenv';
 
 dotenv.config();

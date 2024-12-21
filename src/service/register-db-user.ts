@@ -1,18 +1,26 @@
 import User from '../model/User';
-import { TypesResponseDbRegister } from '../interfaces/response.db.types';
-import Encrypt from '../util/encrypt';
+import { IResponseDbRegister } from '../interfaces/response-db';
+import {
+	IRegisterDbUser,
+	IDatasRegister,
+} from '../interfaces/register-db-user';
+import IEncrypt from '../interfaces/encrypt';
 
-class RegisterDbUser {
-	constructor(private encrypt: Encrypt, private user: typeof User) {}
-	public register = async (
-		name: string,
-		email: string,
-		password: string,
-	): Promise<TypesResponseDbRegister> => {
-		const messageSuccess: TypesResponseDbRegister = {
-			ok: true,
-			status: 'usuario cadastrado com sucesso',
-		};
+class RegisterDbUser implements IRegisterDbUser {
+	private encrypt: IEncrypt;
+	private user: typeof User;
+	private messageSuccess: IResponseDbRegister = {
+		ok: true,
+		status: 'usuario cadastrado com sucesso',
+	};
+	constructor(encrypt: IEncrypt, user: typeof User) {
+		(this.encrypt = encrypt), (this.user = user);
+	}
+	public register = async ({
+		name,
+		email,
+		password,
+	}: IDatasRegister): Promise<IResponseDbRegister> => {
 		try {
 			const encryptedPassword: string = await this.encrypt.encryptPassword(
 				password,
@@ -22,11 +30,10 @@ class RegisterDbUser {
 				email: email,
 				password: encryptedPassword,
 			});
-			return messageSuccess;
+			return this.messageSuccess;
 		} catch (error) {
 			throw error;
 		}
 	};
 }
-
 export default RegisterDbUser;

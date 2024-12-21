@@ -3,15 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class RegisterDbUser {
     encrypt;
     user;
+    messageSuccess = {
+        ok: true,
+        status: 'usuario cadastrado com sucesso',
+    };
     constructor(encrypt, user) {
-        this.encrypt = encrypt;
-        this.user = user;
+        (this.encrypt = encrypt), (this.user = user);
     }
-    register = async (name, email, password) => {
-        const messageSuccess = {
-            ok: true,
-            status: 'usuario cadastrado com sucesso',
-        };
+    register = async ({ name, email, password, }) => {
         try {
             const encryptedPassword = await this.encrypt.encryptPassword(password);
             await this.user.create({
@@ -19,7 +18,7 @@ class RegisterDbUser {
                 email: email,
                 password: encryptedPassword,
             });
-            return messageSuccess;
+            return this.messageSuccess;
         }
         catch (error) {
             throw error;

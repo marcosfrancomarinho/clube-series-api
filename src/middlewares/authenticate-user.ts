@@ -1,25 +1,31 @@
 import { Response, Request, NextFunction } from 'express';
-import GenerateHash from '../util/generate-hash';
+import IAuthenticateUser from '../interfaces/authenticate-user';
+import IGenerateHash from '../interfaces/geneate-hash';
+import RequestModel from '../model/Request';
 
-class AuthenticateUser {
-	constructor(private generateHash: GenerateHash) {}
+class AuthenticateUser extends RequestModel implements IAuthenticateUser {
+	private generateHash: IGenerateHash;
+	constructor(generateHash: IGenerateHash) {
+		super();
+		this.generateHash = generateHash;
+	}
+	private getToken(req: Request) {
+		const token: string | undefined = req.headers['authorization'];
+		if (!token || token.trim().length === 0) throw new Error('token invalido');
+		return token;
+	}
 	public authenticationTokenUser = (
 		req: Request,
 		res: Response,
 		next: NextFunction,
 	): void => {
 		try {
-			const token: string | undefined = req.headers['authorization'];
-			if (!token) throw new Error('token invalido');
-			const response = this.generateHash.verify(token) as {
-				id: number;
-				email: string;
-			};
+			const token: string = this.getToken(req);
+			const response = this.generateHash.verify(token);
 			res.locals.token = response;
 			next();
 		} catch (error) {
-			const messageError: string = (error as Error).message;
-			res.status(400).json({ error: messageError });
+			res.status(400).json(super.messageError(error));
 		}
 	};
 }

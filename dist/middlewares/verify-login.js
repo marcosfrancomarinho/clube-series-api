@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Request_1 = __importDefault(require("../model/Request"));
-class VerifyLogin extends Request_1.default {
+const request_model_1 = __importDefault(require("../util/request-model"));
+class VerifyLogin extends request_model_1.default {
     verifyDatasUser;
     constructor(verifyDatasUser) {
         super();

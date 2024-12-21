@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import ILoginControllers from '../interfaces/login-controllers';
 import { ILoginDbUser } from '../interfaces/login-db-user';
 import IGenerateHash from '../interfaces/geneate-hash';
-import RequestModel from '../model/Request';
+import RequestModel from '../util/request-model';
 
 class LoginControllers extends RequestModel implements ILoginControllers {
 	private loginUserDb: ILoginDbUser;

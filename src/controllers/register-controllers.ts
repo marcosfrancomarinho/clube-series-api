@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import IRegisterControllers from '../interfaces/register-controllers';
 import { IResponseDbRegister } from '../interfaces/response-db';
 import { IRegisterDbUser } from '../interfaces/register-db-user';
-import RequestModel from '../model/Request';
+import RequestModel from '../util/request-model';
 
 class RegisterControllers extends RequestModel implements IRegisterControllers {
 	private registerUserDb: IRegisterDbUser;

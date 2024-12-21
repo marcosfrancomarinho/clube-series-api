@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import IAuthenticateUser from '../interfaces/authenticate-user';
 import IGenerateHash from '../interfaces/geneate-hash';
-import RequestModel from '../model/Request';
+import RequestModel from '../util/request-model';
 
 class AuthenticateUser extends RequestModel implements IAuthenticateUser {
 	private generateHash: IGenerateHash;

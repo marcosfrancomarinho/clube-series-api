@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from 'express';
-import RequestModel from '../model/Request';
 import IVerifyLogin from '../interfaces/verify-login';
 import IVerifyDatasUser from '../interfaces/verify-datas-user';
+import RequestModel from '../util/request-model';
 
 class VerifyLogin extends RequestModel implements IVerifyLogin {
 	private verifyDatasUser: IVerifyDatasUser;

@@ -1,8 +1,8 @@
 import { sign, verify, JwtPayload } from 'jsonwebtoken';
-import IGenerateHash from '../types/igeneate-hash';
+import IGenerateHash from '../interfaces/igeneate-hash';
 import dotenv from 'dotenv';
 
-dotenv.config(); 
+dotenv.config();
 class GenerateHash implements IGenerateHash {
 	constructor(private jwt: { sign: typeof sign; verify: typeof verify }) {}
 

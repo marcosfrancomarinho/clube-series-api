@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
-import { TypesResponseDbRegister } from '../types/response.db.types';
+import { TypesResponseDbRegister } from '../interfaces/response.db.types';
 import RegisterDbUser from '../service/register-db-user';
-import ISignupControllers from '../types/isignup-controllers';
+import ISignupControllers from '../interfaces/isignup-controllers';
 
 class SignUpControllers implements ISignupControllers {
 	constructor(private registerUserDb: RegisterDbUser) {}

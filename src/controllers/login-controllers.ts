@@ -1,7 +1,7 @@
 import { Response, Request } from 'express';
 import LoginDbUser from '../service/login-db-user';
 import GenerateHash from '../util/generate-hash';
-import IControllersLogin from '../types/ilogin-controllers';
+import IControllersLogin from '../interfaces/ilogin-controllers';
 
 class ControllersLogin implements IControllersLogin {
 	constructor(

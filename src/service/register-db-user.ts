@@ -1,5 +1,5 @@
 import User from '../model/User';
-import { TypesResponseDbRegister } from '../types/response.db.types';
+import { TypesResponseDbRegister } from '../interfaces/response.db.types';
 import Encrypt from '../util/encrypt';
 
 class RegisterDbUser {

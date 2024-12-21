@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import TypeVerifyDatasUser from '../types/verify.datas.types';
+import TypeVerifyDatasUser from '../interfaces/verify.datas.types';
 
 class VerifyDatasUser implements TypeVerifyDatasUser {
 	private hasError(params: string, schema: Joi.StringSchema<string>): void {

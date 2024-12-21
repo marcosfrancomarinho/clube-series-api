@@ -10,20 +10,20 @@ class GenerateHash {
     constructor(jwt) {
         this.jwt = jwt;
     }
-    hash(email, id) {
+    hash = (email, id) => {
         const keySecret = process.env.SECRET;
         if (!keySecret) {
             throw new Error('A variável de ambiente SECRET não está definida.');
         }
         const token = this.jwt.sign({ email, id }, keySecret);
         return token;
-    }
-    verify(token) {
+    };
+    verify = (token) => {
         const keySecret = process.env.SECRET;
         if (!keySecret) {
             throw new Error('A variável de ambiente SECRET não está definida.');
         }
         return this.jwt.verify(token, keySecret);
-    }
+    };
 }
 exports.default = GenerateHash;

@@ -6,7 +6,7 @@
     "build": "tsc -w",
     "start": "node dist/config/server.js",
     "dev": "nodemon dist/config/server.js",
-    "git": "git add . & git commit -m 'finalizado' & git push origin main"
+    "git": "git add . & git commit -m 'concluido' & git push origin main"
   },
   "keywords": [],
   "author": "",

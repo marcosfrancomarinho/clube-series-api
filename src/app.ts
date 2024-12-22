@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(router);
 app.use(
 	cors({
-		methods: ['POST'],
+		methods: ['POST', 'GET'],
 		origin: '*',
 		allowedHeaders: ['Authorization', 'Content-Type'],
 		exposedHeaders: ['Authorization'],

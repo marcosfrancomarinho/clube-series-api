@@ -2,20 +2,13 @@ import { Router } from 'express';
 import routerLogin from './login-router';
 import routerRegister from './register-router';
 import routerRoot from './root-router';
-import {
-	authenticateUser,
-	verifyLogin,
-	verifyRegister,
-} from '../config/instances';
+import routerWelcome from './welcome-router';
 
 const router = Router();
 
-router.use('/login', verifyLogin.verifyDatasBodyUserLogin, routerLogin);
-router.use(
-	'/signup',
-	verifyRegister.verifyDatasBodyUserRegister,
-	routerRegister,
-);
-router.use('/', authenticateUser.authenticationTokenUser, routerRoot);
+router.use('/login', routerLogin);
+router.use('/signup', routerRegister);
+router.use('/welcome', routerWelcome);
+router.use('/', routerRoot);
 
 export default router;

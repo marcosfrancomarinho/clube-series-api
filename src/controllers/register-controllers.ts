@@ -10,7 +10,7 @@ class RegisterControllers extends RequestModel implements IRegisterControllers {
 		super();
 		this.registerUserDb = registerUserDb;
 	}
-	public siginUpUser = async (req: Request, res: Response): Promise<void> => {
+	public registerUser = async (req: Request, res: Response): Promise<void> => {
 		try {
 			const datas = super.getDatasBodyRegister(req);
 			const response: IResponseDbRegister = await this.registerUserDb.register(

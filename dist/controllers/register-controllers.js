@@ -10,7 +10,7 @@ class RegisterControllers extends request_model_1.default {
         super();
         this.registerUserDb = registerUserDb;
     }
-    siginUpUser = async (req, res) => {
+    registerUser = async (req, res) => {
         try {
             const datas = super.getDatasBodyRegister(req);
             const response = await this.registerUserDb.register(datas);

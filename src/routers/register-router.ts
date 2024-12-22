@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { registerControllers } from '../config/instances';
+import { registerControllers, verifyRegister } from '../config/instances';
 
 const routerRegister = Router();
 
-routerRegister.post('/', registerControllers.siginUpUser);
+routerRegister.post(
+	'/',
+	verifyRegister.verifyDatasBodyUserRegister,
+	registerControllers.registerUser,
+);
 
 export default routerRegister;

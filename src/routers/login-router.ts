@@ -1,8 +1,12 @@
 import { Router } from 'express';
-import { loginControllers } from '../config/instances';
+import { loginControllers, verifyLogin } from '../config/instances';
 
 const routerLogin = Router();
 
-routerLogin.post('/', loginControllers.loginUser);
+routerLogin.post(
+	'/',
+	verifyLogin.verifyDatasBodyUserLogin,
+	loginControllers.loginUser,
+);
 
 export default routerLogin;

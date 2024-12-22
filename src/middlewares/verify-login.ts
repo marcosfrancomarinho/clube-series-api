@@ -23,5 +23,4 @@ class VerifyLogin extends RequestModel implements IVerifyLogin {
 		}
 	};
 }
-
 export default VerifyLogin;

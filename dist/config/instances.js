@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.rootControllers = exports.registerControllers = exports.loginControllers = exports.authenticateUser = exports.verifyRegister = exports.verifyLogin = void 0;
+exports.welcomeControllers = exports.rootControllers = exports.registerControllers = exports.loginControllers = exports.authenticateUser = exports.verifyRegister = exports.verifyLogin = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const joi_1 = __importDefault(require("joi"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -19,6 +19,7 @@ const login_db_user_1 = __importDefault(require("../service/login-db-user"));
 const login_controllers_1 = __importDefault(require("../controllers/login-controllers"));
 const register_controllers_1 = __importDefault(require("../controllers/register-controllers"));
 const root_controllers_1 = __importDefault(require("../controllers/root-controllers"));
+const welcome_controller_1 = __importDefault(require("../controllers/welcome-controller"));
 const generateHash = new generate_hash_1.default(jsonwebtoken_1.default);
 const encrypt = new encrypt_1.default(bcrypt_1.default);
 const verifyDataUser = new verify_datas_1.default(joi_1.default);
@@ -36,3 +37,5 @@ const loginControllers = new login_controllers_1.default(loginUserDb, generateHa
 exports.loginControllers = loginControllers;
 const registerControllers = new register_controllers_1.default(registerUserDb);
 exports.registerControllers = registerControllers;
+const welcomeControllers = new welcome_controller_1.default();
+exports.welcomeControllers = welcomeControllers;

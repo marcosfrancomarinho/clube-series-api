@@ -2,12 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class LoginDbUser {
     encrypt;
-    user;
-    messageError = 'Email ou senha inválida';
-    attribute = ['id', 'email', 'password'];
-    constructor(encrypt, user) {
+    loginRepository;
+    messageError;
+    attribute;
+    constructor(encrypt, loginRepository) {
         this.encrypt = encrypt;
-        this.user = user;
+        this.loginRepository = loginRepository;
+        this.messageError = 'Email ou senha inválida';
+        this.attribute = ['id', 'email', 'password'];
     }
     messageSuccess = ({ email, id }) => {
         return {
@@ -19,13 +21,7 @@ class LoginDbUser {
     };
     login = async ({ email, password, }) => {
         try {
-            const response = await this.user.findOne({
-                attributes: this.attribute,
-                where: {
-                    email: email,
-                },
-                raw: true,
-            });
+            const response = await this.loginRepository.querySelectUser(email, this.attribute);
             if (!response)
                 throw new Error(this.messageError);
             const checkPassword = await this.encrypt.passwordValidation(password, response.password);

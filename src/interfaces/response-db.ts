@@ -5,6 +5,6 @@ export interface IResponseDbRegister {
 export interface IResponseDbLogin {
 	ok: boolean;
 	status: string;
-	id?: number;
+	id: number;
 	email: string;
 }

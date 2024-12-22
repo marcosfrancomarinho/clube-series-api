@@ -6,14 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const main_1 = __importDefault(require("./routers/main"));
 const cors_1 = __importDefault(require("cors"));
-const configCors = {
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use(main_1.default);
+app.use((0, cors_1.default)({
     methods: ['POST'],
     origin: '*',
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization'],
-};
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)(configCors));
-app.use(express_1.default.json());
-app.use(main_1.default);
+}));
 exports.default = app;

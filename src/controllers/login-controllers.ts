@@ -16,7 +16,7 @@ class LoginControllers extends RequestModel implements ILoginControllers {
 		try {
 			const datas = super.getDatasBodyLogin(req);
 			const { id, email, ...response } = await this.loginUserDb.login(datas);
-			const hash: string = this.generateHash.hash(email, id as number);
+			const hash: string = this.generateHash.hash(email, id);
 			res.status(200).setHeader('authorization', hash).json(response);
 		} catch (error) {
 			res.status(400).json(super.messageError(error));

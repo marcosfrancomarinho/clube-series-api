@@ -14,6 +14,8 @@ import LoginControllers from '../controllers/login-controllers';
 import RegisterControllers from '../controllers/register-controllers';
 import RootControllers from '../controllers/root-controllers';
 import WelcomeControllers from '../controllers/welcome-controller';
+import LoginRepository from '../repositories/login-repository';
+import RegisterRepository from '../repositories/register-repository';
 
 const generateHash = new GenerateHash(jwt);
 const encrypt = new Encrypt(bcrypt);
@@ -21,8 +23,10 @@ const verifyDataUser = new VerifyDatasUser(Joi);
 const verifyLogin = new VerifyLogin(verifyDataUser);
 const verifyRegister = new VerifyRegister(verifyDataUser);
 const authenticateUser = new AuthenticateUser(generateHash);
-const loginUserDb = new LoginDbUser(encrypt, User);
-const registerUserDb = new RegisterDbUser(encrypt, User);
+const loginRepository = new LoginRepository(User);
+const registerRepository = new RegisterRepository(User);
+const loginUserDb = new LoginDbUser(encrypt, loginRepository);
+const registerUserDb = new RegisterDbUser(encrypt, registerRepository);
 const rootControllers = new RootControllers();
 const loginControllers = new LoginControllers(loginUserDb, generateHash);
 const registerControllers = new RegisterControllers(registerUserDb);
@@ -35,5 +39,5 @@ export {
 	loginControllers,
 	registerControllers,
 	rootControllers,
-	welcomeControllers
+	welcomeControllers,
 };

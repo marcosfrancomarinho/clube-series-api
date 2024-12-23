@@ -5,12 +5,12 @@ import IUser from '../interfaces/User';
 type UserCreationAttributes = Optional<IUser, 'id' | 'createdAt' | 'updatedAt'>;
 
 class User extends Model<IUser, UserCreationAttributes> implements IUser {
-	id?: number;
+	id!: number;
 	name!: string;
 	email!: string;
 	password!: string;
-	readonly createdAt!: Date;
-	readonly updatedAt!: Date;
+	createdAt!: Date;
+	updatedAt!: Date;
 }
 
 User.init(
@@ -31,18 +31,17 @@ User.init(
 		},
 		email: {
 			type: DataTypes.STRING,
-			unique: { name: 'email', msg: 'email ja cadastrado' },
+			unique: true,
 			allowNull: false,
 			validate: {
-				isEmail: true,
+				isEmail: { msg: 'email inválido.' },
 			},
 		},
 	},
 	{
-		sequelize: sequelize,
+		sequelize,
 		tableName: 'register_user',
 		timestamps: true,
 	},
 );
-
 export default User;

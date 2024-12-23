@@ -30,10 +30,10 @@ User.init({
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
-        unique: { name: 'email', msg: 'email ja cadastrado' },
+        unique: true,
         allowNull: false,
         validate: {
-            isEmail: true,
+            isEmail: { msg: 'email inválido.' },
         },
     },
 }, {

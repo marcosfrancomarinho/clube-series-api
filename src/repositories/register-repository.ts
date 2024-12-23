@@ -6,7 +6,7 @@ class RegisterRepository implements IRegisterRepository {
 	constructor(user: typeof User) {
 		this.user = user;
 	}
-	queryCreateUser = async (
+	public queryCreateUser = async (
 		name: string,
 		email: string,
 		password: string,

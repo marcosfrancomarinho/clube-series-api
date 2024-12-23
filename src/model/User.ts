@@ -31,11 +31,14 @@ User.init(
 		},
 		email: {
 			type: DataTypes.STRING,
-			unique: { msg: 'email já cadastrado', name: 'email unico' },
 			allowNull: false,
+			unique: {
+				name: 'unique_email_index',
+				msg: 'Este email já está registrado.',
+			},
 			validate: {
 				isEmail: {
-					msg: 'Email inválido',
+					msg: 'Informe um email válido.',
 				},
 			},
 		},

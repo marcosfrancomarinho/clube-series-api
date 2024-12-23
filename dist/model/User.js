@@ -33,7 +33,9 @@ User.init({
         unique: true,
         allowNull: false,
         validate: {
-            isEmail: { msg: 'email inválido.' },
+            isEmail: {
+                msg: 'Email inválido',
+            },
         },
     },
 }, {

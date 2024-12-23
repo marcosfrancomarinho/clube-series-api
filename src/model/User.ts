@@ -4,13 +4,13 @@ import IUser from '../interfaces/User';
 
 type UserCreationAttributes = Optional<IUser, 'id' | 'createdAt' | 'updatedAt'>;
 
-class User extends Model<IUser, UserCreationAttributes> implements IUser {
-	id!: number;
-	name!: string;
-	email!: string;
-	password!: string;
-	createdAt!: Date;
-	updatedAt!: Date;
+class User extends Model<IUser, UserCreationAttributes> {
+	public id!: number;
+	public name!: string;
+	public email!: string;
+	public password!: string;
+	public readonly createdAt!: Date;
+	public readonly updatedAt!: Date;
 }
 
 User.init(
@@ -34,7 +34,9 @@ User.init(
 			unique: true,
 			allowNull: false,
 			validate: {
-				isEmail: { msg: 'email inválido.' },
+				isEmail: {
+					msg: 'Email inválido',
+				},
 			},
 		},
 	},
@@ -44,4 +46,5 @@ User.init(
 		timestamps: true,
 	},
 );
+
 export default User;

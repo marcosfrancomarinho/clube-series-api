@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import Router from 'express';
 import { welcomeControllers } from '../config/instances';
 
 const routerWelcome = Router();

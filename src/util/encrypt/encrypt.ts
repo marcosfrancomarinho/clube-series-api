@@ -1,4 +1,4 @@
-import { compare, hash, genSalt } from 'bcrypt';
+import  {compare, hash, genSalt}  from 'bcrypt';
 import IEncrypt from './@types/encrypt';
 
 class Encrypt implements IEncrypt {

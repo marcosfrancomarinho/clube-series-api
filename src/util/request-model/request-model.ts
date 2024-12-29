@@ -1,4 +1,4 @@
-import { Request } from 'express';
+import {Request} from 'express';
 
 abstract class RequestModel {
 	protected getDatasBodyLogin(req: Request) {

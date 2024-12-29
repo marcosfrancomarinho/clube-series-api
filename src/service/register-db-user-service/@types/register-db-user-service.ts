@@ -1,4 +1,4 @@
-import { IResponseDbRegister } from "../../../controllers/register-controllers/@types/response-db-register";
+import { IResponseDbRegister } from '../../../controllers/register-controllers/@types/response-db-register';
 
 export interface IDatasRegister {
 	name: string;

@@ -1,4 +1,4 @@
-import { Root, StringSchema } from 'joi';
+import  {Root, StringSchema } from 'joi';
 import IVerifyDatasUser from './@types/verify-datas-user';
 
 class VerifyDatasUser implements IVerifyDatasUser {

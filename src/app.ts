@@ -1,7 +1,7 @@
 import express from 'express';
 import routerMain from './routers/main-router';
 import cors from 'cors';
-import { corsOptions } from './config/cors-options';
+import {corsOptions} from './config/cors-options';
 const app = express();
 
 app.use(cors(corsOptions));

@@ -10,7 +10,7 @@ class RegisterDbUserService implements IRegisterDbUserService {
 	private encrypt: IEncrypt;
 	private registerAdapter: IRegisterAdapter;
 	private messageSuccess: IResponseDbRegister;
-	constructor(encrypt: IEncrypt, registerAdapter:IRegisterAdapter) {
+	constructor(encrypt: IEncrypt, registerAdapter: IRegisterAdapter) {
 		this.encrypt = encrypt;
 		this.registerAdapter = registerAdapter;
 		this.messageSuccess = {
@@ -27,11 +27,7 @@ class RegisterDbUserService implements IRegisterDbUserService {
 			const encryptedPassword: string = await this.encrypt.encryptPassword(
 				password,
 			);
-			await this.registerAdapter.queryCreateUser(
-				name,
-				email,
-				encryptedPassword,
-			);
+			await this.registerAdapter.queryCreateUser(name, email, encryptedPassword);
 			return this.messageSuccess;
 		} catch (error) {
 			throw error;

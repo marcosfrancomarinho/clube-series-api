@@ -1,4 +1,4 @@
-import { IResponseDbLogin } from "../../../controllers/login-controllers/@types/response-db-login";
+import {IResponseDbLogin} from '../../../controllers/login-controllers/@types/response-db-login';
 
 export interface IDatasLogin {
 	email: string;
@@ -8,5 +8,3 @@ export interface IDatasLogin {
 export interface ILoginDbUserService {
 	login({ email, password }: IDatasLogin): Promise<IResponseDbLogin>;
 }
-
-

@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { loginControllers, verifyLogin } from '../config/instances';
+import  Router  from 'express';
+import  {loginControllers, verifyLogin}  from '../config/instances';
 
 const routerLogin = Router();
 

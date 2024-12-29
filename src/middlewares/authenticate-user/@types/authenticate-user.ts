@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from 'express';
+import  {Response, Request, NextFunction } from 'express';
 
 interface IAuthenticateUser {
 	authenticationTokenUser(req: Request, res: Response, next: NextFunction): void;

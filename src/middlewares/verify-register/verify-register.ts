@@ -1,4 +1,4 @@
-import { NextFunction, Response, Request } from 'express';
+import  {NextFunction, Response, Request}  from 'express';
 import RequestModel from '../../util/request-model/request-model';
 import IVerifyDatasUser from '../../util/verify-datas/@types/verify-datas-user';
 import IVerifyRegister from './@types/verify-register';

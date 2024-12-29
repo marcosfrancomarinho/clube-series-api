@@ -1,4 +1,4 @@
-import { JwtPayload } from 'jsonwebtoken';
+import {JwtPayload} from 'jsonwebtoken';
 
 interface IGenerateHash {
 	hash(email: string, id: number): string;

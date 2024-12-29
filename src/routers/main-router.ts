@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import Router from 'express';
 import routerLogin from './login-router';
 import routerRegister from './register-router';
 import routerRoot from './root-router';

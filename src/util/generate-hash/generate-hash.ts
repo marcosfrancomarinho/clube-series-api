@@ -1,4 +1,4 @@
-import { sign, verify, JwtPayload } from 'jsonwebtoken';
+import  {sign, verify, JwtPayload } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import IGenerateHash from './@types/generate-hash';
 

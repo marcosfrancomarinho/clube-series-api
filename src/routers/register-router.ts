@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import { registerControllers, verifyRegister } from '../config/instances';
+import  Router  from 'express';
+import  {registerControllers, verifyRegister } from '../config/instances';
 
 const routerRegister = Router();
 

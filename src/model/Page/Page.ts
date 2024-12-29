@@ -1,5 +1,5 @@
-import { DataTypes, Model, Optional } from 'sequelize';
-import { iFooter, IMenu, IPage, IPhoto } from './@types/Page';
+import  {DataTypes, Model, Optional } from 'sequelize';
+import  {iFooter, IMenu, IPage, IPhoto}  from './@types/Page';
 import sequelize from '../../config/database';
 
 type CreateParamsPage = Optional<IPage, 'id' | 'createdAt' | 'updatedAt'>;

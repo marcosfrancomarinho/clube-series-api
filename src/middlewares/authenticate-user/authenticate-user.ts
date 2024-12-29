@@ -1,4 +1,4 @@
-import { Response, Request, NextFunction } from 'express';
+import { Response, Request, NextFunction}  from 'express';
 import RequestModel from '../../util/request-model/request-model';
 import IGenerateHash from '../../util/generate-hash/@types/generate-hash';
 import IAuthenticateUser from './@types/authenticate-user';

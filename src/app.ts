@@ -6,7 +6,7 @@ const app = express();
 app.use(
 	cors({
 		methods: ['POST', 'GET'],
-		origin: 'https://cubo-serie.vercel.app',
+		origin: ['https://cubo-serie.vercel.app', 'http://localhost:5173'],
 		allowedHeaders: ['Authorization', 'Content-Type'],
 		exposedHeaders: ['Authorization'],
 	}),

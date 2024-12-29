@@ -6,7 +6,11 @@ import {
 
 const routerRoot = Router();
 
-routerRoot.post('/', authenticateUser.authenticationTokenUser);
+routerRoot.post(
+	'/',
+	authenticateUser.authenticationTokenUser,
+	pageInterfaceControllers.getDatasPageInterfaceDB,
+);
 
 routerRoot.get('/', pageInterfaceControllers.getDatasPageInterfaceDB);
 

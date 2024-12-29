@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 class ImageAdapterQueryCreate {
     page;
-    sequelize;
     verifyDatasObjectImages;
     messageError = 'Fail seach datas images';
-    constructor(page, verifyDatasObjectImages, sequelize) {
+    constructor(page, verifyDatasObjectImages) {
         this.page = page;
         this.verifyDatasObjectImages = verifyDatasObjectImages;
-        this.sequelize = sequelize;
     }
     sqlInsert = (items) => {
         const sql = `
@@ -29,7 +28,7 @@ class ImageAdapterQueryCreate {
         try {
             this.verifyDatasObjectImages.imagesObject(items);
             await this.page.update({
-                images: this.sequelize.literal(this.sqlInsert(items)),
+                images: sequelize_1.Sequelize.literal(this.sqlInsert(items)),
             }, {
                 where: { title: 'Clube das Séries' },
             });

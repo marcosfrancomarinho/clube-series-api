@@ -8,15 +8,18 @@ import {
 
 class ImageAdapterQueryCreate implements IImageadapterQueryCreate {
 	private page!: typeof Page;
+	private sequelize!: typeof Sequelize;
 	private verifyDatasObjectImages!: IVerifyDatasObjectImages;
 	private messageError: string = 'Fail seach datas images';
 
 	constructor(
 		page: typeof Page,
 		verifyDatasObjectImages: IVerifyDatasObjectImages,
+		sequelize: typeof Sequelize,
 	) {
 		this.page = page;
 		this.verifyDatasObjectImages = verifyDatasObjectImages;
+		this.sequelize = sequelize;
 	}
 
 	private sqlInsert = (items: IImageObject): string => {
@@ -40,7 +43,7 @@ class ImageAdapterQueryCreate implements IImageadapterQueryCreate {
 			this.verifyDatasObjectImages.imagesObject(items);
 			await this.page.update(
 				{
-					images: Sequelize.literal(this.sqlInsert(items)),
+					images: this.sequelize.literal(this.sqlInsert(items)),
 				},
 				{
 					where: { title: 'Clube das Séries' },

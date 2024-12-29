@@ -1,183 +1,110 @@
 /**
  * Importação das bibliotecas e módulos necessários.
  */
-
+import { Sequelize } from 'sequelize';
 import jwt from 'jsonwebtoken';
-// Biblioteca para criação e verificação de tokens JWT (JSON Web Tokens), utilizados para autenticação segura.
-
 import Joi from 'joi';
-// Biblioteca para validação de dados, permitindo definir esquemas para garantir que os dados de entrada estejam corretos.
-
 import bcrypt from 'bcrypt';
-// Biblioteca para encriptação de senhas utilizando o algoritmo bcrypt, garantindo a segurança das senhas armazenadas.
 
+// Importação de modelos e utilitários para autenticação, validação e manipulação de dados
 import Page from '../model/Page/Page';
-// Modelo de dados que representa a tabela "Page", que armazena informações sobre as páginas da aplicação.
-
 import User from '../model/User/User';
-// Modelo de dados que representa a tabela "User", contendo informações sobre os usuários (como nome, email, senha).
-
 import GenerateHash from '../util/generate-hash/generate-hash';
-// Classe utilitária para gerar hashes (como tokens JWT ou outros tipos de hash) necessários para autenticação segura.
-
 import Encrypt from '../util/encrypt/encrypt';
-// Classe utilitária para encriptar senhas e comparar com o hash armazenado no banco de dados para validação da senha do usuário.
-
 import VerifyDatasUser from '../util/verify-datas/verify-datas-user';
-// Classe utilitária para validar os dados de entrada do usuário utilizando a biblioteca Joi.
-
-import VerifyLogin from '../middlewares/verify-login/verify-login';
-// Middleware responsável por validar os dados de login (como email e senha) para garantir que o usuário possa se autenticar corretamente.
-
-import VerifyRegister from '../middlewares/verify-register/verify-register';
-// Middleware responsável por validar os dados de registro de um novo usuário, garantindo que as informações fornecidas estejam corretas.
-
-import AuthenticateUser from '../middlewares/authenticate-user/authenticate-user';
-// Middleware para autenticar usuários através da verificação do token JWT, assegurando que apenas usuários autenticados tenham acesso a recursos protegidos.
-
-import LoginAdapter from '../integrations/login-adapter/login-adapter';
-// Repositório responsável por acessar os dados de login no banco de dados, incluindo validação de credenciais de login.
-
-import RegisterAdapter from '../integrations/register-adapter/register-adapter';
-// Repositório responsável por registrar novos usuários no banco de dados, armazenando informações como nome, email e senha.
-
-import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
-// Serviço que contém a lógica de negócios para autenticar o usuário utilizando dados do banco de dados e a encriptação de senha.
-
-import RegisterDbUserService from '../service/register-db-user-service/register-db-user-service';
-// Serviço que contém a lógica de negócios para o processo de registro de um novo usuário, incluindo validação e armazenamento no banco de dados.
-
-import LoginControllers from '../controllers/login-controllers/login-controllers';
-// Controlador responsável por lidar com as requisições de login do usuário, processando as credenciais e gerando o token JWT.
-
-import RegisterControllers from '../controllers/register-controllers/register-controllers';
-// Controlador responsável por gerenciar as requisições de registro de novos usuários, validando os dados e criando o usuário no banco de dados.
-
-import WelcomeControllers from '../controllers/welcome-controllers/welcome-controllers';
-// Controlador responsável por exibir uma tela de boas-vindas após o login ou registro bem-sucedido.
-
-import PageInterfaceAdapter from '../integrations/page-interface-adapter/page-interface-adapter';
-// Repositório para acessar e manipular os dados das páginas da aplicação no banco de dados.
-
-import PageInterfaceControllers from '../controllers/page-interface-controllers/page-interface-controllers';
-// Controlador que gerencia as interações e exibição das páginas na aplicação, permitindo a manipulação dos dados de páginas.
-
 import VerifyDatasObjectImages from '../util/verify-datas/verify-datas-object-image';
-// Classe utilitária para validar os dados relacionados a objetos de imagens.
 
+// Importação de middlewares e adaptadores
+import VerifyLogin from '../middlewares/verify-login/verify-login';
+import VerifyRegister from '../middlewares/verify-register/verify-register';
+import AuthenticateUser from '../middlewares/authenticate-user/authenticate-user';
+import LoginAdapter from '../integrations/login-adapter/login-adapter';
+import RegisterAdapter from '../integrations/register-adapter/register-adapter';
+import PageInterfaceAdapter from '../integrations/page-interface-adapter/page-interface-adapter';
 import ImageAdapterQueryCreate from '../integrations/image-adapter/image-adapter-query-create/image-adapter-query-create';
-// Adaptador responsável por criar e manipular os dados de imagens no banco de dados, validando os dados do objeto de imagem antes de realizar operações.
+
+// Importação de serviços e controladores
+import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
+import RegisterDbUserService from '../service/register-db-user-service/register-db-user-service';
+import LoginControllers from '../controllers/login-controllers/login-controllers';
+import RegisterControllers from '../controllers/register-controllers/register-controllers';
+import WelcomeControllers from '../controllers/welcome-controllers/welcome-controllers';
+import PageInterfaceControllers from '../controllers/page-interface-controllers/page-interface-controllers';
 
 /**
- * Instanciação das classes utilitárias e serviços necessários para o funcionamento do login, registro e autenticação.
+ * Instanciação das classes utilitárias, serviços e middlewares necessários.
  */
-
 const generateHash = new GenerateHash(jwt);
-// Instancia a classe GenerateHash que usa a biblioteca JWT para criar e verificar tokens de autenticação.
+// Gera e verifica tokens JWT para autenticação do usuário.
 
 const encrypt = new Encrypt(bcrypt);
-// Instancia a classe Encrypt que utiliza bcrypt para encriptar senhas e comparar com o hash armazenado no banco de dados.
+// Encripta senhas usando bcrypt e compara com o hash armazenado no banco de dados.
 
 const verifyDataUser = new VerifyDatasUser(Joi);
-// Instancia a classe VerifyDatasUser que usa Joi para validar os dados de entrada, como email e senha, garantindo que estejam no formato correto.
+// Valida os dados de entrada do usuário (como email e senha) usando Joi.
 
 const verifyLogin = new VerifyLogin(verifyDataUser);
-// Instancia o middleware VerifyLogin, que valida os dados de login antes de permitir que o usuário se autentique.
+// Middleware que valida os dados de login (email e senha).
 
 const verifyRegister = new VerifyRegister(verifyDataUser);
-// Instancia o middleware VerifyRegister, que valida os dados de registro (nome, email, senha) para garantir que o novo usuário forneça informações corretas.
+// Middleware que valida os dados de registro (nome, email, senha).
 
 const authenticateUser = new AuthenticateUser(generateHash);
-// Instancia o middleware AuthenticateUser, que autentica o usuário com base no token JWT, garantindo que o usuário tenha acesso a recursos protegidos.
+// Middleware que autentica o usuário com base no token JWT.
 
 const loginAdapter = new LoginAdapter(User);
-// Instancia o repositório LoginAdapter que lida com o acesso aos dados de login dos usuários no banco de dados.
+// Acessa os dados de login no banco de dados para verificar as credenciais do usuário.
 
 const registerAdapter = new RegisterAdapter(User);
-// Instancia o repositório RegisterAdapter que lida com o registro de novos usuários no banco de dados.
+// Registra novos usuários no banco de dados, armazenando informações como nome, email e senha.
 
 const loginUserDbService = new LoginDbUserService(encrypt, loginAdapter);
-// Instancia o serviço LoginDbUserService, que processa a autenticação de usuários utilizando dados do banco e encriptação de senha.
+// Serviço que realiza o login do usuário, utilizando encriptação de senha e o repositório de login.
 
 const registerUserDbService = new RegisterDbUserService(
 	encrypt,
 	registerAdapter,
 );
-// Instancia o serviço RegisterDbUserService, que lida com a lógica de registro de novos usuários no banco de dados.
+// Serviço que lida com o registro de novos usuários no banco de dados.
 
 const loginControllers = new LoginControllers(loginUserDbService, generateHash);
-// Instancia o controlador LoginControllers, que gerencia as requisições de login e processa as credenciais fornecidas pelo usuário.
+// Controlador que gerencia as requisições de login e gera o token JWT após a autenticação.
 
 const registerControllers = new RegisterControllers(registerUserDbService);
-// Instancia o controlador RegisterControllers, que gerencia as requisições de registro de novos usuários, validando e criando os dados no banco.
+// Controlador que gerencia o processo de registro de novos usuários.
 
 const welcomeControllers = new WelcomeControllers();
-// Instancia o controlador WelcomeControllers, que exibe uma tela de boas-vindas ao usuário após o login ou registro bem-sucedido.
+// Controlador que exibe uma tela de boas-vindas após login ou registro bem-sucedido.
 
 const pageInterfaceAdapter = new PageInterfaceAdapter(Page);
-// Instancia o repositório PageInterfaceRepository que lida com as páginas da aplicação no banco de dados.
+// Adaptador que lida com as páginas da aplicação no banco de dados.
 
 const pageInterfaceControllers = new PageInterfaceControllers(
 	pageInterfaceAdapter,
 );
-// Instancia o controlador PageInterfaceControllers, que gerencia a exibição e manipulação das páginas da aplicação.
+// Controlador que gerencia a exibição e manipulação das páginas na aplicação.
 
 const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
-// Instancia a classe VerifyDatasObjectImages que utiliza Joi para validar os dados de objetos de imagem.
+// Valida os dados de objetos de imagem antes de realizar qualquer operação.
 
 const imageAdapterQueryCreate = new ImageAdapterQueryCreate(
 	Page,
 	verifyDatasObjectImages,
+	Sequelize, // O Sequelize é utilizado aqui para interagir com o banco de dados, especificamente para manipulação de registros de imagem.
 );
-// Instancia o adaptador ImageAdapterQueryCreate que valida e manipula os dados de imagens no banco de dados.
+// Adaptador que cria e manipula dados de imagens no banco de dados, utilizando o Sequelize para validar e processar as imagens.
 
 /**
  * Exportação das instâncias para utilização em outros módulos ou rotas da aplicação.
  */
-
 export {
-	/**
-	 * Middleware responsável por validar os dados de login de um usuário, como email e senha.
-	 */
-	verifyLogin,
-
-	/**
-	 * Middleware responsável por validar os dados de registro de um novo usuário.
-	 */
-	verifyRegister,
-
-	/**
-	 * Middleware responsável por autenticar o usuário com base no token JWT.
-	 */
-	authenticateUser,
-
-	/**
-	 * Controlador responsável por gerenciar o login do usuário, verificando as credenciais e gerando o token de autenticação.
-	 */
-	loginControllers,
-
-	/**
-	 * Controlador responsável por gerenciar o processo de registro de novos usuários.
-	 */
-	registerControllers,
-
-	/**
-	 * Controlador responsável por exibir uma tela de boas-vindas após o login ou o registro de um usuário.
-	 */
-	welcomeControllers,
-
-	/**
-	 * Controlador responsável por gerenciar as páginas da aplicação, permitindo a interação e a exibição de conteúdo dinâmico.
-	 */
-	pageInterfaceControllers,
-
-	/**
-	 * Validador utilitário para verificar os dados relacionados aos objetos de imagens.
-	 */
-	verifyDatasObjectImages,
-
-	/**
-	 * Adaptador responsável por criar e manipular os dados de imagens no banco de dados.
-	 */
-	imageAdapterQueryCreate,
+	verifyLogin, // Middleware de validação de login
+	verifyRegister, // Middleware de validação de registro
+	authenticateUser, // Middleware de autenticação via token JWT
+	loginControllers, // Controlador de login
+	registerControllers, // Controlador de registro de novos usuários
+	welcomeControllers, // Controlador de boas-vindas
+	pageInterfaceControllers, // Controlador de manipulação de páginas
+	verifyDatasObjectImages, // Validador de dados de objetos de imagens
+	imageAdapterQueryCreate, // Adaptador de criação de imagens no banco de dados
 };

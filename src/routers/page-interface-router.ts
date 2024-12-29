@@ -3,6 +3,6 @@ import { pageInterfaceControllers } from '../config/instances';
 
 const routerPageInterface = Router();
 
-routerPageInterface.get('/', pageInterfaceControllers.getDatasPageInterface);
+routerPageInterface.get('/', pageInterfaceControllers.getDatasPageInterfaceDB);
 
 export default routerPageInterface;

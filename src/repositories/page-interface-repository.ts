@@ -8,7 +8,11 @@ class PageInterfaceRepository implements IPageInterfaceRepository {
 		this.page = page;
 	}
 	public getDatasPageInterface = async (): Promise<IPage> => {
-		const datas = await this.page.findOne({ where: { id: 1 }, raw: true });
+		const datas = await this.page.findOne({
+			where: { id: 1 },
+			raw: true,
+			attributes: ['images', 'footer', 'menu', 'id', 'title'],
+		});
 		return datas as IPage;
 	};
 }

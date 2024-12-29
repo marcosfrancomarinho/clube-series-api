@@ -10,7 +10,7 @@ class PageInterfaceControllers extends request_model_1.default {
         super();
         this.pageInterfaceRepository = pageInterfaceRepository;
     }
-    getDatasPageInterface = async (req, res) => {
+    getDatasPageInterfaceDB = async (req, res) => {
         try {
             const response = await this.pageInterfaceRepository.getDatasPageInterface();
             res.status(200).send(response);

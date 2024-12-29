@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import Joi from 'joi';
 import bcrypt from 'bcrypt';
 import User from '../model/User';
+import Page from '../model/Page';
 import AuthenticateUser from '../middlewares/authenticate-user';
 import VerifyLogin from '../middlewares/verify-login';
 import VerifyRegister from '../middlewares/verify-register';
@@ -14,8 +15,10 @@ import LoginControllers from '../controllers/login-controllers';
 import RegisterControllers from '../controllers/register-controllers';
 import RootControllers from '../controllers/root-controllers';
 import WelcomeControllers from '../controllers/welcome-controller';
+import PageInterfaceControllers from '../controllers/page-interface-controllers';
 import LoginRepository from '../repositories/login-repository';
 import RegisterRepository from '../repositories/register-repository';
+import PageInterfaceRepository from '../repositories/page-interface-repository';
 
 const generateHash = new GenerateHash(jwt);
 const encrypt = new Encrypt(bcrypt);
@@ -31,7 +34,10 @@ const rootControllers = new RootControllers();
 const loginControllers = new LoginControllers(loginUserDb, generateHash);
 const registerControllers = new RegisterControllers(registerUserDb);
 const welcomeControllers = new WelcomeControllers();
-
+const pageInterfaceRepository = new PageInterfaceRepository(Page);
+const pageInterfaceControllers = new PageInterfaceControllers(
+	pageInterfaceRepository,
+);
 export {
 	verifyLogin,
 	verifyRegister,
@@ -40,4 +46,5 @@ export {
 	registerControllers,
 	rootControllers,
 	welcomeControllers,
+	pageInterfaceControllers,
 };

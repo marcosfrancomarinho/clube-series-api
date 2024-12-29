@@ -23,7 +23,7 @@ import GenerateHash from '../util/generate-hash/generate-hash';
 import Encrypt from '../util/encrypt/encrypt';
 // Classe utilitária para encriptar senhas e comparar com o hash armazenado no banco de dados para validação da senha do usuário.
 
-import VerifyDatasUser from '../util/verify-datas/verify-datas';
+import VerifyDatasUser from '../util/verify-datas/verify-datas-user';
 // Classe utilitária para validar os dados de entrada do usuário utilizando a biblioteca Joi.
 
 import VerifyLogin from '../middlewares/verify-login/verify-login';
@@ -61,6 +61,12 @@ import PageInterfaceAdapter from '../integrations/page-interface-adapter/page-in
 
 import PageInterfaceControllers from '../controllers/page-interface-controllers/page-interface-controllers';
 // Controlador que gerencia as interações e exibição das páginas na aplicação, permitindo a manipulação dos dados de páginas.
+
+import VerifyDatasObjectImages from '../util/verify-datas/verify-datas-object-image';
+// Classe utilitária para validar os dados relacionados a objetos de imagens.
+
+import ImageAdapterQueryCreate from '../integrations/image-adapter/image-adapter-query-create/image-adapter-query-create';
+// Adaptador responsável por criar e manipular os dados de imagens no banco de dados, validando os dados do objeto de imagem antes de realizar operações.
 
 /**
  * Instanciação das classes utilitárias e serviços necessários para o funcionamento do login, registro e autenticação.
@@ -116,6 +122,15 @@ const pageInterfaceControllers = new PageInterfaceControllers(
 );
 // Instancia o controlador PageInterfaceControllers, que gerencia a exibição e manipulação das páginas da aplicação.
 
+const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
+// Instancia a classe VerifyDatasObjectImages que utiliza Joi para validar os dados de objetos de imagem.
+
+const imageAdapterQueryCreate = new ImageAdapterQueryCreate(
+	Page,
+	verifyDatasObjectImages,
+);
+// Instancia o adaptador ImageAdapterQueryCreate que valida e manipula os dados de imagens no banco de dados.
+
 /**
  * Exportação das instâncias para utilização em outros módulos ou rotas da aplicação.
  */
@@ -155,4 +170,14 @@ export {
 	 * Controlador responsável por gerenciar as páginas da aplicação, permitindo a interação e a exibição de conteúdo dinâmico.
 	 */
 	pageInterfaceControllers,
+
+	/**
+	 * Validador utilitário para verificar os dados relacionados aos objetos de imagens.
+	 */
+	verifyDatasObjectImages,
+
+	/**
+	 * Adaptador responsável por criar e manipular os dados de imagens no banco de dados.
+	 */
+	imageAdapterQueryCreate,
 };

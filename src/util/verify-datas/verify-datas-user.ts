@@ -61,5 +61,6 @@ class VerifyDatasUser implements IVerifyDatasUser {
 			throw error;
 		}
 	}
+
 }
 export default VerifyDatasUser;

@@ -1,7 +1,8 @@
 import User from '../../model/User/User';
-import { IDbResponse, ILoginRepository } from './@types/login-repository';
+import { ILoginAdapter } from './@types/login-adapter';
+import { IDbResponse } from './@types/login-adapter';
 
-class LoginRepository implements ILoginRepository {
+class LoginAdapter implements ILoginAdapter {
 	private user: typeof User;
 	constructor(user: typeof User) {
 		this.user = user;
@@ -20,4 +21,4 @@ class LoginRepository implements ILoginRepository {
 		return response as IDbResponse | null;
 	};
 }
-export default LoginRepository;
+export default LoginAdapter;

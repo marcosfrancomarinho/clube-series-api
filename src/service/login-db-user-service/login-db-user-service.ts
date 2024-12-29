@@ -1,17 +1,12 @@
-import { IResponseDbLogin } from '../../controllers/login-controllers/@types/response-db-login';
-import IEncrypt from '../../util/encrypt/@types/encrypt';
-import {
-	IDatasLogin,
-	ILoginDbUserService,
-} from './@types/login-db-user-service';
-import {
-	IDbResponse,
-	ILoginRepository,
-} from '../../repositories/login-repository/@types/login-repository';
+import { IResponseDbLogin } from "../../controllers/login-controllers/@types/response-db-login";
+import { ILoginRepository, IDbResponse } from "../../repositories/login-repository/@types/login-repository";
+import IEncrypt from "../../util/encrypt/@types/encrypt";
+import { ILoginDbUserService, IDatasLogin } from "./@types/login-db-user-service";
 
-class LoginDbUserService implements ILoginDbUserService {
+
+class LoginDbUserService implements ILoginDbUserService { 
 	private encrypt: IEncrypt;
-	private loginRepository: ILoginRepository;
+	private loginRepository: ILoginRepository; 
 	private messageError: string;
 	private attribute: string[];
 	constructor(encrypt: IEncrypt, loginRepository: ILoginRepository) {

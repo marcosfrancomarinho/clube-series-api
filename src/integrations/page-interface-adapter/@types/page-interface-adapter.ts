@@ -1,5 +1,5 @@
 import { IPage } from "../../../model/Page/@types/Page";
 
-export interface IPageInterfaceRepository {
+export interface IPageInterfaceAdapter {
 	querySelectPage(): Promise<IPage>;
 }

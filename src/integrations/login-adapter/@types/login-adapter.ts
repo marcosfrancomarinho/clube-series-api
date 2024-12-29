@@ -4,7 +4,7 @@ export interface IDbResponse {
 	password: string;
 }
 
-export interface ILoginRepository {
+export interface ILoginAdapter {
 	querySelectUser(
 		email: string,
 		retrievedData: string[],

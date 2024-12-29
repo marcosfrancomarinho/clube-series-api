@@ -35,10 +35,10 @@ import VerifyRegister from '../middlewares/verify-register/verify-register';
 import AuthenticateUser from '../middlewares/authenticate-user/authenticate-user';
 // Middleware para autenticar usuários através da verificação do token JWT, assegurando que apenas usuários autenticados tenham acesso a recursos protegidos.
 
-import LoginRepository from '../repositories/login-repository/login-repository';
+import LoginAdapter from '../integrations/login-adapter/login-adapter';
 // Repositório responsável por acessar os dados de login no banco de dados, incluindo validação de credenciais de login.
 
-import RegisterRepository from '../repositories/register-repository/register-repository';
+import RegisterAdapter from '../integrations/register-adapter/register-adapter';
 // Repositório responsável por registrar novos usuários no banco de dados, armazenando informações como nome, email e senha.
 
 import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
@@ -56,7 +56,7 @@ import RegisterControllers from '../controllers/register-controllers/register-co
 import WelcomeControllers from '../controllers/welcome-controllers/welcome-controllers';
 // Controlador responsável por exibir uma tela de boas-vindas após o login ou registro bem-sucedido.
 
-import PageInterfaceRepository from '../repositories/page-interface-repository/page-interface-repository';
+import PageInterfaceAdapter from '../integrations/page-interface-adapter/page-interface-adapter';
 // Repositório para acessar e manipular os dados das páginas da aplicação no banco de dados.
 
 import PageInterfaceControllers from '../controllers/page-interface-controllers/page-interface-controllers';
@@ -84,18 +84,18 @@ const verifyRegister = new VerifyRegister(verifyDataUser);
 const authenticateUser = new AuthenticateUser(generateHash);
 // Instancia o middleware AuthenticateUser, que autentica o usuário com base no token JWT, garantindo que o usuário tenha acesso a recursos protegidos.
 
-const loginRepository = new LoginRepository(User);
-// Instancia o repositório LoginRepository que lida com o acesso aos dados de login dos usuários no banco de dados.
+const loginAdapter = new LoginAdapter(User);
+// Instancia o repositório LoginAdapter que lida com o acesso aos dados de login dos usuários no banco de dados.
 
-const registerRepository = new RegisterRepository(User);
-// Instancia o repositório RegisterRepository que lida com o registro de novos usuários no banco de dados.
+const registerAdapter = new RegisterAdapter(User);
+// Instancia o repositório RegisterAdapter que lida com o registro de novos usuários no banco de dados.
 
-const loginUserDbService = new LoginDbUserService(encrypt, loginRepository);
+const loginUserDbService = new LoginDbUserService(encrypt, loginAdapter);
 // Instancia o serviço LoginDbUserService, que processa a autenticação de usuários utilizando dados do banco e encriptação de senha.
 
 const registerUserDbService = new RegisterDbUserService(
 	encrypt,
-	registerRepository,
+	registerAdapter,
 );
 // Instancia o serviço RegisterDbUserService, que lida com a lógica de registro de novos usuários no banco de dados.
 
@@ -108,11 +108,11 @@ const registerControllers = new RegisterControllers(registerUserDbService);
 const welcomeControllers = new WelcomeControllers();
 // Instancia o controlador WelcomeControllers, que exibe uma tela de boas-vindas ao usuário após o login ou registro bem-sucedido.
 
-const pageInterfaceRepository = new PageInterfaceRepository(Page);
+const pageInterfaceAdapter = new PageInterfaceAdapter(Page);
 // Instancia o repositório PageInterfaceRepository que lida com as páginas da aplicação no banco de dados.
 
 const pageInterfaceControllers = new PageInterfaceControllers(
-	pageInterfaceRepository,
+	pageInterfaceAdapter,
 );
 // Instancia o controlador PageInterfaceControllers, que gerencia a exibição e manipulação das páginas da aplicação.
 

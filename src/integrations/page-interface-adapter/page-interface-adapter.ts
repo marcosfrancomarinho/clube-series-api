@@ -1,8 +1,8 @@
 import { IPage } from '../../model/Page/@types/Page';
 import Page from '../../model/Page/Page';
-import { IPageInterfaceRepository } from './@types/page-interface-repository';
+import { IPageInterfaceAdapter } from './@types/page-interface-adapter';
 
-class PageInterfaceRepository implements IPageInterfaceRepository {
+class PageInterfaceAdapter implements IPageInterfaceAdapter {
 	private page!: typeof Page;
 	private messageError: string = 'Fail search datas';
 	private atribute: string[] = ['images', 'footer', 'menu', 'id', 'title'];
@@ -23,4 +23,4 @@ class PageInterfaceRepository implements IPageInterfaceRepository {
 		}
 	};
 }
-export default PageInterfaceRepository;
+export default PageInterfaceAdapter;

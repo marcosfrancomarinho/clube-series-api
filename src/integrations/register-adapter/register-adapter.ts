@@ -1,7 +1,7 @@
 import User from '../../model/User/User';
-import IRegisterRepository from './@types/register-repository';
+import { IRegisterAdapter } from './@types/register-adapter';
 
-class RegisterRepository implements IRegisterRepository {
+class RegisterAdapter implements IRegisterAdapter {
 	private user: typeof User;
 	constructor(user: typeof User) {
 		this.user = user;
@@ -18,4 +18,4 @@ class RegisterRepository implements IRegisterRepository {
 		});
 	};
 }
-export default RegisterRepository;
+export default RegisterAdapter;

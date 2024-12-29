@@ -8,7 +8,7 @@ const main_1 = __importDefault(require("./routers/main"));
 const cors_1 = __importDefault(require("cors"));
 const cors_options_1 = require("./config/cors-options");
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)(cors_options_1.optionCors));
+app.use((0, cors_1.default)(cors_options_1.corsOptions));
 app.use(express_1.default.json());
 app.use(main_1.default);
 exports.default = app;

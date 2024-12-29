@@ -3,11 +3,11 @@ import routerLogin from './login-router';
 import routerRegister from './register-router';
 import routerRoot from './root-router';
 import routerWelcome from './welcome-router';
-const router = Router();
+const routerMain = Router();
 
-router.use('/login', routerLogin);
-router.use('/signup', routerRegister);
-router.use('/welcome', routerWelcome);
-router.use('/', routerRoot);
+routerMain.use('/signup', routerRegister);
+routerMain.use('/login', routerLogin);
+routerMain.use('/welcome', routerWelcome);
+routerMain.use('/', routerRoot);
 
-export default router;
+export default routerMain;

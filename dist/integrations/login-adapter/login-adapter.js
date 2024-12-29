@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class LoginRepository {
+class LoginAdapter {
     user;
     constructor(user) {
         this.user = user;
@@ -16,4 +16,4 @@ class LoginRepository {
         return response;
     };
 }
-exports.default = LoginRepository;
+exports.default = LoginAdapter;

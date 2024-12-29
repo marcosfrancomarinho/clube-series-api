@@ -5,14 +5,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const request_model_1 = __importDefault(require("../../util/request-model/request-model"));
 class PageInterfaceControllers extends request_model_1.default {
-    pageInterfaceRepository;
-    constructor(pageInterfaceRepository) {
+    pageInterfaceAdapter;
+    constructor(pageInterfaceAdapter) {
         super();
-        this.pageInterfaceRepository = pageInterfaceRepository;
+        this.pageInterfaceAdapter = pageInterfaceAdapter;
     }
     getDatasPageInterfaceDB = async (req, res) => {
         try {
-            const response = await this.pageInterfaceRepository.querySelectPage();
+            const response = await this.pageInterfaceAdapter.querySelectPage();
             res.status(200).send(response);
         }
         catch (error) {

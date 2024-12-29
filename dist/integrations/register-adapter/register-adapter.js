@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class RegisterRepository {
+class RegisterAdapter {
     user;
     constructor(user) {
         this.user = user;
@@ -13,4 +13,4 @@ class RegisterRepository {
         });
     };
 }
-exports.default = RegisterRepository;
+exports.default = RegisterAdapter;

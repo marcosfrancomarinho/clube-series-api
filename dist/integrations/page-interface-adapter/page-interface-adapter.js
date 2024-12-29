@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class PageInterfaceRepository {
+class PageInterfaceAdapter {
     page;
     messageError = 'Fail search datas';
     atribute = ['images', 'footer', 'menu', 'id', 'title'];
@@ -23,4 +23,4 @@ class PageInterfaceRepository {
         }
     };
 }
-exports.default = PageInterfaceRepository;
+exports.default = PageInterfaceAdapter;

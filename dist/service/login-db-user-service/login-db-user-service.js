@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class LoginDbUserService {
     encrypt;
-    loginRepository;
+    loginAdapter;
     messageError;
     attribute;
-    constructor(encrypt, loginRepository) {
+    constructor(encrypt, loginAdapter) {
         this.encrypt = encrypt;
-        this.loginRepository = loginRepository;
+        this.loginAdapter = loginAdapter;
         this.messageError = 'Email ou senha inválida';
         this.attribute = ['id', 'email', 'password'];
     }
@@ -21,7 +21,7 @@ class LoginDbUserService {
     };
     login = async ({ email, password, }) => {
         try {
-            const response = await this.loginRepository.querySelectUser(email, this.attribute);
+            const response = await this.loginAdapter.querySelectUser(email, this.attribute);
             if (!response)
                 throw new Error(this.messageError);
             const checkPassword = await this.encrypt.passwordValidation(password, response.password);

@@ -1,17 +1,23 @@
-import { IResponseDbLogin } from "../../controllers/login-controllers/@types/response-db-login";
-import { ILoginRepository, IDbResponse } from "../../repositories/login-repository/@types/login-repository";
-import IEncrypt from "../../util/encrypt/@types/encrypt";
-import { ILoginDbUserService, IDatasLogin } from "./@types/login-db-user-service";
+import { IResponseDbLogin } from '../../controllers/login-controllers/@types/response-db-login';
+import {
+	IDbResponse,
+	ILoginAdapter,
+} from '../../integrations/login-adapter/@types/login-adapter';
 
+import IEncrypt from '../../util/encrypt/@types/encrypt';
+import {
+	ILoginDbUserService,
+	IDatasLogin,
+} from './@types/login-db-user-service';
 
-class LoginDbUserService implements ILoginDbUserService { 
+class LoginDbUserService implements ILoginDbUserService {
 	private encrypt: IEncrypt;
-	private loginRepository: ILoginRepository; 
+	private loginAdapter: ILoginAdapter;
 	private messageError: string;
 	private attribute: string[];
-	constructor(encrypt: IEncrypt, loginRepository: ILoginRepository) {
+	constructor(encrypt: IEncrypt, loginAdapter: ILoginAdapter) {
 		this.encrypt = encrypt;
-		this.loginRepository = loginRepository;
+		this.loginAdapter = loginAdapter;
 		this.messageError = 'Email ou senha inválida';
 		this.attribute = ['id', 'email', 'password'];
 	}
@@ -28,7 +34,7 @@ class LoginDbUserService implements ILoginDbUserService {
 		password,
 	}: IDatasLogin): Promise<IResponseDbLogin> => {
 		try {
-			const response = await this.loginRepository.querySelectUser(
+			const response = await this.loginAdapter.querySelectUser(
 				email,
 				this.attribute,
 			);

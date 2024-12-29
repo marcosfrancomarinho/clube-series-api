@@ -1,18 +1,18 @@
 import IEncrypt from '../../util/encrypt/@types/encrypt';
 import { IResponseDbRegister } from '../../controllers/register-controllers/@types/response-db-register';
-import IRegisterRepository from '../../repositories/register-repository/@types/register-repository';
 import {
 	IDatasRegister,
 	IRegisterDbUserService,
 } from './@types/register-db-user-service';
+import { IRegisterAdapter } from '../../integrations/register-adapter/@types/register-adapter';
 
 class RegisterDbUserService implements IRegisterDbUserService {
 	private encrypt: IEncrypt;
-	private registerRepository: IRegisterRepository;
+	private registerAdapter: IRegisterAdapter;
 	private messageSuccess: IResponseDbRegister;
-	constructor(encrypt: IEncrypt, registerRepository: IRegisterRepository) {
+	constructor(encrypt: IEncrypt, registerAdapter:IRegisterAdapter) {
 		this.encrypt = encrypt;
-		this.registerRepository = registerRepository;
+		this.registerAdapter = registerAdapter;
 		this.messageSuccess = {
 			ok: true,
 			status: 'usuario cadastrado com sucesso',
@@ -27,7 +27,7 @@ class RegisterDbUserService implements IRegisterDbUserService {
 			const encryptedPassword: string = await this.encrypt.encryptPassword(
 				password,
 			);
-			await this.registerRepository.queryCreateUser(
+			await this.registerAdapter.queryCreateUser(
 				name,
 				email,
 				encryptedPassword,

@@ -7,7 +7,7 @@
     "start": "node dist/config/server.js",
     "dev": "nodemon dist/config/server.js",
     "git": "git add . & git commit -m 'concluido' & git push origin main",
-    "db": "node dist/integrations/menu-adapter/menu-adapter-query-create/menu-adapter-query-create.js"
+    "db": "node dist/model/Structure/Structure-Images/Structure-Images.js"
   },
   "keywords": [],
   "author": "",

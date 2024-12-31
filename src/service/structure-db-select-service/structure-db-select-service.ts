@@ -22,6 +22,9 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 				this.structureAdapterSelectImages.search(attrImages),
 				this.structureAdapterSelectMenu.search(attrMenu),
 			]);
+			console.log((footer as unknown as Array<string>).length)
+			console.log((images as unknown as Array<string>).length)
+			console.log((menu as unknown as Array<string>).length)
 			return {
 				footer,
 				images,

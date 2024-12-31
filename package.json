@@ -9,6 +9,10 @@
     "git": "git add . & git commit -m '31/12/2024' & git push origin main",
     "db": "node dist/model/structure/structure-menu/structure-menu.js"
   },
+  "files": [
+  "dist/",
+  "src/model/user/"
+],
   "keywords": [],
   "author": "",
   "license": "ISC", 

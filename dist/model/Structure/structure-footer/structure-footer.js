@@ -1,6 +1,6 @@
 "use strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+    return (mod && mod.__esModule) ? mod : { "default": mod }; 
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
@@ -12,6 +12,7 @@ class StructureFooter extends sequelize_1.Model {
     createdAt;
     updatedAt;
 }
+console.log('teste')
 StructureFooter.init({
     id: {
         primaryKey: true,

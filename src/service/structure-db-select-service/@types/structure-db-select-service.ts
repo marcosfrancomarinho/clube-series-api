@@ -16,7 +16,7 @@ export interface IAttributesSelectDb {
 export interface IStructureDbSelectServiceResponse {
 	footer: IStructureFooter[];
 	images: IStructureImages[];
-	menu: IStructureMenu[];
+	menu: IStructureMenu;
 }
 export type IMenu = Array<
 	[{ public: string[]; priavate: string[]; title: string }]

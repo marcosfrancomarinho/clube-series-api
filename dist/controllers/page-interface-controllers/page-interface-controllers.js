@@ -5,14 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const request_model_1 = __importDefault(require("../../util/request-model/request-model"));
 class PageInterfaceControllers extends request_model_1.default {
-    pageInterfaceAdapter;
-    constructor(pageInterfaceAdapter) {
+    structureDbSelectService;
+    option_query_select_attributes_db;
+    constructor(option_query_select_attributes_db, structureDbSelectService) {
         super();
-        this.pageInterfaceAdapter = pageInterfaceAdapter;
+        this.option_query_select_attributes_db = option_query_select_attributes_db;
+        this.structureDbSelectService = structureDbSelectService;
     }
     getDatasPageInterfaceDB = async (req, res) => {
         try {
-            const response = await this.pageInterfaceAdapter.querySelectPage();
+            const response = await this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
             res.status(200).send(response);
         }
         catch (error) {

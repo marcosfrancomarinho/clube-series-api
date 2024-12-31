@@ -5,34 +5,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const database_1 = __importDefault(require("../../../config/database"));
-class StructureMenu extends sequelize_1.Model {
+class StructureFooter extends sequelize_1.Model {
     id;
-    private;
-    public;
-    title;
+    url;
+    redes;
+    createdAt;
+    updatedAt;
 }
-StructureMenu.init({
+StructureFooter.init({
     id: {
-        type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
+        type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
     },
-    private: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING(30)),
+    redes: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    public: {
-        type: sequelize_1.DataTypes.ARRAY(sequelize_1.DataTypes.STRING(30)),
-        allowNull: false,
-    },
-    title: {
-        type: sequelize_1.DataTypes.STRING(50),
+    url: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
     sequelize: database_1.default,
-    timestamps: false,
-    tableName: 'structure_menu',
+    timestamps: true,
+    tableName: 'structure_footer',
 });
-exports.default = StructureMenu;
+exports.default = StructureFooter;

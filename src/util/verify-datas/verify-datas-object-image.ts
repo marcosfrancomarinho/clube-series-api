@@ -1,7 +1,7 @@
 import { ObjectSchema, Root } from 'joi';
 
 import { IVerifyDatasObjectImages } from './@types/verify-datas-object-image';
-import { IImageObject } from '../../integrations/image-adapter/image-adapter-query-create/@types/image-adapter-query-create';
+
 
 class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 	private joi!: Root;
@@ -9,14 +9,14 @@ class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 		this.joi = joi;
 	}
 	private hasError(
-		params: IImageObject,
-		schema: ObjectSchema<IImageObject>,
+		params: any,
+		schema: ObjectSchema<any>,
 	): void {
 		const { error } = schema.validate(params);
 		if (error) throw new Error(error.message);
 	}
-	imagesObject(items: IImageObject): void {
-		const schema: ObjectSchema<IImageObject> = this.joi.object({
+	imagesObject(items: any): void {
+		const schema: ObjectSchema<any> = this.joi.object({
 			title: this.joi
 				.string()
 				.trim()
@@ -36,3 +36,7 @@ class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 	}
 }
 export default VerifyDatasObjectImages;
+
+
+
+//EM DESENVOLVIMENTO

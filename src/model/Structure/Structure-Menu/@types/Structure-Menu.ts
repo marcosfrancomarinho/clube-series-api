@@ -1,5 +1,6 @@
 export interface IStructureMenu {
-   id?:number;
+	id?: number;
 	public: string[];
 	private: string[];
+	title: string;
 }

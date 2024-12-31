@@ -17,13 +17,14 @@ StructureImages.init({
         primaryKey: true,
         type: sequelize_1.DataTypes.INTEGER,
         autoIncrement: true,
+        allowNull: false,
     },
     title: {
-        type: sequelize_1.DataTypes.CHAR(50),
+        type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
     },
     url: {
-        type: sequelize_1.DataTypes.CHAR(50),
+        type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
     },
 }, {

@@ -1,4 +1,4 @@
-import User from '../../model/User/User';
+import User from '../../model/user/user'
 import { ILoginAdapter } from './@types/login-adapter';
 import { IDbResponse } from './@types/login-adapter';
 

@@ -1,24 +1,24 @@
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../../../config/database';
-import { IStructureImages } from './@types/structure-images';
+import { IStructureFooter } from './@types/structure-footer';
 
-type CreateParamsStructureImages = Optional<
-	IStructureImages,
+type CreateParamsStructureFooter = Optional<
+	IStructureFooter,
 	'id' | 'createdAt' | 'updatedAt'
 >;
 
-class StructureImages extends Model<
-	CreateParamsStructureImages,
-	IStructureImages
+class StructureFooter extends Model<
+	CreateParamsStructureFooter,
+	IStructureFooter
 > {
 	id?: number;
 	url!: string;
-	title!: string;
+	redes!: string;
 	readonly createdAt?: Date;
 	readonly updatedAt?: Date;
 }
 
-StructureImages.init(
+StructureFooter.init(
 	{
 		id: {
 			primaryKey: true,
@@ -26,20 +26,20 @@ StructureImages.init(
 			autoIncrement: true,
 			allowNull: false,
 		},
-		title: {
-			type: DataTypes.STRING(50),
+		redes: {
+			type: DataTypes.STRING,
 			allowNull: false,
 		},
 		url: {
-			type: DataTypes.STRING(50),
+			type: DataTypes.STRING,
 			allowNull: false,
 		},
 	},
 	{
 		sequelize,
 		timestamps: true,
-		tableName: 'structure_images',
+		tableName: 'structure_footer',
 	},
 );
 
-export default StructureImages;
+export default StructureFooter;

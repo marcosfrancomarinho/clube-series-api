@@ -1,5 +1,5 @@
-import User from '../../model/User/User';
-import {IRegisterAdapter} from './@types/register-adapter';
+import User from '../../model/user/user';
+import { IRegisterAdapter } from './@types/register-adapter';
 
 class RegisterAdapter implements IRegisterAdapter {
 	private user: typeof User;

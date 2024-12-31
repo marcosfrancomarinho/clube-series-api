@@ -3,14 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class RegisterDbUserService {
     encrypt;
     registerAdapter;
-    messageSuccess;
+    messageSuccess = {
+        ok: true,
+        status: 'usuario cadastrado com sucesso',
+    };
     constructor(encrypt, registerAdapter) {
         this.encrypt = encrypt;
         this.registerAdapter = registerAdapter;
-        this.messageSuccess = {
-            ok: true,
-            status: 'usuario cadastrado com sucesso',
-        };
     }
     register = async ({ name, email, password, }) => {
         try {

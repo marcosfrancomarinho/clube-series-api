@@ -4,10 +4,7 @@ import { IStructureAdapterSelect } from './@types/structure-select-adapter';
 class StructureSelectAdapter<T extends Model>
 	implements IStructureAdapterSelect<T[]>
 {
-	private structureSelect: ModelStatic<T>;
-	constructor(structureSelect: ModelStatic<T>) {
-		this.structureSelect = structureSelect;
-	}
+	constructor(private structureSelect: ModelStatic<T>) {}
 	public search = async (attributes: string[]): Promise<T[]> => {
 		try {
 			const response = await this.structureSelect.findAll({

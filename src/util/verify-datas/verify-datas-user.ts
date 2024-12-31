@@ -1,11 +1,8 @@
-import  {Root, StringSchema } from 'joi';
+import { Root, StringSchema } from 'joi';
 import IVerifyDatasUser from './@types/verify-datas-user';
 
 class VerifyDatasUser implements IVerifyDatasUser {
-	private joi: Root;
-	constructor(joi: Root) {
-		this.joi = joi;
-	}
+	constructor(private joi: Root) {}
 	private hasError(params: string, schema: StringSchema<string>): void {
 		const { error } = schema.validate(params);
 		if (error) throw new Error(error.message);
@@ -61,6 +58,5 @@ class VerifyDatasUser implements IVerifyDatasUser {
 			throw error;
 		}
 	}
-
 }
 export default VerifyDatasUser;

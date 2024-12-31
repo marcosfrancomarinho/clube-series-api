@@ -3,13 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class LoginDbUserService {
     encrypt;
     loginAdapter;
-    messageError;
-    attribute;
+    messageError = 'Email ou senha inválida';
+    attribute = ['id', 'email', 'password'];
     constructor(encrypt, loginAdapter) {
         this.encrypt = encrypt;
         this.loginAdapter = loginAdapter;
-        this.messageError = 'Email ou senha inválida';
-        this.attribute = ['id', 'email', 'password'];
     }
     messageSuccess = ({ email, id }) => {
         return {

@@ -7,10 +7,10 @@ const request_model_1 = __importDefault(require("../../util/request-model/reques
 class PageInterfaceControllers extends request_model_1.default {
     structureDbSelectService;
     option_query_select_attributes_db;
-    constructor(option_query_select_attributes_db, structureDbSelectService) {
+    constructor(structureDbSelectService, option_query_select_attributes_db) {
         super();
-        this.option_query_select_attributes_db = option_query_select_attributes_db;
         this.structureDbSelectService = structureDbSelectService;
+        this.option_query_select_attributes_db = option_query_select_attributes_db;
     }
     getDatasPageInterfaceDB = async (req, res) => {
         try {

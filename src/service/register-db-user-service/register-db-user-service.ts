@@ -7,17 +7,14 @@ import {
 import { IRegisterAdapter } from '../../integrations/register-adapter/@types/register-adapter';
 
 class RegisterDbUserService implements IRegisterDbUserService {
-	private encrypt: IEncrypt;
-	private registerAdapter: IRegisterAdapter;
-	private messageSuccess: IResponseDbRegister;
-	constructor(encrypt: IEncrypt, registerAdapter: IRegisterAdapter) {
-		this.encrypt = encrypt;
-		this.registerAdapter = registerAdapter;
-		this.messageSuccess = {
-			ok: true,
-			status: 'usuario cadastrado com sucesso',
-		};
-	}
+	private messageSuccess: IResponseDbRegister = {
+		ok: true,
+		status: 'usuario cadastrado com sucesso',
+	};
+	constructor(
+		private encrypt: IEncrypt,
+		private registerAdapter: IRegisterAdapter,
+	) {}
 	public register = async ({
 		name,
 		email,

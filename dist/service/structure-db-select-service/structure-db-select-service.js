@@ -4,9 +4,9 @@ class StructureDbSelectService {
     structureAdapterSelectFooter;
     structureAdapterSelectImages;
     structureAdapterSelectMenu;
-    constructor(structureAdapterSelectFooter, structureAdapterSelectImage, structureAdapterSelectMenu) {
+    constructor(structureAdapterSelectFooter, structureAdapterSelectImages, structureAdapterSelectMenu) {
         this.structureAdapterSelectFooter = structureAdapterSelectFooter;
-        this.structureAdapterSelectImages = structureAdapterSelectImage;
+        this.structureAdapterSelectImages = structureAdapterSelectImages;
         this.structureAdapterSelectMenu = structureAdapterSelectMenu;
     }
     searchAllContent = async ({ attrFooter, attrImages, attrMenu, }) => {

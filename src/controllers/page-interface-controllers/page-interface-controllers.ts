@@ -11,15 +11,11 @@ class PageInterfaceControllers
 	extends RequestModel
 	implements IPageInterfaceControllers
 {
-	private structureDbSelectService: IStructureDbSelectService;
-	private option_query_select_attributes_db: IAttributesSelectDb;
 	constructor(
-		option_query_select_attributes_db: IAttributesSelectDb,
-		structureDbSelectService: IStructureDbSelectService,
+		private structureDbSelectService: IStructureDbSelectService,
+		private option_query_select_attributes_db: IAttributesSelectDb,
 	) {
 		super();
-		this.option_query_select_attributes_db = option_query_select_attributes_db;
-		this.structureDbSelectService = structureDbSelectService;
 	}
 	public getDatasPageInterfaceDB = async (
 		req: Request,

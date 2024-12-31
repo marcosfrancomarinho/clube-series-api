@@ -5,10 +5,8 @@ import { IResponseDbRegister } from './@types/response-db-register';
 import { IRegisterDbUserService } from '../../service/register-db-user-service/@types/register-db-user-service';
 
 class RegisterControllers extends RequestModel implements IRegisterControllers {
-	private registerUserDb: IRegisterDbUserService;
-	constructor(registerUserDb: IRegisterDbUserService) {
+	constructor(private registerUserDb: IRegisterDbUserService) {
 		super();
-		this.registerUserDb = registerUserDb;
 	}
 	public registerUser = async (req: Request, res: Response): Promise<void> => {
 		try {

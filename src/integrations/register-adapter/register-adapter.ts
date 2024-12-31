@@ -2,10 +2,7 @@ import User from '../../model/user/user';
 import { IRegisterAdapter } from './@types/register-adapter';
 
 class RegisterAdapter implements IRegisterAdapter {
-	private user: typeof User;
-	constructor(user: typeof User) {
-		this.user = user;
-	}
+	constructor(private user: typeof User) {}
 	public queryCreateUser = async (
 		name: string,
 		email: string,

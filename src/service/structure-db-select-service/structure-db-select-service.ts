@@ -6,18 +6,11 @@ import {
 } from './@types/structure-db-select-service';
 
 class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
-	private structureAdapterSelectFooter!: IStructureAdapterSelect<F>;
-	private structureAdapterSelectImages!: IStructureAdapterSelect<I>;
-	private structureAdapterSelectMenu!: IStructureAdapterSelect<M>;
 	constructor(
-		structureAdapterSelectFooter: IStructureAdapterSelect<F>,
-		structureAdapterSelectImage: IStructureAdapterSelect<I>,
-		structureAdapterSelectMenu: IStructureAdapterSelect<M>,
-	) {
-		this.structureAdapterSelectFooter = structureAdapterSelectFooter;
-		this.structureAdapterSelectImages = structureAdapterSelectImage;
-		this.structureAdapterSelectMenu = structureAdapterSelectMenu;
-	}
+		private structureAdapterSelectFooter: IStructureAdapterSelect<F>,
+		private structureAdapterSelectImages: IStructureAdapterSelect<I>,
+		private structureAdapterSelectMenu: IStructureAdapterSelect<M>,
+	) {}
 	public searchAllContent = async ({
 		attrFooter,
 		attrImages,

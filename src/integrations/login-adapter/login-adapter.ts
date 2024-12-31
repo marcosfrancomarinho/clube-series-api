@@ -1,12 +1,9 @@
-import User from '../../model/user/user'
+import User from '../../model/user/user';
 import { ILoginAdapter } from './@types/login-adapter';
 import { IDbResponse } from './@types/login-adapter';
 
 class LoginAdapter implements ILoginAdapter {
-	private user: typeof User;
-	constructor(user: typeof User) {
-		this.user = user;
-	}
+	constructor(private user: typeof User) {}
 	public querySelectUser = async (
 		email: string,
 		retrievedData: string[],

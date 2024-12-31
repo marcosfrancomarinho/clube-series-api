@@ -41,8 +41,8 @@ const structureDbSelectService = new StructureDbSelectService(
 
 // Controlador para gerenciar a interface das páginas
 const pageInterfaceControllers = new PageInterfaceControllers(
-	option_query_select_attributes_db,
 	structureDbSelectService,
+	option_query_select_attributes_db,
 );
 
 // Utilitários para autenticação e encriptação

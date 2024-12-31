@@ -1,13 +1,11 @@
-import { Response, Request, NextFunction}  from 'express';
+import { Response, Request, NextFunction } from 'express';
 import RequestModel from '../../util/request-model/request-model';
 import IGenerateHash from '../../util/generate-hash/@types/generate-hash';
 import IAuthenticateUser from './@types/authenticate-user';
 
 class AuthenticateUser extends RequestModel implements IAuthenticateUser {
-	private generateHash: IGenerateHash;
-	constructor(generateHash: IGenerateHash) {
+	constructor(private generateHash: IGenerateHash) {
 		super();
-		this.generateHash = generateHash;
 	}
 	private getToken(req: Request) {
 		const token: string | undefined = req.headers['authorization'];

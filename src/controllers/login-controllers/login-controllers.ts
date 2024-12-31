@@ -5,12 +5,11 @@ import { ILoginDbUserService } from '../../service/login-db-user-service/@types/
 import IGenerateHash from '../../util/generate-hash/@types/generate-hash';
 
 class LoginControllers extends RequestModel implements ILoginControllers {
-	private loginUserDb: ILoginDbUserService;
-	private generateHash: IGenerateHash;
-	constructor(loginUserDb: ILoginDbUserService, generateHash: IGenerateHash) {
+	constructor(
+		private loginUserDb: ILoginDbUserService,
+		private generateHash: IGenerateHash,
+	) {
 		super();
-		this.loginUserDb = loginUserDb;
-		this.generateHash = generateHash;
 	}
 	public loginUser = async (req: Request, res: Response): Promise<void> => {
 		try {

@@ -11,16 +11,9 @@ import {
 } from './@types/login-db-user-service';
 
 class LoginDbUserService implements ILoginDbUserService {
-	private encrypt: IEncrypt;
-	private loginAdapter: ILoginAdapter;
-	private messageError: string;
-	private attribute: string[];
-	constructor(encrypt: IEncrypt, loginAdapter: ILoginAdapter) {
-		this.encrypt = encrypt;
-		this.loginAdapter = loginAdapter;
-		this.messageError = 'Email ou senha inválida';
-		this.attribute = ['id', 'email', 'password'];
-	}
+	private messageError: string = 'Email ou senha inválida';
+	private attribute: string[] = ['id', 'email', 'password'];
+	constructor(private encrypt: IEncrypt, private loginAdapter: ILoginAdapter) {}
 	private messageSuccess = ({ email, id }: IDbResponse): IResponseDbLogin => {
 		return {
 			ok: true,

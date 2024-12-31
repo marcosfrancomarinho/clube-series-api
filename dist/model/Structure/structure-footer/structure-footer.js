@@ -12,7 +12,6 @@ class StructureFooter extends sequelize_1.Model {
     createdAt;
     updatedAt;
 }
-console.log('teste')
 StructureFooter.init({
     id: {
         primaryKey: true,

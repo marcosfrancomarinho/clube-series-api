@@ -12,6 +12,8 @@ class StructureImages extends sequelize_1.Model {
     createdAt;
     updatedAt;
 }
+console.log('teste')
+
 StructureImages.init({
     id: {
         primaryKey: true,

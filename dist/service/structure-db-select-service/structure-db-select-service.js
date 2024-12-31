@@ -16,9 +16,6 @@ class StructureDbSelectService {
                 this.structureAdapterSelectImages.search(attrImages),
                 this.structureAdapterSelectMenu.search(attrMenu),
             ]);
-            console.log(footer.length);
-            console.log(images.length);
-            console.log(menu.length);
             return {
                 footer,
                 images,

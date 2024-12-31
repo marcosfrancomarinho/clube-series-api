@@ -1,6 +1,7 @@
 import { IStructureAdapterSelect } from '../../integrations/structure-adapter/structure-select-adapter/@types/structure-select-adapter';
 import {
 	IAttributesSelectDb,
+	IMenu,
 	IStructureDbSelectService,
 	IStructureDbSelectServiceResponse,
 } from './@types/structure-db-select-service';
@@ -22,10 +23,11 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 				this.structureAdapterSelectImages.search(attrImages),
 				this.structureAdapterSelectMenu.search(attrMenu),
 			]);
+			const $menu = menu as IMenu;
 			return {
 				footer,
 				images,
-				menu,
+				menu: $menu[0],
 			} as unknown as IStructureDbSelectServiceResponse;
 		} catch (error) {
 			throw error;

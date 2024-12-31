@@ -16,10 +16,11 @@ class StructureDbSelectService {
                 this.structureAdapterSelectImages.search(attrImages),
                 this.structureAdapterSelectMenu.search(attrMenu),
             ]);
+            const $menu = menu;
             return {
                 footer,
                 images,
-                menu,
+                menu: $menu[0],
             };
         }
         catch (error) {

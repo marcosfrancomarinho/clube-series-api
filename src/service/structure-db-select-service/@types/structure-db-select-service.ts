@@ -18,3 +18,6 @@ export interface IStructureDbSelectServiceResponse {
 	images: IStructureImages[];
 	menu: IStructureMenu[];
 }
+export type IMenu = Array<
+	[{ public: string[]; priavate: string[]; title: string }]
+>;

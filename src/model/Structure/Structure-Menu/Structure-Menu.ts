@@ -39,4 +39,5 @@ StructureMenu.init(
 	},
 );
 
+
 export default StructureMenu;

@@ -2,6 +2,6 @@ import { IAttributesSelectDb } from '../service/structure-db-select-service/@typ
 
 export const option_query_select_attributes_db: IAttributesSelectDb = {
 	attrFooter: ['id', 'url', 'redes'],
-	attrImages: ['url', 'title'],
+	attrImages: ['url', 'title', 'id'],
 	attrMenu: ['public', 'private', 'title'],
 };

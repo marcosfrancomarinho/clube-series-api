@@ -25,7 +25,7 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 			return {
 				footer,
 				images,
-				...menu,
+				menu,
 			} as unknown as IStructureDbSelectServiceResponse;
 		} catch (error) {
 			throw error;

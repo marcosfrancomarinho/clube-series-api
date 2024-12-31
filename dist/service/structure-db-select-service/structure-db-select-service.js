@@ -19,7 +19,7 @@ class StructureDbSelectService {
             return {
                 footer,
                 images,
-                ...menu,
+                menu,
             };
         }
         catch (error) {

@@ -23,11 +23,11 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 				this.structureAdapterSelectImages.search(attrImages),
 				this.structureAdapterSelectMenu.search(attrMenu),
 			]);
-			const $menu = menu as IMenu;
+			const $menu = (menu as IMenu)[0];
 			return {
 				footer,
 				images,
-				menu: $menu[0],
+				menu: $menu,
 			} as unknown as IStructureDbSelectServiceResponse;
 		} catch (error) {
 			throw error;

@@ -10,7 +10,7 @@ class VerifyDatasObjectImages {
         if (error)
             throw new Error(error.message);
     }
-    imagesObject(items) {
+    verify = (imageObject) => {
         const schema = this.joi.object({
             title: this.joi
                 .string()
@@ -27,7 +27,7 @@ class VerifyDatasObjectImages {
                 .min(5)
                 .label('URL da Imagem'),
         });
-        this.hasError(items, schema);
-    }
+        this.hasError(imageObject, schema);
+    };
 }
 exports.default = VerifyDatasObjectImages;

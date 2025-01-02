@@ -2,20 +2,16 @@ import { ObjectSchema, Root } from 'joi';
 
 import { IVerifyDatasObjectImages } from './@types/verify-datas-object-image';
 
-
 class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 	private joi!: Root;
 	constructor(joi: Root) {
 		this.joi = joi;
 	}
-	private hasError(
-		params: any,
-		schema: ObjectSchema<any>,
-	): void {
+	private hasError(params: any, schema: ObjectSchema<any>): void {
 		const { error } = schema.validate(params);
 		if (error) throw new Error(error.message);
 	}
-	imagesObject(items: any): void {
+	public verify = (imageObject: any): void => {
 		const schema: ObjectSchema<any> = this.joi.object({
 			title: this.joi
 				.string()
@@ -32,11 +28,7 @@ class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 				.min(5)
 				.label('URL da Imagem'),
 		});
-		this.hasError(items, schema);
-	}
+		this.hasError(imageObject, schema);
+	};
 }
 export default VerifyDatasObjectImages;
-
-
-
-//EM DESENVOLVIMENTO

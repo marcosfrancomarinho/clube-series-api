@@ -12,6 +12,7 @@ import StructureMenu from '../model/structure/structure-menu/structure-menu';
 import GenerateHash from '../util/generate-hash/generate-hash';
 import Encrypt from '../util/encrypt/encrypt';
 import VerifyDatasUser from '../util/verify-datas/verify-datas-user';
+import VerifyDatasObjectImages from '../util/verify-datas/verify-datas-object-image';
 
 // Middlewares
 import VerifyLogin from '../middlewares/verify-login/verify-login';
@@ -22,6 +23,7 @@ import AuthenticateUser from '../middlewares/authenticate-user/authenticate-user
 import LoginAdapter from '../integrations/login-adapter/login-adapter';
 import RegisterAdapter from '../integrations/register-adapter/register-adapter';
 import StructureSelectAdapter from '../integrations/structure-adapter/structure-select-adapter/structure-select-adapter';
+import StructureAdapterCreateImage from '../integrations/structure-adapter/structure-adapter-create/structure-adapter-create-image/structure-adapter-create-image';
 
 // Serviços
 import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
@@ -51,6 +53,12 @@ const structureDbSelectService = new StructureDbSelectService(
 	structureSelectAdapterFooter,
 	structureSelectAdapterImages,
 	structureSelectAdapterMenu,
+);
+const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
+
+const sructureAdapterCreateImage = new StructureAdapterCreateImage(
+	StructureImages,
+	verifyDatasObjectImages,
 );
 
 // Controlador de interface de páginas
@@ -94,4 +102,5 @@ export {
 	registerControllers,
 	welcomeControllers,
 	pageInterfaceControllers,
+	sructureAdapterCreateImage,
 };

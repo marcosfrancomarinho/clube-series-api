@@ -1,6 +1,5 @@
-
+import { IImageObject } from '../../../integrations/structure-adapter/structure-adapter-create/structure-adapter-create-image/@types/structure-adapter-create-image';
 
 export interface IVerifyDatasObjectImages {
-	imagesObject(items: any): void;
+	verify(imageObject: IImageObject): void;
 }
-// EM DESENVOLVIMENTO

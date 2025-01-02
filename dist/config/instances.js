@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.pageInterfaceControllers = exports.welcomeControllers = exports.registerControllers = exports.loginControllers = exports.authenticateUser = exports.verifyRegister = exports.verifyLogin = void 0;
+exports.sructureAdapterCreateImage = exports.pageInterfaceControllers = exports.welcomeControllers = exports.registerControllers = exports.loginControllers = exports.authenticateUser = exports.verifyRegister = exports.verifyLogin = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const joi_1 = __importDefault(require("joi"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
@@ -14,12 +14,14 @@ const structure_menu_1 = __importDefault(require("../model/structure/structure-m
 const generate_hash_1 = __importDefault(require("../util/generate-hash/generate-hash"));
 const encrypt_1 = __importDefault(require("../util/encrypt/encrypt"));
 const verify_datas_user_1 = __importDefault(require("../util/verify-datas/verify-datas-user"));
+const verify_datas_object_image_1 = __importDefault(require("../util/verify-datas/verify-datas-object-image"));
 const verify_login_1 = __importDefault(require("../middlewares/verify-login/verify-login"));
 const verify_register_1 = __importDefault(require("../middlewares/verify-register/verify-register"));
 const authenticate_user_1 = __importDefault(require("../middlewares/authenticate-user/authenticate-user"));
 const login_adapter_1 = __importDefault(require("../integrations/login-adapter/login-adapter"));
 const register_adapter_1 = __importDefault(require("../integrations/register-adapter/register-adapter"));
 const structure_select_adapter_1 = __importDefault(require("../integrations/structure-adapter/structure-select-adapter/structure-select-adapter"));
+const structure_adapter_create_image_1 = __importDefault(require("../integrations/structure-adapter/structure-adapter-create/structure-adapter-create-image/structure-adapter-create-image"));
 const login_db_user_service_1 = __importDefault(require("../service/login-db-user-service/login-db-user-service"));
 const register_db_user_service_1 = __importDefault(require("../service/register-db-user-service/register-db-user-service"));
 const structure_db_select_service_1 = __importDefault(require("../service/structure-db-select-service/structure-db-select-service"));
@@ -32,6 +34,9 @@ const structureSelectAdapterFooter = new structure_select_adapter_1.default(stru
 const structureSelectAdapterImages = new structure_select_adapter_1.default(structure_images_1.default);
 const structureSelectAdapterMenu = new structure_select_adapter_1.default(structure_menu_1.default);
 const structureDbSelectService = new structure_db_select_service_1.default(structureSelectAdapterFooter, structureSelectAdapterImages, structureSelectAdapterMenu);
+const verifyDatasObjectImages = new verify_datas_object_image_1.default(joi_1.default);
+const sructureAdapterCreateImage = new structure_adapter_create_image_1.default(structure_images_1.default, verifyDatasObjectImages);
+exports.sructureAdapterCreateImage = sructureAdapterCreateImage;
 const pageInterfaceControllers = new page_interface_controllers_1.default(structureDbSelectService, option_query_select_attributes_db_1.option_query_select_attributes_db);
 exports.pageInterfaceControllers = pageInterfaceControllers;
 const generateHash = new generate_hash_1.default(jsonwebtoken_1.default);

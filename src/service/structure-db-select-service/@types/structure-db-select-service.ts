@@ -5,7 +5,7 @@ import { IStructureMenu } from '../../../model/structure/structure-menu/@types/s
 export interface IStructureDbSelectService {
 	searchAllContent(
 		attr: IAttributesSelectDb,
-	): Promise<IStructureDbSelectServiceResponse>;
+	): Promise<ISelectServiceResponse>;
 }
 export interface IAttributesSelectDb {
 	attrFooter: string[];
@@ -13,10 +13,10 @@ export interface IAttributesSelectDb {
 	attrMenu: string[];
 }
 
-export interface IStructureDbSelectServiceResponse {
+export interface ISelectServiceResponse {
 	footer: IStructureFooter[];
 	images: IStructureImages[];
-	menu: IStructureMenu;
+	menu: IStructureMenu[];
 }
 export type IMenu = Array<
 	[{ public: string[]; priavate: string[]; title: string }]

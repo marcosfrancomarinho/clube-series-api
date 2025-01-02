@@ -3,7 +3,7 @@ import {
 	IAttributesSelectDb,
 	IMenu,
 	IStructureDbSelectService,
-	IStructureDbSelectServiceResponse,
+	ISelectServiceResponse,
 } from './@types/structure-db-select-service';
 
 class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
@@ -12,11 +12,12 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 		private structureAdapterSelectImages: IStructureAdapterSelect<I>,
 		private structureAdapterSelectMenu: IStructureAdapterSelect<M>,
 	) {}
+
 	public searchAllContent = async ({
 		attrFooter,
 		attrImages,
 		attrMenu,
-	}: IAttributesSelectDb): Promise<IStructureDbSelectServiceResponse> => {
+	}: IAttributesSelectDb): Promise<ISelectServiceResponse> => {
 		try {
 			const [footer, images, menu] = await Promise.all([
 				this.structureAdapterSelectFooter.search(attrFooter),
@@ -28,7 +29,7 @@ class StructureDbSelectService<F, M, I> implements IStructureDbSelectService {
 				footer,
 				images,
 				menu: $menu,
-			} as unknown as IStructureDbSelectServiceResponse;
+			} as unknown as ISelectServiceResponse;
 		} catch (error) {
 			throw error;
 		}

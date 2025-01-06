@@ -3,9 +3,7 @@ import { IStructureImages } from '../../../model/structure/structure-images/@typ
 import { IStructureMenu } from '../../../model/structure/structure-menu/@types/structure-menu';
 
 export interface IStructureDbSelectService {
-	searchAllContent(
-		attr: IAttributesSelectDb,
-	): Promise<ISelectServiceResponse>;
+	searchAllContent(attr: IAttributesSelectDb): Promise<ISelectServiceResponse>;
 }
 export interface IAttributesSelectDb {
 	attrFooter: string[];
@@ -16,7 +14,7 @@ export interface IAttributesSelectDb {
 export interface ISelectServiceResponse {
 	footer: IStructureFooter[];
 	images: IStructureImages[];
-	menu: IStructureMenu[];
+	menu: IStructureMenu[] | IStructureMenu;
 }
 export type IMenu = Array<
 	[{ public: string[]; priavate: string[]; title: string }]

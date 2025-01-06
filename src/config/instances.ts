@@ -29,6 +29,7 @@ import StructureAdapterCreateImage from '../integrations/structure-adapter/struc
 import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
 import RegisterDbUserService from '../service/register-db-user-service/register-db-user-service';
 import StructureDbSelectService from '../service/structure-db-select-service/structure-db-select-service';
+import StructureDbSelectFormatService from '../service/structure-db-select-service/structure-db-select-format-service';
 
 // Controladores
 import LoginControllers from '../controllers/login-controllers/login-controllers';
@@ -54,6 +55,9 @@ const structureDbSelectService = new StructureDbSelectService(
 	structureSelectAdapterImages,
 	structureSelectAdapterMenu,
 );
+const structureDbSelectFormatService = new StructureDbSelectFormatService(
+	structureDbSelectService,
+);
 const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
 
 const sructureAdapterCreateImage = new StructureAdapterCreateImage(
@@ -63,7 +67,7 @@ const sructureAdapterCreateImage = new StructureAdapterCreateImage(
 
 // Controlador de interface de páginas
 const pageInterfaceControllers = new PageInterfaceControllers(
-	structureDbSelectService,
+	structureDbSelectFormatService,
 	option_query_select_attributes_db,
 );
 

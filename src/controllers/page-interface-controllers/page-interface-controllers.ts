@@ -3,8 +3,8 @@ import RequestModel from '../../util/request-model/request-model';
 import { IPageInterfaceControllers } from './@types/page-interface-controllers';
 import {
 	IAttributesSelectDb,
+	ISelectServiceResponse,
 	IStructureDbSelectService,
-	IStructureDbSelectServiceResponse,
 } from '../../service/structure-db-select-service/@types/structure-db-select-service';
 
 class PageInterfaceControllers
@@ -22,7 +22,7 @@ class PageInterfaceControllers
 		res: Response,
 	): Promise<void> => {
 		try {
-			const response: IStructureDbSelectServiceResponse =
+			const response: ISelectServiceResponse =
 				await this.structureDbSelectService.searchAllContent(
 					this.option_query_select_attributes_db,
 				);

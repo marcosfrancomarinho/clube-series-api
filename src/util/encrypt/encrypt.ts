@@ -1,23 +1,17 @@
-import  {compare, hash, genSalt}  from 'bcrypt';
+import  bcrypt  from 'bcrypt';
 import IEncrypt from './@types/encrypt';
 
 class Encrypt implements IEncrypt {
-	constructor(
-		private crypt: {
-			compare: typeof compare;
-			hash: typeof hash;
-			genSalt: typeof genSalt;
-		},
-	) {}
+	
 	public encryptPassword = async (password: string): Promise<string> => {
-		const salt = await this.crypt.genSalt(15);
-		return await this.crypt.hash(password, salt);
+		const salt = await bcrypt.genSalt(15);
+		return await bcrypt.hash(password, salt);
 	};
 	public passwordValidation = async (
 		password: string,
 		encrypted_password: string,
 	): Promise<boolean> => {
-		const response = await this.crypt.compare(password, encrypted_password);
+		const response = await bcrypt.compare(password, encrypted_password);
 		return response;
 	};
 }

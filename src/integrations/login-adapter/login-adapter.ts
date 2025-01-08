@@ -3,12 +3,11 @@ import { ILoginAdapter } from './@types/login-adapter';
 import { IDbResponse } from './@types/login-adapter';
 
 class LoginAdapter implements ILoginAdapter {
-	constructor(private user: typeof User) {}
 	public querySelectUser = async (
 		email: string,
 		retrievedData: string[],
 	): Promise<IDbResponse | null> => {
-		const response = await this.user.findOne({
+		const response = await User.findOne({
 			attributes: retrievedData,
 			where: {
 				email: email,

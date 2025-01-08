@@ -2,13 +2,12 @@ import User from '../../model/user/user';
 import { IRegisterAdapter } from './@types/register-adapter';
 
 class RegisterAdapter implements IRegisterAdapter {
-	constructor(private user: typeof User) {}
 	public queryCreateUser = async (
 		name: string,
 		email: string,
 		password: string,
 	): Promise<void> => {
-		await this.user.create({
+		await User.create({
 			name,
 			email,
 			password,

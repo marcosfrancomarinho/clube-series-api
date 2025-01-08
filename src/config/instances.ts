@@ -1,9 +1,4 @@
-import jwt from 'jsonwebtoken';
-import Joi from 'joi';
-import bcrypt from 'bcrypt';
-
 // Modelos
-import User from '../model/user/user';
 import StructureFooter from '../model/structure/structure-footer/structure-footer';
 import StructureImages from '../model/structure/structure-images/structure-images';
 import StructureMenu from '../model/structure/structure-menu/structure-menu';
@@ -59,10 +54,9 @@ const structureDbSelectService = new StructureDbSelectService(
 	structureSelectFormaterMenuDecorator,
 );
 
-const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
+const verifyDatasObjectImages = new VerifyDatasObjectImages();
 
 const sructureAdapterCreateImage = new StructureAdapterCreateImage(
-	StructureImages,
 	verifyDatasObjectImages,
 );
 
@@ -73,9 +67,9 @@ const pageInterfaceControllers = new PageInterfaceControllers(
 );
 
 // Instâncias de utilitários
-const generateHash = new GenerateHash(jwt);
-const encrypt = new Encrypt(bcrypt);
-const verifyDataUser = new VerifyDatasUser(Joi);
+const generateHash = new GenerateHash();
+const encrypt = new Encrypt();
+const verifyDataUser = new VerifyDatasUser();
 
 // Middlewares
 const verifyLogin = new VerifyLogin(verifyDataUser);
@@ -84,8 +78,8 @@ const authenticateUser = new AuthenticateUser(generateHash);
 const responseError = new ResponseError();
 
 // Adaptadores de banco de dados
-const loginAdapter = new LoginAdapter(User);
-const registerAdapter = new RegisterAdapter(User);
+const loginAdapter = new LoginAdapter();
+const registerAdapter = new RegisterAdapter();
 
 // Serviços
 const loginUserDbService = new LoginDbUserService(encrypt, loginAdapter);

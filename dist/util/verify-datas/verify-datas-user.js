@@ -1,17 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const joi_1 = __importDefault(require("joi"));
 class VerifyDatasUser {
-    joi;
-    constructor(joi) {
-        this.joi = joi;
-    }
     hasError(params, schema) {
         const { error } = schema.validate(params);
         if (error)
             throw new Error(error.message);
     }
     nameUser(name) {
-        const schema = this.joi
+        const schema = joi_1.default
             .string()
             .required()
             .trim()
@@ -22,7 +22,7 @@ class VerifyDatasUser {
         this.hasError(name, schema);
     }
     emailUser(email) {
-        const schema = this.joi
+        const schema = joi_1.default
             .string()
             .required()
             .trim()
@@ -34,7 +34,7 @@ class VerifyDatasUser {
         this.hasError(email, schema);
     }
     passwordUser(password) {
-        const schema = this.joi
+        const schema = joi_1.default
             .string()
             .required()
             .trim()

@@ -6,14 +6,11 @@ import {
 import { IVerifyDatasObjectImages } from '../../../../util/verify-datas/@types/verify-datas-object-image';
 
 class StructureAdapterCreateImage implements IStructureAdapterCreateImage {
-	constructor(
-		private structureImage: typeof StructureImages,
-		private verifyDatasObjectImages: IVerifyDatasObjectImages,
-	) {}
+	constructor(private verifyDatasObjectImages: IVerifyDatasObjectImages) {}
 	public createImage = async (imageObject: IImageObject): Promise<void> => {
 		try {
 			this.verifyDatasObjectImages.verify(imageObject);
-			await this.structureImage.create(imageObject);
+			await StructureImages.create(imageObject);
 		} catch (error) {
 			throw error as Error;
 		}

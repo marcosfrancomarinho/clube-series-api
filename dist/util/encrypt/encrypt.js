@@ -1,16 +1,16 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const bcrypt_1 = __importDefault(require("bcrypt"));
 class Encrypt {
-    crypt;
-    constructor(crypt) {
-        this.crypt = crypt;
-    }
     encryptPassword = async (password) => {
-        const salt = await this.crypt.genSalt(15);
-        return await this.crypt.hash(password, salt);
+        const salt = await bcrypt_1.default.genSalt(15);
+        return await bcrypt_1.default.hash(password, salt);
     };
     passwordValidation = async (password, encrypted_password) => {
-        const response = await this.crypt.compare(password, encrypted_password);
+        const response = await bcrypt_1.default.compare(password, encrypted_password);
         return response;
     };
 }

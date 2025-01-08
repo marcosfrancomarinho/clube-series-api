@@ -1,4 +1,4 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 import RequestModel from '../../util/request-model/request-model';
 import { IPageInterfaceControllers } from './@types/page-interface-controllers';
 import {
@@ -20,6 +20,7 @@ class PageInterfaceControllers
 	public getDatasPageInterfaceDB = async (
 		req: Request,
 		res: Response,
+		next:NextFunction
 	): Promise<void> => {
 		try {
 			const response: ISelectServiceResponse =
@@ -28,7 +29,7 @@ class PageInterfaceControllers
 				);
 			res.status(200).send(response);
 		} catch (error) {
-			res.status(400).send(super.messageError(error));
+			next(error);
 		}
 	};
 }

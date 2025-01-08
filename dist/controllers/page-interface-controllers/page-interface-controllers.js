@@ -12,13 +12,13 @@ class PageInterfaceControllers extends request_model_1.default {
         this.structureDbSelectService = structureDbSelectService;
         this.option_query_select_attributes_db = option_query_select_attributes_db;
     }
-    getDatasPageInterfaceDB = async (req, res) => {
+    getDatasPageInterfaceDB = async (req, res, next) => {
         try {
             const response = await this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
             res.status(200).send(response);
         }
         catch (error) {
-            res.status(400).send(super.messageError(error));
+            next(error);
         }
     };
 }

@@ -12,7 +12,7 @@ class LoginControllers extends request_model_1.default {
         this.loginUserDb = loginUserDb;
         this.generateHash = generateHash;
     }
-    loginUser = async (req, res) => {
+    loginUser = async (req, res, next) => {
         try {
             const datas = super.getDatasBodyLogin(req);
             const { id, email, ...response } = await this.loginUserDb.login(datas);
@@ -20,7 +20,7 @@ class LoginControllers extends request_model_1.default {
             res.status(200).setHeader('authorization', hash).json(response);
         }
         catch (error) {
-            res.status(400).json(super.messageError(error));
+            next(error);
         }
     };
 }

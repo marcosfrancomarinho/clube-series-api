@@ -1,4 +1,4 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 import RequestModel from '../../util/request-model/request-model';
 import IRegisterControllers from './@types/register-controllers';
 import { IResponseDbRegister } from './@types/response-db-register';
@@ -8,15 +8,19 @@ class RegisterControllers extends RequestModel implements IRegisterControllers {
 	constructor(private registerUserDb: IRegisterDbUserService) {
 		super();
 	}
-	public registerUser = async (req: Request, res: Response): Promise<void> => {
+	public registerUser = async (
+		req: Request,
+		res: Response,
+		next: NextFunction,
+	): Promise<void> => {
 		try {
 			const datas = super.getDatasBodyRegister(req);
 			const response: IResponseDbRegister = await this.registerUserDb.register(
 				datas,
 			);
-			res.status(200).json(response);
+			res.status(201).json(response);
 		} catch (error) {
-			res.status(400).json(super.messageError(error));
+			next(error);
 		}
 	};
 }

@@ -1,6 +1,6 @@
-import { Response, Request } from 'express';
+import { Response, Request, NextFunction } from 'express';
 
 interface IRegisterControllers {
-	registerUser(req: Request, res: Response): Promise<void>;
+	registerUser(req: Request, res: Response, next: NextFunction): Promise<void>;
 }
 export default IRegisterControllers;

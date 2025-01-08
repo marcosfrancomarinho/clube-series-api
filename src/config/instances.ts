@@ -29,7 +29,6 @@ import StructureAdapterCreateImage from '../integrations/structure-adapter/struc
 import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
 import RegisterDbUserService from '../service/register-db-user-service/register-db-user-service';
 import StructureDbSelectService from '../service/structure-db-select-service/structure-db-select-service';
-import StructureDbSelectFormatService from '../service/structure-db-select-service/structure-db-select-format-service';
 
 // Controladores
 import LoginControllers from '../controllers/login-controllers/login-controllers';
@@ -39,7 +38,8 @@ import PageInterfaceControllers from '../controllers/page-interface-controllers/
 
 // Configuração adicional
 import { option_query_select_attributes_db } from './option-query-select-attributes-db';
-
+import StructureSelectFormaterAdapter from '../integrations/structure-adapter/structure-select-adapter/structure-select-formater-adapter';
+import ResponseError from '../middlewares/error/response-error';
 // Adaptadores de estruturas
 const structureSelectAdapterFooter = new StructureSelectAdapter(
 	StructureFooter,
@@ -49,15 +49,16 @@ const structureSelectAdapterImages = new StructureSelectAdapter(
 );
 const structureSelectAdapterMenu = new StructureSelectAdapter(StructureMenu);
 
+const structureSelectFormaterMenuDecorator = new StructureSelectFormaterAdapter(
+	structureSelectAdapterMenu,
+);
 // Serviço de seleção no banco de dados
 const structureDbSelectService = new StructureDbSelectService(
 	structureSelectAdapterFooter,
 	structureSelectAdapterImages,
-	structureSelectAdapterMenu,
+	structureSelectFormaterMenuDecorator,
 );
-const structureDbSelectFormatService = new StructureDbSelectFormatService(
-	structureDbSelectService,
-);
+
 const verifyDatasObjectImages = new VerifyDatasObjectImages(Joi);
 
 const sructureAdapterCreateImage = new StructureAdapterCreateImage(
@@ -67,7 +68,7 @@ const sructureAdapterCreateImage = new StructureAdapterCreateImage(
 
 // Controlador de interface de páginas
 const pageInterfaceControllers = new PageInterfaceControllers(
-	structureDbSelectFormatService,
+	structureDbSelectService,
 	option_query_select_attributes_db,
 );
 
@@ -80,6 +81,7 @@ const verifyDataUser = new VerifyDatasUser(Joi);
 const verifyLogin = new VerifyLogin(verifyDataUser);
 const verifyRegister = new VerifyRegister(verifyDataUser);
 const authenticateUser = new AuthenticateUser(generateHash);
+const responseError = new ResponseError();
 
 // Adaptadores de banco de dados
 const loginAdapter = new LoginAdapter(User);
@@ -107,4 +109,5 @@ export {
 	welcomeControllers,
 	pageInterfaceControllers,
 	sructureAdapterCreateImage,
+	responseError,
 };

@@ -1,5 +1,5 @@
-import { Sequelize } from 'sequelize';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 dotenv.config();
 
 const sequelize = new Sequelize({
@@ -7,16 +7,16 @@ const sequelize = new Sequelize({
 	username: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
 	host: process.env.DB_HOST,
-	dialect: 'postgres',
+	dialect: "postgres",
 });
 
 export async function verifyConnectionDataBase(): Promise<void> {
 	try {
 		await sequelize.authenticate();
-		console.log('connection database');
+		console.log("connection database");
 	} catch (error) {
 		console.log(error);
 	}
 }
 
-export default sequelize;
+export { sequelize };

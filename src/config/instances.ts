@@ -1,69 +1,62 @@
 // Modelos
-import StructureFooter from '../model/structure/structure-footer/structure-footer';
-import StructureImages from '../model/structure/structure-images/structure-images';
-import StructureMenu from '../model/structure/structure-menu/structure-menu';
+import { StructureFooter } from "../model/structure.footer.model";
+import { StructureImages } from "../model/structure.images.model";
+import { StructureMenu } from "../model/structure.menu.model";
 
 // Utilitários
-import GenerateHash from '../util/generate-hash/generate-hash';
-import Encrypt from '../util/encrypt/encrypt';
-import VerifyDatasUser from '../util/verify-datas/verify-datas-user';
-import VerifyDatasObjectImages from '../util/verify-datas/verify-datas-object-image';
+import { GenerateHash } from "../util/generate.hash";
+import { Encrypt } from "../util/encrypt";
+import { VerifyDatasUser } from "../util/verify.datas.user";
+import { VerifyDatasObjectImages } from "../util/verify.datas.object.image";
 
 // Middlewares
-import VerifyLogin from '../middlewares/verify-login/verify-login';
-import VerifyRegister from '../middlewares/verify-register/verify-register';
-import AuthenticateUser from '../middlewares/authenticate-user/authenticate-user';
+import { VerifyRegisterMiddlewares } from "../middlewares/verify.register.middlewares";
+import { AuthenticateUserMiddlewares } from "../middlewares/authenticate.user.middlewares";
 
 // Adaptadores
-import LoginAdapter from '../integrations/login-adapter/login-adapter';
-import RegisterAdapter from '../integrations/register-adapter/register-adapter';
-import StructureSelectAdapter from '../integrations/structure-adapter/structure-select-adapter/structure-select-adapter';
-import StructureAdapterCreateImage from '../integrations/structure-adapter/structure-adapter-create/structure-adapter-create-image/structure-adapter-create-image';
+import { LoginAdapter } from "../integrations/login.adapter";
+import { StructureSelectAdapter } from "../integrations/structure.select.adapter";
+import { RegisterAdapter } from "../integrations/register.adapter";
+import { StructureSelectFormaterAdapter } from "../integrations/structure.select.formater.adapter";
+import { StructureCreateImageAdapter } from "../integrations/structure.create.image.adapter";
 
 // Serviços
-import LoginDbUserService from '../service/login-db-user-service/login-db-user-service';
-import RegisterDbUserService from '../service/register-db-user-service/register-db-user-service';
-import StructureDbSelectService from '../service/structure-db-select-service/structure-db-select-service';
+import { LoginDbUserServices } from "../service/login.db.user.services";
+import { RegisterDbUserServices } from "../service/register.db.user.services";
+import { StructureDbSelectServices } from "../service/structure.db.select.services";
 
 // Controladores
-import LoginControllers from '../controllers/login-controllers/login-controllers';
-import RegisterControllers from '../controllers/register-controllers/register-controllers';
-import WelcomeControllers from '../controllers/welcome-controllers/welcome-controllers';
-import PageInterfaceControllers from '../controllers/page-interface-controllers/page-interface-controllers';
+import { LoginControllers } from "../controllers/login.controllers";
+import { RegisterControllers } from "../controllers/register.controllers";
+import { WelcomeControllers } from "../controllers/welcome.controllers";
+import { PageInterfaceControllers } from "../controllers/pageInterface.controllers";
 
 // Configuração adicional
-import { option_query_select_attributes_db } from './option-query-select-attributes-db';
-import StructureSelectFormaterAdapter from '../integrations/structure-adapter/structure-select-adapter/structure-select-formater-adapter';
-import ResponseError from '../middlewares/error/response-error';
+import { option_query_select_attributes_db } from "./option.query.select.attributes.db";
+import { ResponseErrorMiddlewares } from "../middlewares/response.error.middlewares";
+import { VerifyLoginMiddlewares } from "../middlewares/verify.login.middlewares";
+
 // Adaptadores de estruturas
-const structureSelectAdapterFooter = new StructureSelectAdapter(
-	StructureFooter,
-);
-const structureSelectAdapterImages = new StructureSelectAdapter(
-	StructureImages,
-);
+const structureSelectAdapterFooter = new StructureSelectAdapter(StructureFooter);
+const structureSelectAdapterImages = new StructureSelectAdapter(StructureImages);
 const structureSelectAdapterMenu = new StructureSelectAdapter(StructureMenu);
 
-const structureSelectFormaterMenuDecorator = new StructureSelectFormaterAdapter(
-	structureSelectAdapterMenu,
-);
+const structureSelectFormaterAdapter = new StructureSelectFormaterAdapter(structureSelectAdapterMenu);
 // Serviço de seleção no banco de dados
-const structureDbSelectService = new StructureDbSelectService(
+const structureDbSelectServices = new StructureDbSelectServices(
 	structureSelectAdapterFooter,
 	structureSelectAdapterImages,
-	structureSelectFormaterMenuDecorator,
+	structureSelectFormaterAdapter
 );
 
 const verifyDatasObjectImages = new VerifyDatasObjectImages();
 
-const sructureAdapterCreateImage = new StructureAdapterCreateImage(
-	verifyDatasObjectImages,
-);
+const sructureAdapterCreateImage = new StructureCreateImageAdapter(verifyDatasObjectImages);
 
 // Controlador de interface de páginas
 const pageInterfaceControllers = new PageInterfaceControllers(
-	structureDbSelectService,
-	option_query_select_attributes_db,
+	structureDbSelectServices,
+	option_query_select_attributes_db
 );
 
 // Instâncias de utilitários
@@ -72,21 +65,18 @@ const encrypt = new Encrypt();
 const verifyDataUser = new VerifyDatasUser();
 
 // Middlewares
-const verifyLogin = new VerifyLogin(verifyDataUser);
-const verifyRegister = new VerifyRegister(verifyDataUser);
-const authenticateUser = new AuthenticateUser(generateHash);
-const responseError = new ResponseError();
+const verifyLogin = new VerifyLoginMiddlewares(verifyDataUser);
+const verifyRegister = new VerifyRegisterMiddlewares(verifyDataUser);
+const authenticateUser = new AuthenticateUserMiddlewares(generateHash);
+const responseError = new ResponseErrorMiddlewares();
 
 // Adaptadores de banco de dados
 const loginAdapter = new LoginAdapter();
 const registerAdapter = new RegisterAdapter();
 
 // Serviços
-const loginUserDbService = new LoginDbUserService(encrypt, loginAdapter);
-const registerUserDbService = new RegisterDbUserService(
-	encrypt,
-	registerAdapter,
-);
+const loginUserDbService = new LoginDbUserServices(encrypt, loginAdapter);
+const registerUserDbService = new RegisterDbUserServices(encrypt, registerAdapter);
 
 // Controladores
 const loginControllers = new LoginControllers(loginUserDbService, generateHash);

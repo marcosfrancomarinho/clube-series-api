@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { IEncrypt } from "../@types/encrypt";
+import { IEncrypt } from "../@types/utils/encrypt";
 
 export class Encrypt implements IEncrypt {
 	public encryptPassword = async (password: string): Promise<string> => {

@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import { RequestModel } from "../util/request.model";
-import { IRegisterDbUserServices } from "../@types/register.db.user.services";
-import { IResponseDb, IRegisterControllers } from "../@types/register.controllers";
+import { IRegisterDbUserServices } from "../@types/services/register.db.user.services";
+import { IResponseDb, IRegisterControllers } from "../@types/controllers/register.controllers";
 
 export class RegisterControllers extends RequestModel implements IRegisterControllers {
 	constructor(private registerUserDb: IRegisterDbUserServices) {

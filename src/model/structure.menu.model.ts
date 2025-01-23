@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/database";
-import { IStructureMenu } from "../@types/structure.menu.model";
+import { IStructureMenu } from "../@types/model/structure.menu.model";
 
 type CreateParamsStructureMenu = Optional<IStructureMenu, "id">;
 

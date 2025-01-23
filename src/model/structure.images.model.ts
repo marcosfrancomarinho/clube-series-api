@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/database";
-import { IStructureImages } from "../@types/structure.images";
+import { IStructureImages } from "../@types/model/structure.images.model";
 
 type CreateParamsStructureImages = Optional<IStructureImages, "id" | "createdAt" | "updatedAt">;
 

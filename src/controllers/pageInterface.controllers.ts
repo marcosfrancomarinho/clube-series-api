@@ -4,8 +4,8 @@ import {
 	IAttributesSelectDb,
 	ISelectServicesResponse,
 	IStructureDbSelectServices,
-} from "../@types/structure.db.select.services";
-import { IPageInterfaceControllers } from "../@types/pageInterface.controllers";
+} from "../@types/services/structure.db.select.services";
+import { IPageInterfaceControllers } from "../@types/controllers/page.interface.controllers";
 
 export class PageInterfaceControllers extends RequestModel implements IPageInterfaceControllers {
 	constructor(

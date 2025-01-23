@@ -1,8 +1,8 @@
 import { Response, Request, NextFunction } from "express";
 import { RequestModel } from "../util/request.model";
-import { ILoginDbUserServices } from "../@types/login.db.user.services";
-import { IGenerateHash } from "../@types/generatehash";
-import { ILoginControllers } from "../@types/login.controllers";
+import { IGenerateHash } from "../@types/utils/generate.hash";
+import { ILoginControllers } from "../@types/controllers/login.controllers";
+import { ILoginDbUserServices } from "../@types/services/login.db.user.services";
 
 export class LoginControllers extends RequestModel implements ILoginControllers {
 	constructor(private loginUserDb: ILoginDbUserServices, private generateHash: IGenerateHash) {

@@ -1,4 +1,4 @@
-import { IRegisterAdapter } from "../@types/register.adapter";
+import { IRegisterAdapter } from "../@types/integrations/register.adapter";
 import { User } from "../model/user.model";
 
 export class RegisterAdapter implements IRegisterAdapter {

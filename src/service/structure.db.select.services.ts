@@ -1,9 +1,9 @@
-import { IStructurSelecteAdapter } from "../@types/structure.select.adapter";
+import { IStructurSelecteAdapter } from "../@types/integrations/structure.select.adapter";
 import {
 	IAttributesSelectDb,
 	IStructureDbSelectServices,
 	ISelectServicesResponse,
-} from "../@types/structure.db.select.services";
+} from "../@types/services/structure.db.select.services";
 
 export class StructureDbSelectServices<F, M, I> implements IStructureDbSelectServices {
 	constructor(

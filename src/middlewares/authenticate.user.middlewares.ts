@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import { RequestModel } from "../util/request.model";
-import { IGenerateHash } from "../@types/generatehash";
-import { IAuthenticateUserMiddlewares } from "../@types/authenticate.user.middlewares";
+import { IGenerateHash } from "../@types/utils/generate.hash";
+import { IAuthenticateUserMiddlewares } from "../@types/middleware/authenticate.user.middlewares";
 
 export class AuthenticateUserMiddlewares extends RequestModel implements IAuthenticateUserMiddlewares {
 	constructor(private generateHash: IGenerateHash) {

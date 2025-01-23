@@ -1,4 +1,4 @@
-import { IResponseDb } from "./register.controllers";
+import { IResponseDb } from "../controllers/register.controllers";
 
 export interface IDatasRegister {
 	name: string;

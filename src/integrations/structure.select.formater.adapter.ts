@@ -1,4 +1,4 @@
-import { IStructurSelecteAdapter } from "../@types/structure.select.adapter";
+import { IStructurSelecteAdapter } from "../@types/integrations/structure.select.adapter";
 
 export class StructureSelectFormaterAdapter<T> implements IStructurSelecteAdapter<T> {
 	constructor(private structureSelectAdapter: IStructurSelecteAdapter<T[]>) {}

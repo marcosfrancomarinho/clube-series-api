@@ -1,7 +1,7 @@
-import { IResponseDb } from "../@types/register.controllers";
-import { IDbResponse, ILoginAdapter } from "../@types/login.adapter";
-import { IEncrypt } from "../@types/encrypt";
-import { ILoginDbUserServices, IDatasLogin } from "../@types/login.db.user.services";
+import { IResponseDb } from "../@types/controllers/register.controllers";
+import { IDbResponse, ILoginAdapter } from "../@types/integrations/login.adapter";
+import { IDatasLogin, ILoginDbUserServices } from "../@types/services/login.db.user.services";
+import { IEncrypt } from "../@types/utils/encrypt";
 
 export class LoginDbUserServices implements ILoginDbUserServices {
 	private messageError: string = "Email ou senha inválida";

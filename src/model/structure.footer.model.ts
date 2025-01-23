@@ -1,6 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../config/database";
-import { IStructureFooter } from "../@types/structure.footer.model";
+import { IStructureFooter } from "../@types/model/structure.footer.model";
 
 type CreateParamsStructureFooter = Optional<IStructureFooter, "id" | "createdAt" | "updatedAt">;
 

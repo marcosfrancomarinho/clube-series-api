@@ -1,7 +1,7 @@
 import { NextFunction, Response, Request } from "express";
 import { RequestModel } from "../util/request.model";
-import { IVerifyDatasUser } from "../@types/verify.datas.user";
-import { IVerifyRegisterMiddlewares } from "../@types/verify.register.middlewares";
+import { IVerifyDatasUser } from "../@types/utils/verify.datas.user";
+import { IVerifyRegisterMiddlewares } from "../@types/middleware/verify.register.middlewares";
 
 export class VerifyRegisterMiddlewares extends RequestModel implements IVerifyRegisterMiddlewares {
 	constructor(private verifyDatasUser: IVerifyDatasUser) {

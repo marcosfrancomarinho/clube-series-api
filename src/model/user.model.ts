@@ -1,5 +1,5 @@
 import { Model, Optional, DataTypes } from "sequelize";
-import IUser from "../@types/user.model";
+import IUser from "../@types/model/user.model";
 import { sequelize } from "../config/database";
 
 type UserCreationAttributes = Optional<IUser, "id" | "createdAt" | "updatedAt">;

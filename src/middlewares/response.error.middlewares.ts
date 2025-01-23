@@ -1,5 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import { IResponseErrorMiddlewares } from "../@types/response.error.middlewares";
+import { IResponseErrorMiddlewares } from "../@types/middleware/response.error.middlewares";
 import { RequestModel } from "../util/request.model";
 
 export class ResponseErrorMiddlewares extends RequestModel implements IResponseErrorMiddlewares {

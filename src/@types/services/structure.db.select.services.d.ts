@@ -1,6 +1,6 @@
-import { IStructureFooter } from "./structure.footer.model";
-import { IStructureImages } from "./structure.images";
-import { IStructureMenu } from "./structure.menu.model";
+import { IStructureFooter } from "../model/structure.footer.model";
+import { IStructureImages } from "../model/structure.images.model";
+import { IStructureMenu } from "../model/structure.menu.model";
 
 export interface IStructureDbSelectServices {
 	searchAllContent(attr: IAttributesSelectDb): Promise<ISelectServicesResponse>;

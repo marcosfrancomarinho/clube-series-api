@@ -1,5 +1,5 @@
 import joi, { StringSchema } from "joi";
-import { IVerifyDatasUser } from "../@types/verify.datas.user";
+import { IVerifyDatasUser } from "../@types/utils/verify.datas.user";
 
 export class VerifyDatasUser implements IVerifyDatasUser {
 	private hasError(params: string, schema: StringSchema<string>): void {

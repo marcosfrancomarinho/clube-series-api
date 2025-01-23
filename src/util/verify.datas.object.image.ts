@@ -1,6 +1,6 @@
 import joi, { ObjectSchema } from "joi";
 
-import { IVerifyDatasObjectImages } from "../@types/verify.datas.object.image";
+import { IVerifyDatasObjectImages } from "../@types/utils/verify.datas.object.image";
 
 export class VerifyDatasObjectImages implements IVerifyDatasObjectImages {
 	private hasError(params: any, schema: ObjectSchema<any>): void {

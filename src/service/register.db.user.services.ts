@@ -1,7 +1,7 @@
-import { IEncrypt } from "../@types/encrypt";
-import { IDatasRegister, IRegisterDbUserServices } from "../@types/register.db.user.services";
-import { IRegisterAdapter } from "../@types/register.adapter";
-import { IResponseDb } from "../@types/register.controllers";
+import { IEncrypt } from "../@types/utils/encrypt";
+import { IDatasRegister, IRegisterDbUserServices } from "../@types/services/register.db.user.services";
+import { IRegisterAdapter } from "../@types/integrations/register.adapter";
+import { IResponseDb } from "../@types/controllers/register.controllers";
 
 export class RegisterDbUserServices implements IRegisterDbUserServices {
 	private messageSuccess: Pick<IResponseDb, "ok" | "status"> = {

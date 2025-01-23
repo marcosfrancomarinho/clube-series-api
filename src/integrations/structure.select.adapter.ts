@@ -1,5 +1,5 @@
 import { Model, ModelStatic } from "sequelize";
-import { IStructurSelecteAdapter } from "../@types/structure.select.adapter";
+import { IStructurSelecteAdapter } from "../@types/integrations/structure.select.adapter";
 
 export class StructureSelectAdapter<T extends Model> implements IStructurSelecteAdapter<T[]> {
 	constructor(private structureSelect: ModelStatic<T>) {}

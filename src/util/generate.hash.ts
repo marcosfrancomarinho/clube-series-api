@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { IGenerateHash } from "../@types/generatehash";
+import { IGenerateHash } from "../@types/utils/generate.hash";
 
 dotenv.config();
 

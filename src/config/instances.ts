@@ -12,6 +12,8 @@ import { VerifyDatasObjectImages } from "../util/verify.datas.object.image";
 // Middlewares
 import { VerifyRegisterMiddlewares } from "../middlewares/verify.register.middlewares";
 import { AuthenticateUserMiddlewares } from "../middlewares/authenticate.user.middlewares";
+import { ResponseErrorMiddlewares } from "../middlewares/response.error.middlewares";
+import { VerifyLoginMiddlewares } from "../middlewares/verify.login.middlewares";
 
 // Adaptadores
 import { LoginAdapter } from "../integrations/login.adapter";
@@ -33,15 +35,13 @@ import { PageInterfaceControllers } from "../controllers/pageInterface.controlle
 
 // Configuração adicional
 import { option_query_select_attributes_db } from "./option.query.select.attributes.db";
-import { ResponseErrorMiddlewares } from "../middlewares/response.error.middlewares";
-import { VerifyLoginMiddlewares } from "../middlewares/verify.login.middlewares";
 
 // Adaptadores de estruturas
 const structureSelectAdapterFooter = new StructureSelectAdapter(StructureFooter);
 const structureSelectAdapterImages = new StructureSelectAdapter(StructureImages);
 const structureSelectAdapterMenu = new StructureSelectAdapter(StructureMenu);
-
 const structureSelectFormaterAdapter = new StructureSelectFormaterAdapter(structureSelectAdapterMenu);
+
 // Serviço de seleção no banco de dados
 const structureDbSelectServices = new StructureDbSelectServices(
 	structureSelectAdapterFooter,
@@ -50,7 +50,6 @@ const structureDbSelectServices = new StructureDbSelectServices(
 );
 
 const verifyDatasObjectImages = new VerifyDatasObjectImages();
-
 const sructureAdapterCreateImage = new StructureCreateImageAdapter(verifyDatasObjectImages);
 
 // Controlador de interface de páginas

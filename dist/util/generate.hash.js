@@ -5,8 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GenerateHash = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
 class GenerateHash {
     hash = (email, id) => {
         const keySecret = process.env.SECRET;

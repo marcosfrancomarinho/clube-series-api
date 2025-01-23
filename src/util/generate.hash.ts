@@ -1,8 +1,6 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import dotenv from "dotenv";
 import { IGenerateHash } from "../@types/utils/generate.hash";
 
-dotenv.config();
 
 export class GenerateHash implements IGenerateHash {
 	public hash = (email: string, id: number): string => {

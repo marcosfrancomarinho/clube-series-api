@@ -3,8 +3,8 @@ import { pool } from "../config/database";
 export class LoginAdapter implements ILoginAdapter {
 	public querySelectUser = async (email: string): Promise<IDbResponse | null> => {
 		try {
-			const sql = `--sql
-			SELECT 
+			const sql =
+			`SELECT 
 				id,
 				email,
 				password

@@ -7,6 +7,7 @@ export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
 		try {
 			const params: string = attributes.map((param) => `"${param}"`).join(",");
 			const { rows } = await pool.query(`SELECT ${params} FROM "${this.table}"`);
+			console.log(rows)
 			return rows as T[];
 		} catch (error) {
 			throw error as Error;

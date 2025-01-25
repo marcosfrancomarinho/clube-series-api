@@ -5,8 +5,7 @@ const database_1 = require("../config/database");
 class LoginAdapter {
     querySelectUser = async (email) => {
         try {
-            const sql = `--sql
-			SELECT 
+            const sql = `SELECT 
 				id,
 				email,
 				password

@@ -4,8 +4,8 @@ import { pool } from "../config/database";
 export class RegisterAdapter implements IRegisterAdapter {
 	public queryCreateUser = async (name: string, email: string, password: string): Promise<void> => {
 		try {
-			const sql: string = `//ssdsds
-			INSERT INTO register_user
+			const sql: string =
+			`INSERT INTO register_user
 			(
 				id,
 				name,

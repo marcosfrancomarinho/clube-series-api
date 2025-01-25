@@ -4,7 +4,7 @@ esbuild
 	.build({
 		entryPoints: ["./src/app.ts"],
 		outfile: "./dist/app.js",
-		bundle: true,
+		bundle: false,
 		minify: true,
 		platform: "node",
 		external: ["bcrypt", "cors", "express", "joi", "jsonwebtoken", "pg"],

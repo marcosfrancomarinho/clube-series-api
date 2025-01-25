@@ -4,7 +4,6 @@ exports.RegisterAdapter = void 0;
 const database_1 = require("../config/database");
 class RegisterAdapter {
     queryCreateUser = async (name, email, password) => {
-        const client = await database_1.pool.connect();
         try {
             const sql = `
 			INSERT INTO register_user
@@ -24,13 +23,10 @@ class RegisterAdapter {
 				NOW(), 
 				NOW()
 			)`;
-            await client.query(sql, [name, email, password]);
+            await database_1.pool.query(sql, [name, email, password]);
         }
         catch (error) {
             throw error;
-        }
-        finally {
-            client.release();
         }
     };
 }

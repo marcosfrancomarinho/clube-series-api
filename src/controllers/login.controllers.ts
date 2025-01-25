@@ -10,7 +10,7 @@ export class LoginControllers extends RequestModel implements ILoginControllers 
 	}
 	public loginUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			const datas = super.getDatasBodyLogin(req);
+			const datas = this.getDatasBodyLogin(req);
 			const { id, email, ...response } = await this.loginUserDb.login(datas);
 			const hash: string = this.generateHash.hash(email, id);
 			res.status(200).setHeader("authorization", hash).json(response);

@@ -9,7 +9,7 @@ export class RegisterControllers extends RequestModel implements IRegisterContro
 	}
 	public registerUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			const datas = super.getDatasBodyRegister(req);
+			const datas = this.getDatasBodyRegister(req);
 			const response: Pick<IResponseDb, "ok" | "status"> = await this.registerUserDb.register(datas);
 			res.status(201).json(response);
 		} catch (error) {

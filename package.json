@@ -1,13 +1,14 @@
 {
 	"name": "server",
 	"version": "1.0.0",
-	"main": "dist/config/server.js",
+	"main": "dist/app.js",
 	"scripts": {
 		"start": "node dist/app.js",
 		"db": "tsx --env-file=.env src/integrations/structure.select.adapter.pg.ts",
 		"dev": "tsx --watch --env-file=.env src/app.ts",
 		"git": "git add . & git commit -m '24/01/2025' & git push origin main",
-		"build": "tsc -w"
+		"build": "node esbuild.config.js",
+		"check": "tsc --watch --noEmit"
 	},
 	"keywords": [],
 	"author": "",
@@ -19,8 +20,7 @@
 		"express": "5.0.1",
 		"joi": "17.13.3",
 		"jsonwebtoken": "^9.0.2",
-		"pg": "8.13.1",
-		"sequelize": "6.37.5"
+		"pg": "8.13.1"
 	},
 	"devDependencies": {
 		"@types/bcrypt": "^5.0.2",
@@ -31,7 +31,7 @@
 		"@types/minimatch": "5.1.2",
 		"@types/node": "22.10.1",
 		"@types/pg": "^8.11.10",
-		"@types/sequelize": "4.28.20",
+		"esbuild": "^0.24.2",
 		"tsx": "^4.19.2",
 		"typescript": "5.7.2"
 	}

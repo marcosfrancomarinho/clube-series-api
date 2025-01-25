@@ -11,7 +11,7 @@ export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
 		} catch (error) {
 			throw error as Error;
 		} finally {
-			(await pool.connect()).release();
+			await pool.end();
 		}
 	};
 }

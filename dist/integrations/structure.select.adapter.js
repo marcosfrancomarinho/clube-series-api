@@ -17,7 +17,7 @@ class StructureSelectAdapter {
             throw error;
         }
         finally {
-            (await database_1.pool.connect()).release();
+            await database_1.pool.end();
         }
     };
 }

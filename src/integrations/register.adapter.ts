@@ -26,7 +26,7 @@ export class RegisterAdapter implements IRegisterAdapter {
 		} catch (error) {
 			throw error as Error;
 		} finally {
-			(await pool.connect()).release();
+			await pool.end();
 		}
 	};
 }

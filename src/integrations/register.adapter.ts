@@ -10,17 +10,13 @@ export class RegisterAdapter implements IRegisterAdapter {
 				id,
 				name,
 				email, 
-				password, 
-				"createdAt", 
-				"updatedAt"
+				password
 			)
 			VALUES (
 				DEFAULT, 
 				$1, 
 				$2, 
-				$3, 
-				NOW(), 
-				NOW()
+				$3
 			)`;
 			await pool.query(sql, [name, email, password]);
 		} catch (error) {

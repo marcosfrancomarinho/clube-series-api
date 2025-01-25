@@ -1,11 +1,10 @@
 import { IDbResponse, ILoginAdapter } from "../@types/integrations/login.adapter";
 import { pool } from "../config/database";
-
 export class LoginAdapter implements ILoginAdapter {
 	public querySelectUser = async (email: string): Promise<IDbResponse | null> => {
 		try {
-			const sql: string = `
-			SELECT
+			const sql = `--sql
+			SELECT 
 				id,
 				email,
 				password

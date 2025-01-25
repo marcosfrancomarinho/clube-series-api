@@ -6,10 +6,10 @@ export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
 	public search = async (attributes: string[]): Promise<T[] | T> => {
 		try {
 			const params: string = attributes.map((param) => `"${param}"`).join(",");
-			const { rows } = await pool.query(`SELECT ${params} FROM "${this.table}"`);
+			const { rows } = await pool.query(`--sql SELECT ${params} FROM "${this.table}"`);
 			return rows as T[];
 		} catch (error) {
 			throw error as Error;
-		} 
+		}
 	};
 }

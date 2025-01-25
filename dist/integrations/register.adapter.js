@@ -5,7 +5,7 @@ const database_1 = require("../config/database");
 class RegisterAdapter {
     queryCreateUser = async (name, email, password) => {
         try {
-            const sql = `
+            const sql = `--sql
 			INSERT INTO register_user
 			(
 				id,

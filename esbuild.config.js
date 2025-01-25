@@ -12,6 +12,5 @@ esbuild
 		minifySyntax: true,
 		minifyWhitespace: true,
 		minifyIdentifiers: true,
-		outExtension: { ".js": ".min.js" },
 	})
 	.catch(() => process.exit(1));

@@ -14,6 +14,7 @@ class LoginAdapter {
 				register_user
 			WHERE
 				email = $1`;
+            console.log(sql);
             const { rows } = await database_1.pool.query(sql, [email]);
             return rows.at(0) ?? null;
         }

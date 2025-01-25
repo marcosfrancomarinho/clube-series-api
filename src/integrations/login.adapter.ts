@@ -12,6 +12,7 @@ export class LoginAdapter implements ILoginAdapter {
 				register_user
 			WHERE
 				email = $1`;
+				console.log(sql)
 			const { rows } = await pool.query<IDbResponse>(sql, [email]);
 			return rows.at(0) ?? null;
 		} catch (error) {

@@ -10,8 +10,6 @@ export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
 			return rows as T[];
 		} catch (error) {
 			throw error as Error;
-		} finally {
-			await pool.end();
-		}
+		} 
 	};
 }

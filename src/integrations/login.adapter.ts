@@ -17,8 +17,6 @@ export class LoginAdapter implements ILoginAdapter {
 			return rows.at(0) ?? null;
 		} catch (error) {
 			throw error as Error;
-		} finally {
-			await pool.end();
-		}
+		} 
 	};
 }

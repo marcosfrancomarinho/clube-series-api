@@ -20,9 +20,6 @@ class LoginAdapter {
         catch (error) {
             throw error;
         }
-        finally {
-            await database_1.pool.end();
-        }
     };
 }
 exports.LoginAdapter = LoginAdapter;

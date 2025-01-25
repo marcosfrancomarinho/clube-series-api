@@ -25,8 +25,6 @@ export class RegisterAdapter implements IRegisterAdapter {
 			await pool.query(sql, [name, email, password]);
 		} catch (error) {
 			throw error as Error;
-		} finally {
-			await pool.end();
-		}
+		} 
 	};
 }

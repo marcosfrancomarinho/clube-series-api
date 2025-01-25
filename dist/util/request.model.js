@@ -1,17 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RequestModel = void 0;
-class RequestModel {
-    getDatasBodyLogin(req) {
-        return req.body;
+var RequestModel = (function () {
+    function RequestModel() {
     }
-    getDatasBodyRegister(req) {
+    RequestModel.prototype.getDatasBodyLogin = function (req) {
         return req.body;
-    }
-    messageError(error) {
+    };
+    RequestModel.prototype.getDatasBodyRegister = function (req) {
+        return req.body;
+    };
+    RequestModel.prototype.messageError = function (error) {
         return {
             error: error.message,
         };
-    }
-}
+    };
+    return RequestModel;
+}());
 exports.RequestModel = RequestModel;

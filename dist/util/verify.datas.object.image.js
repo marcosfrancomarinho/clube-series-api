@@ -4,19 +4,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.VerifyDatasObjectImages = void 0;
-const joi_1 = __importDefault(require("joi"));
-class VerifyDatasObjectImages {
-    hasError(params, schema) {
-        const { error } = schema.validate(params);
+var joi_1 = __importDefault(require("joi"));
+var VerifyDatasObjectImages = (function () {
+    function VerifyDatasObjectImages() {
+        var _this = this;
+        this.verify = function (imageObject) {
+            var schema = joi_1.default.object({
+                title: joi_1.default.string().trim().empty().required().min(3).label("Titulo da Imagem"),
+                url: joi_1.default.string().trim().empty().required().min(5).label("URL da Imagem"),
+            });
+            _this.hasError(imageObject, schema);
+        };
+    }
+    VerifyDatasObjectImages.prototype.hasError = function (params, schema) {
+        var error = schema.validate(params).error;
         if (error)
             throw new Error(error.message);
-    }
-    verify = (imageObject) => {
-        const schema = joi_1.default.object({
-            title: joi_1.default.string().trim().empty().required().min(3).label("Titulo da Imagem"),
-            url: joi_1.default.string().trim().empty().required().min(5).label("URL da Imagem"),
-        });
-        this.hasError(imageObject, schema);
     };
-}
+    return VerifyDatasObjectImages;
+}());
 exports.VerifyDatasObjectImages = VerifyDatasObjectImages;

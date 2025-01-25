@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.routers = void 0;
-const express_1 = __importDefault(require("express"));
-const login_router_1 = require("./login.router");
-const register_router_1 = require("./register.router");
-const root_router_1 = require("./root.router");
-const welcome_router_1 = require("./welcome.router");
-const routers = (0, express_1.default)();
+var express_1 = __importDefault(require("express"));
+var login_router_1 = require("./login.router");
+var register_router_1 = require("./register.router");
+var root_router_1 = require("./root.router");
+var welcome_router_1 = require("./welcome.router");
+var routers = (0, express_1.default)();
 exports.routers = routers;
 routers.use("/signup", register_router_1.registerRouter);
 routers.use("/login", login_router_1.loginRouter);

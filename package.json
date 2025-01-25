@@ -7,7 +7,7 @@
 		"start": "node dist/config/server.js",
 		"db": "tsx --env-file=.env src/integrations/structure.select.adapter.pg.ts",
 		"dev": "tsx --watch --env-file=.env src/config/server.ts",
-		"git": "git add . & git commit -m '22/01/2025' & git push origin main"
+		"git": "git add . & git commit -m '24/01/2025' & git push origin main"
 	},
 	"bin": "dist/config/server.js",
 	"keywords": [],

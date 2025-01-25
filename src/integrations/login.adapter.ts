@@ -4,6 +4,7 @@ import { pool } from "../config/database";
 export class LoginAdapter implements ILoginAdapter {
 	public querySelectUser = async (email: string): Promise<IDbResponse | null> => {
 		try {
+			const client = await pool.connect();
 			const sql: string = `
 			SELECT
 				id,
@@ -13,10 +14,10 @@ export class LoginAdapter implements ILoginAdapter {
 				register_user
 			WHERE
 				email = $1`;
-			const { rows } = await pool.query<IDbResponse>(sql, [email]);
+			const { rows } = await client.query<IDbResponse>(sql, [email]);
 			return rows.at(0) ?? null;
 		} catch (error) {
 			throw error as Error;
-		} 
+		}
 	};
 }

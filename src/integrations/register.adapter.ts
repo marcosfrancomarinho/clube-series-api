@@ -4,6 +4,7 @@ import { pool } from "../config/database";
 export class RegisterAdapter implements IRegisterAdapter {
 	public queryCreateUser = async (name: string, email: string, password: string): Promise<void> => {
 		try {
+			const client = await pool.connect();
 			const sql: string = `
 			INSERT INTO register_user
 			(
@@ -22,7 +23,7 @@ export class RegisterAdapter implements IRegisterAdapter {
 				NOW(), 
 				NOW()
 			)`;
-			await pool.query(sql, [name, email, password]);
+			await client.query(sql, [name, email, password]);
 		} catch (error) {
 			throw error as Error;
 		} 

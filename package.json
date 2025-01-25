@@ -3,13 +3,12 @@
 	"version": "1.0.0",
 	"main": "dist/config/server.js",
 	"scripts": {
-		"build": "tsc -w",
-		"start": "node dist/config/server.js",
+		"start": "node dist/app.js",
 		"db": "tsx --env-file=.env src/integrations/structure.select.adapter.pg.ts",
-		"dev": "tsx --watch --env-file=.env src/config/server.ts",
-		"git": "git add . & git commit -m '24/01/2025' & git push origin main"
+		"dev": "tsx --watch --env-file=.env src/app.ts",
+		"git": "git add . & git commit -m '24/01/2025' & git push origin main",
+		"build": "tsc -w"
 	},
-	"bin": "dist/config/server.js",
 	"keywords": [],
 	"author": "",
 	"license": "ISC",

@@ -3,8 +3,8 @@ import { pool } from "../config/database";
 
 export class LoginAdapter implements ILoginAdapter {
 	public querySelectUser = async (email: string): Promise<IDbResponse | null> => {
+		const client = await pool.connect();
 		try {
-			const client = await pool.connect();
 			const sql: string = `
 			SELECT
 				id,
@@ -18,6 +18,8 @@ export class LoginAdapter implements ILoginAdapter {
 			return rows.at(0) ?? null;
 		} catch (error) {
 			throw error as Error;
+		} finally {
+			client.release();
 		}
 	};
 }

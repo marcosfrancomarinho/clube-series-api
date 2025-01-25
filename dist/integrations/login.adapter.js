@@ -4,8 +4,8 @@ exports.LoginAdapter = void 0;
 const database_1 = require("../config/database");
 class LoginAdapter {
     querySelectUser = async (email) => {
+        const client = await database_1.pool.connect();
         try {
-            const client = await database_1.pool.connect();
             const sql = `
 			SELECT
 				id,
@@ -20,6 +20,9 @@ class LoginAdapter {
         }
         catch (error) {
             throw error;
+        }
+        finally {
+            client.release();
         }
     };
 }

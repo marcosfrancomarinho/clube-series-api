@@ -5,6 +5,7 @@ const pool = new pg.Pool({
 	user: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
 	host: process.env.DB_HOST,
+	max: 50,
 });
 
 export { pool };

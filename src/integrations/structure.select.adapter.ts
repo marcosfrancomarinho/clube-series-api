@@ -11,8 +11,8 @@ export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
 			return rows as T[];
 		} catch (error) {
 			throw error as Error;
-		}finally{
-			client.release()
+		} finally {
+			client.release();
 		}
 	};
 }

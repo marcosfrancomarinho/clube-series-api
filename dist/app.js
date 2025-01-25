@@ -1,69 +1,100 @@
 "use strict";
-var me = Object.create;
-var V = Object.defineProperty;
-var ue = Object.getOwnPropertyDescriptor;
-var le = Object.getOwnPropertyNames;
-var ge = Object.getPrototypeOf,
-	de = Object.prototype.hasOwnProperty;
-var fe = (o, r, e, t) => {
-	if ((r && typeof r == "object") || typeof r == "function")
-		for (let s of le(r)) !de.call(o, s) && s !== e && V(o, s, { get: () => r[s], enumerable: !(t = ue(r, s)) || t.enumerable });
-	return o;
+var he = Object.create;
+var G = Object.defineProperty;
+var Ie = Object.getOwnPropertyDescriptor;
+var Re = Object.getOwnPropertyNames,
+	$ = Object.getOwnPropertySymbols,
+	ye = Object.getPrototypeOf,
+	z = Object.prototype.hasOwnProperty,
+	Se = Object.prototype.propertyIsEnumerable;
+var W = (s, r) => {
+	var e = {};
+	for (var t in s) z.call(s, t) && r.indexOf(t) < 0 && (e[t] = s[t]);
+	if (s != null && $) for (var t of $(s)) r.indexOf(t) < 0 && Se.call(s, t) && (e[t] = s[t]);
+	return e;
 };
-var c = (o, r, e) => (
-	(e = o != null ? me(ge(o)) : {}), fe(r || !o || !o.__esModule ? V(e, "default", { value: o, enumerable: !0 }) : e, o)
+var we = (s, r, e, t) => {
+	if ((r && typeof r == "object") || typeof r == "function")
+		for (let o of Re(r)) !z.call(s, o) && o !== e && G(s, o, { get: () => r[o], enumerable: !(t = Ie(r, o)) || t.enumerable });
+	return s;
+};
+var p = (s, r, e) => (
+	(e = s != null ? he(ye(s)) : {}), we(r || !s || !s.__esModule ? G(e, "default", { value: s, enumerable: !0 }) : e, s)
 );
-var B = c(require("express"));
-var oe = c(require("express"));
-var ee = c(require("express"));
-var L = c(require("jsonwebtoken")),
-	d = class {
+var n = (s, r, e) =>
+	new Promise((t, o) => {
+		var i = (u) => {
+				try {
+					m(e.next(u));
+				} catch (h) {
+					o(h);
+				}
+			},
+			c = (u) => {
+				try {
+					m(e.throw(u));
+				} catch (h) {
+					o(h);
+				}
+			},
+			m = (u) => (u.done ? t(u.value) : Promise.resolve(u.value).then(i, c));
+		m((e = e.apply(s, r)).next());
+	});
+var O = p(require("express"));
+var me = p(require("express"));
+var ne = p(require("express"));
+var H = p(require("jsonwebtoken")),
+	R = class {
 		constructor() {
 			this.hash = (r, e) => {
 				let t = process.env.SECRET;
 				if (!t) throw new Error("A vari\xE1vel de ambiente SECRET n\xE3o est\xE1 definida.");
-				return L.default.sign({ email: r, id: e }, t);
+				return H.default.sign({ email: r, id: e }, t);
 			};
 			this.verify = (r) => {
 				let e = process.env.SECRET;
 				if (!e) throw new Error("A vari\xE1vel de ambiente SECRET n\xE3o est\xE1 definida.");
-				return L.default.verify(r, e);
+				return H.default.verify(r, e);
 			};
 		}
 	};
-var f = c(require("bcrypt")),
-	h = class {
-		constructor() {
-			this.encryptPassword = async (r) => {
-				let e = await f.default.genSalt(15);
-				return await f.default.hash(r, e);
-			};
-			this.passwordValidation = async (r, e) => await f.default.compare(r, e);
-		}
-	};
-var I = c(require("joi")),
-	R = class {
+var y = p(require("bcrypt"));
+var S = class {
+	constructor() {
+		this.encryptPassword = (r) =>
+			n(this, null, function* () {
+				let e = yield y.default.genSalt(15);
+				return yield y.default.hash(r, e);
+			});
+		this.passwordValidation = (r, e) =>
+			n(this, null, function* () {
+				return yield y.default.compare(r, e);
+			});
+	}
+};
+var w = p(require("joi")),
+	b = class {
 		hasError(r, e) {
 			let { error: t } = e.validate(r);
 			if (t) throw new Error(t.message);
 		}
 		nameUser(r) {
-			let e = I.default.string().required().trim().min(3).max(30).empty().label("nome do usu\xE1rio");
+			let e = w.default.string().required().trim().min(3).max(30).empty().label("nome do usu\xE1rio");
 			this.hasError(r, e);
 		}
 		emailUser(r) {
-			let e = I.default.string().required().trim().min(10).max(35).email().empty().label("email do usu\xE1rio");
+			let e = w.default.string().required().trim().min(10).max(35).email().empty().label("email do usu\xE1rio");
 			this.hasError(r, e);
 		}
 		passwordUser(r) {
-			let e = I.default.string().required().trim().min(8).max(15).empty().label("senha do usu\xE1rio");
+			let e = w.default.string().required().trim().min(8).max(15).empty().label("senha do usu\xE1rio");
 			this.hasError(r, e);
 		}
 		registerUser(r, e, t) {
 			try {
 				this.nameUser(r), this.emailUser(e), this.passwordUser(t);
-			} catch (s) {
-				throw s;
+			} catch (o) {
+				throw o;
 			}
 		}
 		loginUser(r, e) {
@@ -74,7 +105,7 @@ var I = c(require("joi")),
 			}
 		}
 	};
-var n = class {
+var a = class {
 	getDatasBodyLogin(r) {
 		return r.body;
 	}
@@ -85,29 +116,29 @@ var n = class {
 		return { error: r.message };
 	}
 };
-var y = class extends n {
+var v = class extends a {
 	constructor(e) {
 		super();
 		this.verifyDatasUser = e;
-		this.verifyDatasBodyUserRegister = (e, t, s) => {
+		this.verifyDatasBodyUserRegister = (e, t, o) => {
 			try {
-				let { name: i, email: a, password: F } = this.getDatasBodyRegister(e);
-				this.verifyDatasUser.registerUser(i, a, F), s();
+				let { name: i, email: c, password: m } = this.getDatasBodyRegister(e);
+				this.verifyDatasUser.registerUser(i, c, m), o();
 			} catch (i) {
 				t.status(400).json(this.messageError(i));
 			}
 		};
 	}
 };
-var S = class extends n {
+var D = class extends a {
 	constructor(e) {
 		super();
 		this.generateHash = e;
-		this.authenticationTokenUser = (e, t, s) => {
+		this.authenticationTokenUser = (e, t, o) => {
 			try {
 				let i = this.getToken(e),
-					a = this.generateHash.verify(i);
-				(t.locals.token = a), s();
+					c = this.generateHash.verify(i);
+				(t.locals.token = c), o();
 			} catch (i) {
 				t.status(400).json(super.messageError(i));
 			}
@@ -119,59 +150,65 @@ var S = class extends n {
 		return t;
 	}
 };
-var w = class extends n {
+var U = class extends a {
 	constructor() {
 		super(...arguments);
-		this.error = (e, t, s, i) => {
-			s.status(400).send(super.messageError(e));
+		this.error = (e, t, o, i) => {
+			o.status(400).send(super.messageError(e));
 		};
 	}
 };
-var b = class extends n {
+var x = class extends a {
 	constructor(e) {
 		super();
 		this.verifyDatasUser = e;
-		this.verifyDatasBodyUserLogin = (e, t, s) => {
+		this.verifyDatasBodyUserLogin = (e, t, o) => {
 			try {
-				let { email: i, password: a } = super.getDatasBodyLogin(e);
-				this.verifyDatasUser.loginUser(i, a), s();
+				let { email: i, password: c } = super.getDatasBodyLogin(e);
+				this.verifyDatasUser.loginUser(i, c), o();
 			} catch (i) {
 				t.status(400).json(super.messageError(i));
 			}
 		};
 	}
 };
-var j = c(require("pg")),
-	p = new j.default.Pool({ connectionString: process.env.URL_DB, ssl: { rejectUnauthorized: !1 } });
-function m(o) {
-	return o.replace("--sql", "");
+var J = p(require("pg")),
+	l = new J.default.Pool({ connectionString: process.env.URL_DB, ssl: { rejectUnauthorized: !1 } });
+function g(s) {
+	return s.replace("--sql", "");
 }
-var u = class {
+var d = class {
 	constructor(r) {
 		this.table = r;
-		this.search = async (r) => {
-			try {
-				let e = r.map((i) => `"${i}"`).join(","),
-					t = m(`--sql SELECT ${e} FROM "${this.table}"`),
-					{ rows: s } = await p.query(t);
-				return s;
-			} catch (e) {
-				throw e;
-			}
-		};
+		this.search = (r) =>
+			n(this, null, function* () {
+				try {
+					let e = r.map((i) => `"${i}"`).join(","),
+						t = g(`--sql SELECT ${e} FROM "${this.table}"`),
+						{ rows: o } = yield l.query(t);
+					return o;
+				} catch (e) {
+					throw e;
+				}
+			});
 	}
 };
-var v = class {
+var q = class {
 	constructor(r) {
 		this.structureSelectAdapter = r;
-		this.search = async (r) => (await this.structureSelectAdapter.search(r)).at(0);
+		this.search = (r) =>
+			n(this, null, function* () {
+				return (yield this.structureSelectAdapter.search(r)).at(0);
+			});
 	}
 };
-var D = class {
+var A = class {
 	constructor() {
-		this.querySelectUser = async (r) => {
-			try {
-				let e = m(`--sql
+		this.querySelectUser = (r) =>
+			n(this, null, function* () {
+				var e;
+				try {
+					let t = g(`--sql
 			SELECT 
 				id,
 				email,
@@ -180,19 +217,20 @@ var D = class {
 				register_user
 			WHERE
 				email = $1`),
-					{ rows: t } = await p.query(e, [r]);
-				return t.at(0) ?? null;
-			} catch (e) {
-				throw e;
-			}
-		};
+						{ rows: o } = yield l.query(t, [r]);
+					return (e = o.at(0)) != null ? e : null;
+				} catch (t) {
+					throw t;
+				}
+			});
 	}
 };
-var U = class {
+var E = class {
 	constructor() {
-		this.queryCreateUser = async (r, e, t) => {
-			try {
-				let s = m(`--sql
+		this.queryCreateUser = (r, e, t) =>
+			n(this, null, function* () {
+				try {
+					let o = g(`--sql
 			INSERT INTO register_user
 			(
 				id,
@@ -206,14 +244,14 @@ var U = class {
 				$2, 
 				$3,
 			)`);
-				await p.query(s, [r, e, t]);
-			} catch (s) {
-				throw s;
-			}
-		};
+					yield l.query(o, [r, e, t]);
+				} catch (o) {
+					throw o;
+				}
+			});
 	}
 };
-var x = class {
+var P = class {
 	constructor(r, e) {
 		this.encrypt = r;
 		this.loginAdapter = e;
@@ -221,155 +259,165 @@ var x = class {
 			success: ({ email: r, id: e }) => ({ ok: !0, status: "usuario logado com sucesso", email: r, id: e }),
 			error: "email ou senha inv\xE1lida",
 		};
-		this.login = async ({ email: r, password: e }) => {
-			try {
-				let t = await this.loginAdapter.querySelectUser(r);
-				if (!t) throw new Error(this.message.error);
-				if (!(await this.encrypt.passwordValidation(e, t.password))) throw new Error(this.message.error);
-				return this.message.success(t);
-			} catch (t) {
-				throw t;
-			}
-		};
+		this.login = (t) =>
+			n(this, [t], function* ({ email: r, password: e }) {
+				try {
+					let o = yield this.loginAdapter.querySelectUser(r);
+					if (!o) throw new Error(this.message.error);
+					if (!(yield this.encrypt.passwordValidation(e, o.password))) throw new Error(this.message.error);
+					return this.message.success(o);
+				} catch (o) {
+					throw o;
+				}
+			});
 	}
 };
-var q = class {
+var C = class {
 	constructor(r, e) {
 		this.encrypt = r;
 		this.registerAdapter = e;
 		this.messageSuccess = { ok: !0, status: "usuario cadastrado com sucesso" };
-		this.register = async ({ name: r, email: e, password: t }) => {
-			try {
-				let s = await this.encrypt.encryptPassword(t);
-				return await this.registerAdapter.queryCreateUser(r, e, s), this.messageSuccess;
-			} catch (s) {
-				throw s;
-			}
-		};
+		this.register = (o) =>
+			n(this, [o], function* ({ name: r, email: e, password: t }) {
+				try {
+					let i = yield this.encrypt.encryptPassword(t);
+					return yield this.registerAdapter.queryCreateUser(r, e, i), this.messageSuccess;
+				} catch (i) {
+					throw i;
+				}
+			});
 	}
 };
-var A = class {
+var T = class {
 	constructor(r, e, t) {
 		this.structureAdapterSelectFooter = r;
 		this.structureAdapterSelectImages = e;
 		this.structureAdapterSelectMenu = t;
-		this.searchAllContent = async ({ attrFooter: r, attrImages: e, attrMenu: t }) => {
-			try {
-				let [s, i, a] = await Promise.all([
-					this.structureAdapterSelectFooter.search(r),
-					this.structureAdapterSelectImages.search(e),
-					this.structureAdapterSelectMenu.search(t),
-				]);
-				return { footer: s, images: i, menu: a };
-			} catch (s) {
-				throw s;
-			}
-		};
+		this.searchAllContent = (o) =>
+			n(this, [o], function* ({ attrFooter: r, attrImages: e, attrMenu: t }) {
+				try {
+					let [i, c, m] = yield Promise.all([
+						this.structureAdapterSelectFooter.search(r),
+						this.structureAdapterSelectImages.search(e),
+						this.structureAdapterSelectMenu.search(t),
+					]);
+					return { footer: i, images: c, menu: m };
+				} catch (i) {
+					throw i;
+				}
+			});
 	}
 };
-var E = class extends n {
+var M = class extends a {
 	constructor(e, t) {
 		super();
 		this.loginUserDb = e;
 		this.generateHash = t;
-		this.loginUser = async (e, t, s) => {
-			try {
-				let i = this.getDatasBodyLogin(e),
-					{ id: a, email: F, ...ce } = await this.loginUserDb.login(i),
-					pe = this.generateHash.hash(F, a);
-				t.status(200).setHeader("authorization", pe).json(ce);
-			} catch (i) {
-				s(i);
-			}
-		};
+		this.loginUser = (e, t, o) =>
+			n(this, null, function* () {
+				try {
+					let c = this.getDatasBodyLogin(e),
+						i = yield this.loginUserDb.login(c),
+						{ id: m, email: u } = i,
+						h = W(i, ["id", "email"]),
+						fe = this.generateHash.hash(u, m);
+					t.status(200).setHeader("authorization", fe).json(h);
+				} catch (c) {
+					o(c);
+				}
+			});
 	}
 };
-var P = class extends n {
+var F = class extends a {
 	constructor(e) {
 		super();
 		this.registerUserDb = e;
-		this.registerUser = async (e, t, s) => {
-			try {
-				let i = this.getDatasBodyRegister(e),
-					a = await this.registerUserDb.register(i);
-				t.status(201).json(a);
-			} catch (i) {
-				s(i);
-			}
-		};
+		this.registerUser = (e, t, o) =>
+			n(this, null, function* () {
+				try {
+					let i = this.getDatasBodyRegister(e),
+						c = yield this.registerUserDb.register(i);
+					t.status(201).json(c);
+				} catch (i) {
+					o(i);
+				}
+			});
 	}
 };
-var C = class {
+var L = class {
 	constructor() {
-		this.welcomeUser = async (r, e) => {
-			e.status(200).type(".html").send("<h1>Ola seja bem vindo</h1>");
-		};
+		this.welcomeUser = (r, e) =>
+			n(this, null, function* () {
+				e.status(200).type(".html").send("<h1>Ola seja bem vindo</h1>");
+			});
 	}
 };
-var T = class extends n {
+var k = class extends a {
 	constructor(e, t) {
 		super();
 		this.structureDbSelectService = e;
 		this.option_query_select_attributes_db = t;
-		this.getDatasPageInterfaceDB = async (e, t, s) => {
-			try {
-				let i = await this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
-				t.status(200).send(i);
-			} catch (i) {
-				s(i);
-			}
-		};
+		this.getDatasPageInterfaceDB = (e, t, o) =>
+			n(this, null, function* () {
+				try {
+					let i = yield this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
+					t.status(200).send(i);
+				} catch (i) {
+					o(i);
+				}
+			});
 	}
 };
-var O = { attrFooter: ["id", "url", "redes"], attrImages: ["url", "title", "id"], attrMenu: ["public", "private", "title"] };
-var he = new u("structure_footer"),
-	Ie = new u("structure_images"),
-	Re = new u("structure_menu"),
-	ye = new v(Re),
-	Se = new A(he, Ie, ye),
-	k = new T(Se, O),
-	$ = new d(),
-	G = new h(),
-	z = new R(),
-	W = new b(z),
-	J = new y(z),
-	K = new S($),
-	Q = new w(),
-	we = new U(),
-	be = new D(),
-	ve = new x(G, be),
-	De = new q(G, we),
-	X = new E(ve, $),
-	Y = new P(De),
-	Z = new C();
-var _ = (0, ee.default)();
-_.post("/", W.verifyDatasBodyUserLogin, X.loginUser);
-var re = c(require("express"));
-var H = (0, re.default)();
-H.post("/", J.verifyDatasBodyUserRegister, Y.registerUser);
-var te = c(require("express"));
-var M = (0, te.default)();
-M.post("/", K.authenticationTokenUser, k.getDatasPageInterfaceDB);
-M.get("/", k.getDatasPageInterfaceDB);
-var se = c(require("express"));
-var N = (0, se.default)();
-N.get("/", Z.welcomeUser);
-var l = (0, oe.default)();
-l.use("/signup", H);
-l.use("/login", _);
-l.use("/welcome", N);
-l.use("/", M);
-var ae = c(require("cors"));
-var ie = {
+var K = { attrFooter: ["id", "url", "redes"], attrImages: ["url", "title", "id"], attrMenu: ["public", "private", "title"] };
+var be = new d("structure_footer"),
+	ve = new d("structure_images"),
+	De = new d("structure_menu"),
+	Ue = new q(De),
+	xe = new T(be, ve, Ue),
+	N = new k(xe, K),
+	Q = new R(),
+	X = new S(),
+	Y = new b(),
+	Z = new x(Y),
+	ee = new v(Y),
+	re = new D(Q),
+	te = new U(),
+	qe = new E(),
+	Ae = new A(),
+	Ee = new P(X, Ae),
+	Pe = new C(X, qe),
+	se = new M(Ee, Q),
+	oe = new F(Pe),
+	ie = new L();
+var B = (0, ne.default)();
+B.post("/", Z.verifyDatasBodyUserLogin, se.loginUser);
+var ae = p(require("express"));
+var V = (0, ae.default)();
+V.post("/", ee.verifyDatasBodyUserRegister, oe.registerUser);
+var ce = p(require("express"));
+var _ = (0, ce.default)();
+_.post("/", re.authenticationTokenUser, N.getDatasPageInterfaceDB);
+_.get("/", N.getDatasPageInterfaceDB);
+var pe = p(require("express"));
+var j = (0, pe.default)();
+j.get("/", ie.welcomeUser);
+var f = (0, me.default)();
+f.use("/signup", V);
+f.use("/login", B);
+f.use("/welcome", j);
+f.use("/", _);
+var de = p(require("cors"));
+var ue = {
 	methods: ["POST", "GET"],
 	origin: ["https://cubo-serie.vercel.app", "http://localhost:5173"],
 	allowedHeaders: ["Authorization", "Content-Type"],
 	exposedHeaders: ["Authorization"],
 };
-var ne = Number(process.env.PORT ?? "3000"),
-	g = (0, B.default)();
-g.use((0, ae.default)(ie));
-g.use(B.default.json());
-g.use(l);
-g.use(Q.error);
-g.listen(ne, () => console.log(`server running on http://localhost:${ne}`));
+var ge,
+	le = Number((ge = process.env.PORT) != null ? ge : "3000"),
+	I = (0, O.default)();
+I.use((0, de.default)(ue));
+I.use(O.default.json());
+I.use(f);
+I.use(te.error);
+I.listen(le, () => console.log(`server running on http://localhost:${le}`));

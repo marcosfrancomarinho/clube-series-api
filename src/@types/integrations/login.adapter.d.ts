@@ -5,8 +5,15 @@ export interface IDbResponse {
 }
 
 export interface ILoginAdapter {
-	querySelectUser(
-		email: string,
-		retrievedData: string[],
-	): Promise<IDbResponse | null>;
+	querySelectUser(email: string): Promise<IDbResponse | null>;
+}
+
+export interface IMessage {
+	success: ({ email, id }: IDbResponse) => {
+		ok: boolean;
+		status: string;
+		email: string;
+		id: number;
+	};
+	error: string;
 }

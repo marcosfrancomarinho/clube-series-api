@@ -1,10 +1,6 @@
 import { Response, Request, NextFunction } from "express";
 import { RequestModel } from "../util/request.model";
-import {
-	IAttributesSelectDb,
-	ISelectServicesResponse,
-	IStructureDbSelectServices,
-} from "../@types/services/structure.db.select.services";
+import { IAttributesSelectDb, IStructureDbSelectServices } from "../@types/services/structure.db.select.services";
 import { IPageInterfaceControllers } from "../@types/controllers/page.interface.controllers";
 
 export class PageInterfaceControllers extends RequestModel implements IPageInterfaceControllers {
@@ -16,9 +12,7 @@ export class PageInterfaceControllers extends RequestModel implements IPageInter
 	}
 	public getDatasPageInterfaceDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			const response: ISelectServicesResponse = await this.structureDbSelectService.searchAllContent(
-				this.option_query_select_attributes_db
-			);
+			const response = await this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
 			res.status(200).send(response);
 		} catch (error) {
 			next(error);

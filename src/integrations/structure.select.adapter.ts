@@ -1,17 +1,11 @@
-import { Model, ModelStatic } from "sequelize";
 import { IStructurSelecteAdapter } from "../@types/integrations/structure.select.adapter";
+import { pool } from "../config/database";
 
-export class StructureSelectAdapter<T extends Model> implements IStructurSelecteAdapter<T[]> {
-	constructor(private structureSelect: ModelStatic<T>) {}
-	public search = async (attributes: string[]): Promise<T[]> => {
-		try {
-			const response = await this.structureSelect.findAll({
-				raw: true,
-				attributes: attributes,
-			});
-			return response as T[];
-		} catch (error) {
-			throw error as Error;
-		}
+export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
+	constructor(private table: string) {}
+	public search = async (attributes: string[]): Promise<T[] | T> => {
+		const params: string = attributes.map((param) => `"${param}"`).join(", ");
+		const { rows } = await pool.query(`SELECT ${params} FROM "${this.table}"`);
+		return rows as T[];
 	};
 }

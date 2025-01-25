@@ -1,22 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sequelize = void 0;
-exports.verifyConnectionDataBase = verifyConnectionDataBase;
-const sequelize_1 = require("sequelize");
-const sequelize = new sequelize_1.Sequelize({
+exports.pool = void 0;
+const pg_1 = __importDefault(require("pg"));
+const pool = new pg_1.default.Pool({
     database: process.env.DB_DATABASE,
-    username: process.env.DB_USERNAME,
+    user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
-    dialect: "postgres",
 });
-exports.sequelize = sequelize;
-async function verifyConnectionDataBase() {
-    try {
-        await sequelize.authenticate();
-        console.log("connection database");
-    }
-    catch (error) {
-        console.log(error);
-    }
-}
+exports.pool = pool;

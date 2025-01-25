@@ -7,7 +7,7 @@ class StructureSelectFormaterAdapter {
         this.structureSelectAdapter = structureSelectAdapter;
     }
     search = async (attribtues) => {
-        const menu = await this.structureSelectAdapter.search(attribtues);
+        const menu = (await this.structureSelectAdapter.search(attribtues));
         return menu.at(0);
     };
 }

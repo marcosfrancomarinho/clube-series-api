@@ -1,13 +1,7 @@
-// Modelos
-import { StructureFooter } from "../model/structure.footer.model";
-import { StructureImages } from "../model/structure.images.model";
-import { StructureMenu } from "../model/structure.menu.model";
-
 // Utilitários
 import { GenerateHash } from "../util/generate.hash";
 import { Encrypt } from "../util/encrypt";
 import { VerifyDatasUser } from "../util/verify.datas.user";
-import { VerifyDatasObjectImages } from "../util/verify.datas.object.image";
 
 // Middlewares
 import { VerifyRegisterMiddlewares } from "../middlewares/verify.register.middlewares";
@@ -16,12 +10,10 @@ import { ResponseErrorMiddlewares } from "../middlewares/response.error.middlewa
 import { VerifyLoginMiddlewares } from "../middlewares/verify.login.middlewares";
 
 // Adaptadores
-import { LoginAdapter } from "../integrations/login.adapter";
 import { StructureSelectAdapter } from "../integrations/structure.select.adapter";
-import { RegisterAdapter } from "../integrations/register.adapter";
 import { StructureSelectFormaterAdapter } from "../integrations/structure.select.formater.adapter";
-import { StructureCreateImageAdapter } from "../integrations/structure.create.image.adapter";
-
+import { LoginAdapter } from "../integrations/login.adapter";
+import { RegisterAdapter } from "../integrations/register.adapter";
 // Serviços
 import { LoginDbUserServices } from "../service/login.db.user.services";
 import { RegisterDbUserServices } from "../service/register.db.user.services";
@@ -35,12 +27,15 @@ import { PageInterfaceControllers } from "../controllers/pageInterface.controlle
 
 // Configuração adicional
 import { option_query_select_attributes_db } from "./option.query.select.attributes.db";
+import { IStructureMenu } from "../@types/model/structure.menu.model";
+import { IStructureImages } from "../@types/model/structure.images.model";
+import { IStructureFooter } from "../@types/model/structure.footer.model";
 
 // Adaptadores de estruturas
-const structureSelectAdapterFooter = new StructureSelectAdapter(StructureFooter);
-const structureSelectAdapterImages = new StructureSelectAdapter(StructureImages);
-const structureSelectAdapterMenu = new StructureSelectAdapter(StructureMenu);
-const structureSelectFormaterAdapter = new StructureSelectFormaterAdapter(structureSelectAdapterMenu);
+const structureSelectAdapterFooter = new StructureSelectAdapter<IStructureFooter>("structure_footer");
+const structureSelectAdapterImages = new StructureSelectAdapter<IStructureImages>("structure_images");
+const structureSelectAdapterMenu = new StructureSelectAdapter<IStructureMenu>("structure_menu");
+const structureSelectFormaterAdapter = new StructureSelectFormaterAdapter<IStructureMenu>(structureSelectAdapterMenu);
 
 // Serviço de seleção no banco de dados
 const structureDbSelectServices = new StructureDbSelectServices(
@@ -49,14 +44,8 @@ const structureDbSelectServices = new StructureDbSelectServices(
 	structureSelectFormaterAdapter
 );
 
-const verifyDatasObjectImages = new VerifyDatasObjectImages();
-const sructureAdapterCreateImage = new StructureCreateImageAdapter(verifyDatasObjectImages);
-
 // Controlador de interface de páginas
-const pageInterfaceControllers = new PageInterfaceControllers(
-	structureDbSelectServices,
-	option_query_select_attributes_db
-);
+const pageInterfaceControllers = new PageInterfaceControllers(structureDbSelectServices, option_query_select_attributes_db);
 
 // Instâncias de utilitários
 const generateHash = new GenerateHash();
@@ -70,8 +59,8 @@ const authenticateUser = new AuthenticateUserMiddlewares(generateHash);
 const responseError = new ResponseErrorMiddlewares();
 
 // Adaptadores de banco de dados
-const loginAdapter = new LoginAdapter();
 const registerAdapter = new RegisterAdapter();
+const loginAdapter = new LoginAdapter();
 
 // Serviços
 const loginUserDbService = new LoginDbUserServices(encrypt, loginAdapter);
@@ -91,6 +80,5 @@ export {
 	registerControllers,
 	welcomeControllers,
 	pageInterfaceControllers,
-	sructureAdapterCreateImage,
 	responseError,
 };

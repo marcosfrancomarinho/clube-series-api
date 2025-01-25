@@ -1,20 +1,10 @@
-import { Sequelize } from "sequelize";
+import pg from "pg";
 
-const sequelize = new Sequelize({
+const pool = new pg.Pool({
 	database: process.env.DB_DATABASE,
-	username: process.env.DB_USERNAME,
+	user: process.env.DB_USERNAME,
 	password: process.env.DB_PASSWORD,
 	host: process.env.DB_HOST,
-	dialect: "postgres",
 });
 
-export async function verifyConnectionDataBase(): Promise<void> {
-	try {
-		await sequelize.authenticate();
-		console.log("connection database");
-	} catch (error) {
-		console.log(error);
-	}
-}
-
-export { sequelize };
+export { pool };

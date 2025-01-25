@@ -1,17 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginAdapter = void 0;
-const user_model_1 = require("../model/user.model");
+const database_1 = require("../config/database");
 class LoginAdapter {
-    querySelectUser = async (email, retrievedData) => {
-        const response = await user_model_1.User.findOne({
-            attributes: retrievedData,
-            where: {
-                email: email,
-            },
-            raw: true,
-        });
-        return response;
+    querySelectUser = async (email) => {
+        const sql = `
+		SELECT
+			id,
+			email,
+			password
+		FROM
+			register_user
+		WHERE
+			email = $1`;
+        const { rows } = await database_1.pool.query(sql, [email]);
+        return rows.at(0) ?? null;
     };
 }
 exports.LoginAdapter = LoginAdapter;

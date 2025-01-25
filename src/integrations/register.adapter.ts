@@ -1,12 +1,26 @@
 import { IRegisterAdapter } from "../@types/integrations/register.adapter";
-import { User } from "../model/user.model";
+import { pool } from "../config/database";
 
 export class RegisterAdapter implements IRegisterAdapter {
 	public queryCreateUser = async (name: string, email: string, password: string): Promise<void> => {
-		await User.create({
+		const sql: string = `
+		INSERT INTO register_user
+        (
+			id,
 			name,
-			email,
-			password,
-		});
+			email, 
+			password, 
+			"createdAt", 
+			"updatedAt"
+		)
+        VALUES (
+			DEFAULT, 
+			$1, 
+			$2, 
+			$3, 
+			NOW(), 
+			NOW()
+		)`;
+		await pool.query(sql, [name, email, password]);
 	};
 }

@@ -1,16 +1,18 @@
-import { User } from "../model/user.model";
-import { ILoginAdapter } from "../@types/integrations/login.adapter";
-import { IDbResponse } from "../@types/integrations/login.adapter";
+import { IDbResponse, ILoginAdapter } from "../@types/integrations/login.adapter";
+import { pool } from "../config/database";
 
 export class LoginAdapter implements ILoginAdapter {
-	public querySelectUser = async (email: string, retrievedData: string[]): Promise<IDbResponse | null> => {
-		const response = await User.findOne({
-			attributes: retrievedData,
-			where: {
-				email: email,
-			},
-			raw: true,
-		});
-		return response as IDbResponse | null;
+	public querySelectUser = async (email: string): Promise<IDbResponse | null> => {
+		const sql: string = `
+		SELECT
+			id,
+			email,
+			password
+		FROM
+			register_user
+		WHERE
+			email = $1`;
+		const { rows } = await pool.query<IDbResponse>(sql, [email]);
+		return rows.at(0) ?? null;
 	};
 }

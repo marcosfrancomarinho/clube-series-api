@@ -11,17 +11,13 @@ class RegisterAdapter {
 				id,
 				name,
 				email, 
-				password, 
-				"createdAt", 
-				"updatedAt"
+				password
 			)
 			VALUES (
 				DEFAULT, 
 				$1, 
 				$2, 
-				$3, 
-				NOW(), 
-				NOW()
+				$3
 			)`;
             await database_1.pool.query(sql, [name, email, password]);
         }

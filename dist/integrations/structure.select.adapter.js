@@ -9,7 +9,7 @@ class StructureSelectAdapter {
     }
     search = async (attributes) => {
         try {
-            const params = attributes.map((param) => `"${param}"`).join(", ");
+            const params = attributes.map((param) => `"${param}"`).join(",");
             const { rows } = await database_1.pool.query(`SELECT ${params} FROM "${this.table}"`);
             return rows;
         }

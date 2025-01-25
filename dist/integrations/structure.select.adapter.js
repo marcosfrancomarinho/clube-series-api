@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StructureSelectAdapter = void 0;
 const database_1 = require("../config/database");
+const remove_comments_1 = require("../util/remove.comments");
 class StructureSelectAdapter {
     table;
     constructor(table) {
@@ -10,8 +11,8 @@ class StructureSelectAdapter {
     search = async (attributes) => {
         try {
             const params = attributes.map((param) => `"${param}"`).join(",");
-            const { rows } = await database_1.pool.query(`SELECT ${params} FROM "${this.table}"`);
-            console.log(rows);
+            const sql = (0, remove_comments_1.prepare)(`--sql SELECT ${params} FROM "${this.table}"`);
+            const { rows } = await database_1.pool.query(sql);
             return rows;
         }
         catch (error) {

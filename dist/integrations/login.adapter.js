@@ -2,18 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoginAdapter = void 0;
 const database_1 = require("../config/database");
+const remove_comments_1 = require("../util/remove.comments");
 class LoginAdapter {
     querySelectUser = async (email) => {
         try {
-            const sql = `SELECT 
+            const sql = (0, remove_comments_1.prepare)(`--sql
+			SELECT 
 				id,
 				email,
 				password
 			FROM
 				register_user
 			WHERE
-				email = $1`;
-            console.log(sql);
+				email = $1`);
             const { rows } = await database_1.pool.query(sql, [email]);
             return rows.at(0) ?? null;
         }

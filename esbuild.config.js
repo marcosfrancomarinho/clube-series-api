@@ -3,7 +3,7 @@ const esbuild = require("esbuild");
 esbuild
 	.build({
 		entryPoints: ["./src/app.ts"],
-		outfile: "./public/bundle.js",
+		outfile: "dist/bundle.js",
 		bundle: true,
 		minify: true,
 		platform: "node",

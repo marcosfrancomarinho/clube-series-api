@@ -43,7 +43,11 @@ const formatObject = new FormatObject();
 
 // Serviço de seleção no banco de dados
 const structureDbSelectServices = new StructureDbSelectServices(formatObject);
-structureDbSelectServices.addAdapter(structureSelectAdapterFooter, structureSelectAdapterImages, structureSelectAdapterMenu);
+structureDbSelectServices.addAdapter(
+	structureSelectAdapterFooter,
+	structureSelectAdapterImages,
+	structureSelectAdapterMenu,
+);
 
 // Controlador de interface de páginas
 const pageInterfaceControllers = new PageInterfaceControllers(structureDbSelectServices);

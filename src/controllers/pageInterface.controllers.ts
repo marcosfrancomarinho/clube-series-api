@@ -6,13 +6,12 @@ import { IPageInterfaceControllers } from "../@types/controllers/page.interface.
 export class PageInterfaceControllers extends RequestModel implements IPageInterfaceControllers {
 	constructor(
 		private structureDbSelectService: IStructureDbSelectServices,
-		private option_query_select_attributes_db: IAttributesSelectDb
 	) {
 		super();
 	}
 	public getDatasPageInterfaceDB = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
 		try {
-			const response = await this.structureDbSelectService.searchAllContent(this.option_query_select_attributes_db);
+			const response = await this.structureDbSelectService.searchAllContent();
 			res.status(200).send(response);
 		} catch (error) {
 			next(error);

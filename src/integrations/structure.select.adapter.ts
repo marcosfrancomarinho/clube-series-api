@@ -1,17 +1,21 @@
 import { IStructurSelecteAdapter } from "../@types/integrations/structure.select.adapter";
+import { IAttribute } from "../@types/services/structure.db.select.services";
 import { pool } from "../config/database";
 import { prepare } from "../util/remove.comments";
 
 export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
-	constructor(private table: string) {}
-	public search = async (attributes: string[]): Promise<T[] | T> => {
+	constructor(private table: string, public attributes: IAttribute) {}
+	public search = async (): Promise<T> => {
 		try {
-			const params: string = attributes.map((param) => `"${param}"`).join(",");
+			const params: string = this.attributes.list.map((param) => `"${param}"`).join(",");
 			const sql: string = prepare(`--sql SELECT ${params} FROM "${this.table}"`);
 			const { rows } = await pool.query(sql);
-			return rows as T[];
+			return rows as T;
 		} catch (error) {
 			throw error as Error;
 		}
+	};
+	public getAttribute = (): Pick<IAttribute, "name"> => {
+		return { name: this.attributes.name };
 	};
 }

@@ -11,13 +11,13 @@ import { VerifyLoginMiddlewares } from "../middlewares/verify.login.middlewares"
 
 // Adaptadores
 import { StructureSelectAdapter } from "../integrations/structure.select.adapter";
-import { StructureSelectFormaterAdapter } from "../integrations/structure.select.formater.adapter";
 import { LoginAdapter } from "../integrations/login.adapter";
 import { RegisterAdapter } from "../integrations/register.adapter";
+
 // Serviços
-import { LoginDbUserServices } from "../service/login.db.user.services";
-import { RegisterDbUserServices } from "../service/register.db.user.services";
-import { StructureDbSelectServices } from "../service/structure.db.select.services";
+import { LoginDbUserServices } from "../services/login.db.user.services";
+import { RegisterDbUserServices } from "../services/register.db.user.services";
+import { StructureDbSelectServices } from "../services/structure.db.select.services";
 
 // Controladores
 import { LoginControllers } from "../controllers/login.controllers";
@@ -30,22 +30,23 @@ import { option_query_select_attributes_db } from "./option.query.select.attribu
 import { IStructureMenu } from "../@types/model/structure.menu.model";
 import { IStructureImages } from "../@types/model/structure.images.model";
 import { IStructureFooter } from "../@types/model/structure.footer.model";
+import { FormatObject } from "../util/format.object";
 
 // Adaptadores de estruturas
-const structureSelectAdapterFooter = new StructureSelectAdapter<IStructureFooter>("structure_footer");
-const structureSelectAdapterImages = new StructureSelectAdapter<IStructureImages>("structure_images");
-const structureSelectAdapterMenu = new StructureSelectAdapter<IStructureMenu>("structure_menu");
-const structureSelectFormaterAdapter = new StructureSelectFormaterAdapter<IStructureMenu>(structureSelectAdapterMenu);
+const { footer, images, menu } = option_query_select_attributes_db;
+
+const structureSelectAdapterFooter = new StructureSelectAdapter<IStructureFooter>("structure_footer", footer);
+const structureSelectAdapterImages = new StructureSelectAdapter<IStructureImages>("structure_images", images);
+const structureSelectAdapterMenu = new StructureSelectAdapter<IStructureMenu>("structure_menu", menu);
+
+const formatObject = new FormatObject();
 
 // Serviço de seleção no banco de dados
-const structureDbSelectServices = new StructureDbSelectServices(
-	structureSelectAdapterFooter,
-	structureSelectAdapterImages,
-	structureSelectFormaterAdapter
-);
+const structureDbSelectServices = new StructureDbSelectServices(formatObject);
+structureDbSelectServices.addAdapter(structureSelectAdapterFooter, structureSelectAdapterImages, structureSelectAdapterMenu);
 
 // Controlador de interface de páginas
-const pageInterfaceControllers = new PageInterfaceControllers(structureDbSelectServices, option_query_select_attributes_db);
+const pageInterfaceControllers = new PageInterfaceControllers(structureDbSelectServices);
 
 // Instâncias de utilitários
 const generateHash = new GenerateHash();

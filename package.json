@@ -1,9 +1,9 @@
 {
 	"name": "server",
 	"version": "1.0.0",
-	"main": "api/bundle.js",
+	"main": "public/bundle.js",
 	"scripts": {
-		"start": "node api/bundle.js",
+		"start": "node public/bundle.js",
 		"db": "tsx --env-file=.env src/integrations/structure.select.adapter.pg.ts",
 		"dev": "tsx --watch --env-file=.env src/app.ts",
 		"git": "git add . & git commit -m '25/01/2025' & git push origin main",

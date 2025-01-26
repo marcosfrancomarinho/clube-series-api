@@ -27,27 +27,21 @@ import { PageInterfaceControllers } from "../controllers/pageInterface.controlle
 
 // Configuração adicional
 import { option_query_select_attributes_db } from "./option.query.select.attributes.db";
-import { IStructureMenu } from "../@types/model/structure.menu.model";
-import { IStructureImages } from "../@types/model/structure.images.model";
-import { IStructureFooter } from "../@types/model/structure.footer.model";
 import { FormatObject } from "../util/format.object";
+import { IStructureFooter, IStructureImages, IStructureMenu } from "../@types/model/structure.model";
 
 // Adaptadores de estruturas
 const { footer, images, menu } = option_query_select_attributes_db;
 
-const structureSelectAdapterFooter = new StructureSelectAdapter<IStructureFooter>("structure_footer", footer);
-const structureSelectAdapterImages = new StructureSelectAdapter<IStructureImages>("structure_images", images);
-const structureSelectAdapterMenu = new StructureSelectAdapter<IStructureMenu>("structure_menu", menu);
+const structureSelectAdapterFooter = new StructureSelectAdapter<IStructureFooter>(footer);
+const structureSelectAdapterImages = new StructureSelectAdapter<IStructureImages>(images);
+const structureSelectAdapterMenu = new StructureSelectAdapter<IStructureMenu>(menu);
 
 const formatObject = new FormatObject();
 
 // Serviço de seleção no banco de dados
 const structureDbSelectServices = new StructureDbSelectServices(formatObject);
-structureDbSelectServices.addAdapter(
-	structureSelectAdapterFooter,
-	structureSelectAdapterImages,
-	structureSelectAdapterMenu,
-);
+structureDbSelectServices.addAdapter(structureSelectAdapterFooter, structureSelectAdapterImages, structureSelectAdapterMenu);
 
 // Controlador de interface de páginas
 const pageInterfaceControllers = new PageInterfaceControllers(structureDbSelectServices);

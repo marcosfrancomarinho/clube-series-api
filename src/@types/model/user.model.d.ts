@@ -1,10 +1,1 @@
-interface IUser {
-	id: number;
-	name: string;
-	email: string;
-	password: string;
-	createdAt?: Date; 
-	updatedAt?: Date; 
-}
-
-export default IUser;
+export type IUser = { id: number; name: string; email: string; password: string; createdAt?: Date; updatedAt?: Date };

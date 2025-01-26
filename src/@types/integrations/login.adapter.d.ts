@@ -1,14 +1,6 @@
-export interface IDbResponse {
-	id: number;
-	email: string;
-	password: string;
-}
+export type IDbResponse = { id: number; email: string; password: string };
 
-export interface ILoginAdapter {
-	querySelectUser(email: string): Promise<IDbResponse | null>;
-}
-
-export interface IMessage {
+export type IMessage = {
 	success: ({ email, id }: IDbResponse) => {
 		ok: boolean;
 		status: string;
@@ -16,4 +8,8 @@ export interface IMessage {
 		id: number;
 	};
 	error: string;
+};
+
+export interface ILoginAdapter {
+	querySelectUser(email: string): Promise<IDbResponse | null>;
 }

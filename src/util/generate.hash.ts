@@ -6,7 +6,7 @@ export class GenerateHash implements IGenerateHash {
 	public hash = (email: string, id: number): string => {
 		const keySecret = process.env.SECRET;
 		if (!keySecret) {
-			throw new Error("A variável de ambiente SECRET não está definida.");
+			throw new Error("A variável de ambiente não está definida.");
 		}
 		const token: string = jwt.sign({ email, id }, keySecret);
 		return token;

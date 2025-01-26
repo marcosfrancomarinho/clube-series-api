@@ -6,7 +6,7 @@
 		"start": "node dist/bundle.js",
 		"db": "tsx --env-file=.env src/integrations/structure.select.adapter.pg.ts",
 		"dev": "tsx --watch --env-file=.env src/app.ts",
-		"git": "git add . & git commit -m '26/01/2025' & git push origin main",
+		"git": "git add . & git commit -m 'chega' & git push origin main",
 		"build": "node esbuild.config.js",
 		"check": "tsc --watch --noEmit"
 	},

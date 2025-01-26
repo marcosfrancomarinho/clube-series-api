@@ -4,11 +4,11 @@ import { pool } from "../config/database";
 import { prepare } from "../util/remove.comments";
 
 export class StructureSelectAdapter<T> implements IStructurSelecteAdapter<T> {
-	constructor(private table: string, public attributes: IAttribute) {}
+	constructor(private attributes: IAttribute) {}
 	public search = async (): Promise<T> => {
 		try {
 			const params: string = this.attributes.list.map((param) => `"${param}"`).join(",");
-			const sql: string = prepare(`--sql SELECT ${params} FROM "${this.table}"`);
+			const sql: string = prepare(`--sql SELECT ${params} FROM "${this.attributes.table}"`);
 			const { rows } = await pool.query(sql);
 			return rows as T;
 		} catch (error) {

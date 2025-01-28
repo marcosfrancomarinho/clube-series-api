@@ -19,10 +19,8 @@ export class RegisterAdapter implements IRegisterAdapter {
 				$2, 
 				$3
 			)`);
-			console.log(name, password, email)
 			await pool.query(sql, [name, email, password]);
 		} catch (error) {
-			console.log(error)
 			throw error as Error;
 		}
 	};

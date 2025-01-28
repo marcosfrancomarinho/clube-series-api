@@ -7,11 +7,11 @@ export class VerifyDatasUser implements IVerifyDatasUser {
 		if (error) throw new Error(error.message);
 	}
 	public nameUser(name: string): void {
-		const schema = joi.string().required().trim().min(3).max(30).empty().label("nome do usuário");
+		const schema = joi.string().required().trim().min(3).max(100).empty().label("nome do usuário");
 		this.hasError(name, schema);
 	}
 	public emailUser(email: string): void {
-		const schema = joi.string().required().trim().min(10).max(35).email().empty().label("email do usuário");
+		const schema = joi.string().required().trim().min(10).max(100).email().empty().label("email do usuário");
 		this.hasError(email, schema);
 	}
 	public passwordUser(password: string): void {

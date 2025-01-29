@@ -14,7 +14,8 @@ export class StructureDbSelectServices implements IStructureDbSelectServices {
 			const names: string[] = this.listAdapters.map((item) => item.getAttribute().name);
 			const adapters = this.listAdapters.map((adapter) => adapter.search());
 			const response = (await Promise.all([...adapters])) as ISelectServicesRequest;
-			return this.formatObject.formatResponseInJson(names, response);
+			const datasFormat: ISelectServicesResponse = this.formatObject.formatResponseInJson(names, response);
+			return datasFormat;
 		} catch (error) {
 			throw error as Error;
 		}

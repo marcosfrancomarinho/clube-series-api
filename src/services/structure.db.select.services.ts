@@ -17,7 +17,7 @@ export class StructureDbSelectServices implements IStructureDbSelectServices {
 			const datasFormat: ISelectServicesResponse = this.formatObject.formatResponseInJson(names, response);
 			return datasFormat;
 		} catch (error) {
-			throw error as Error;
+			throw error as Error;	
 		}
 	};
 	public addAdapter = (...adapters: IStructurSelecteAdapter[]): void => {
